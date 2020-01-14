@@ -1,0 +1,22 @@
+{
+  "name": "twitter-clone",
+  "version": "1.0.0",
+  "description": "Remake of Twitter with Express, Auth, PassportJS, SQL, and React.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "db:init": "dropdb --if-exists twitter_clone_db && createdb twitter_clone_db",
+    "db:reset": "node ./scripts/resetDb.js",
+    "db:seed": "node ./scripts/seedDb.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikesabzz/twitter-clone.git"
+  },
+  "author": "Michael Sabzevari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikesabzz/twitter-clone/issues"
+  },
+  "homepage": "https://github.com/mikesabzz/twitter-clone#readme"
+}
