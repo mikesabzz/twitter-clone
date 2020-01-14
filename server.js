@@ -3,6 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const authRouter = require('./routers/authRouter')
+const passport = require('passport')
 
 const PORT = process.env.PORT || 4567
 
@@ -10,14 +11,18 @@ const app = express()
 
 app.use(logger('dev'))
 app.use(cors())
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json())
 app.use('/auth', authRouter)
+app.use(passport.initialize())
 
-app.get('/', async (request, response) => {
+app.get('/', async (req, res) => {
   try {
-    response.json({message: 'Welcome to Express Auth App!'})
+    res.json({message: 'Welcome to Express Auth App!'})
   } catch (e) {
-    response.status(e.status).json({ message: e.status })
+    res.status(e.status).json({ message: e.status })
   }
 })
 

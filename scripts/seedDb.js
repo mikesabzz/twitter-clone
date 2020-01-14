@@ -1,5 +1,5 @@
 const { User }  = require('../models/index')
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
 
 const seedDb = async () => {
   try {
