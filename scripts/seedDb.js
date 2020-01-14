@@ -1,4 +1,5 @@
 const { User }  = require('../models/index')
+const bcrypt = require('bcrypt')
 
 const seedDb = async () => {
   try {
@@ -9,7 +10,7 @@ const seedDb = async () => {
     await User.create({
       name: "DemoUser",
       email: "demouser@mail.com",
-      password: "password"
+      password: 'password'
     })
 
   } catch(e) {
