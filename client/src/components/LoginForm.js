@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 class LoginForm extends Component {
   constructor (props) {
@@ -15,8 +16,16 @@ class LoginForm extends Component {
 
   async handleSubmitForm (event) {
     event.preventDefault()
-
     console.log(`submitting the form`)
+  
+    const { email, password } = this.state
+    const { handleLogin } = this.props
+  
+    try {
+      await handleLogin({ email, password})
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   handleTextInput (event) {
@@ -29,6 +38,11 @@ class LoginForm extends Component {
   }
 
   render () {
+    const { isSignedIn } = this.props
+
+    if (isSignedIn) {
+      return <Redirect to='/dashboard' />
+    }
     return (
       <div>
         <form className='form' onSubmit={this.handleSubmitForm}>
