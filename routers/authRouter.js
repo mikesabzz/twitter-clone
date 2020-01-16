@@ -6,7 +6,13 @@ const { passport, jwtSign } = require('../auth/auth.js')
 authRouter.post('/signup', async(req, res, next) => {
   passport.authenticate('signup', async(err, user) => {
     try {
-      console.log('user from /signup', user);
+      if (err) { return next(err) }
+
+      if (!user) {
+        let error = new Error(info.message || 'An error occurred during signup')
+        error.status = 400
+        return next(error)
+      }
 
       const { email, id } = user
       const payload = { email, id }
@@ -23,8 +29,13 @@ authRouter.post('/signup', async(req, res, next) => {
 authRouter.post('/login', (req, res, next) => {
   passport.authenticate('login', async(err, user, info) => {
     try {
-      if (err || !user) {
-        const error = new Error('An Error Occurred')
+      if (err) { return next(err) }
+
+      if (!user) {
+        let error = new Error(info.message || 'An error occurred during login')
+        error.status = 400
+
+        return next(error)    
       }
 
       req.login(user, { session: false }, async (error) => {

@@ -17,7 +17,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json())
-app.use('/auth', authRouter, appRouter)
+app.use('/auth', authRouter)
+app.use('/app', authorized, appRouter)
 app.use(passport.initialize())
 
 app.get('/', async (req, res) => {
@@ -26,6 +27,10 @@ app.get('/', async (req, res) => {
   } catch (e) {
     res.status(e.status).json({ message: e.status })
   }
+})
+app.use((err, req, res, next) => {
+  res.status(err.status || 500)
+  res.json({ message: err.message })
 })
 
 app.listen(PORT, () => console.log(`App is up and running listening on port ${PORT}`))
