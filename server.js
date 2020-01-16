@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const logger = require('morgan')
 const authRouter = require('./routers/authRouter')
 const passport = require('passport')
+const appRouter = require('./routers/appRouter')
+const { authorized } = require('./auth/auth')
 
 const PORT = process.env.PORT || 4567
 
@@ -15,7 +17,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json())
-app.use('/auth', authRouter)
+app.use('/auth', authRouter, appRouter)
 app.use(passport.initialize())
 
 app.get('/', async (req, res) => {

@@ -3,13 +3,31 @@ const LocalStrategy = require('passport-local').Strategy
 const { User } = require('../models/index.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-
+const JWTStrategy = require('passport-jwt').Strategy
+const ExtractJWT = require('passport-jwt').ExtractJwt
 require('dotenv').config()
 
 
 const jwtSign = payload => {
   return jwt.sign(payload, process.env.SECRET)
 }
+
+passport.use(new JWTStrategy({
+  secretOrKey: process.env.SECRET,
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
+}, async(token, done) => {
+  try {
+    const user = await User.findByPk(token.id)
+
+    if (user) {
+      done(null, user)
+    } else {
+      done(null, false)
+    }
+  } catch (error) {
+    done(error)
+  }
+}))
 
 passport.use('login', new LocalStrategy({
   usernameField: 'email',
@@ -61,8 +79,21 @@ passport.use('signup', new LocalStrategy ({
 }
 ))
 
+const authorized = (req, res, next) => {
+  passport.authenticate('jwt', { session: false }, async (error, user) => {
+    if (error || !user) {
+      let err = new Error('No bueno, no access allowed')
+      err.status = 401
+      return next(err)
+    }
+
+    req.user = user
+    return next()
+  })(req, res, next)
+}
 
 module.exports = {
   passport,
-  jwtSign
+  jwtSign,
+  authorized
 }
