@@ -1,7 +1,15 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const { User } = require('../models/index.js')
-// const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+
+require('dotenv').config()
+
+
+const jwtSign = payload => {
+  return jwt.sign(payload, process.env.SECRET)
+}
 
 passport.use('login', new LocalStrategy({
   usernameField: 'email',
@@ -30,6 +38,31 @@ passport.use('login', new LocalStrategy({
   }
 }))
 
+passport.use('signup', new LocalStrategy ({
+  usernameField: 'email',
+  passwordField: 'password',
+  passReqToCallback: true
+}, async (req, email, password, done) => {
+  try {
+    const { body: { name } } = req
+
+    const user = await User.create({
+      name: name,
+      email: email,
+      password: password
+    })
+    if (!user){
+      return done(null, false, { message: 'Unable to sign up'})
+    }
+    done(null, user)
+  } catch(error) {
+    done(error)
+  }
+}
+))
+
+
 module.exports = {
-  passport
+  passport,
+  jwtSign
 }

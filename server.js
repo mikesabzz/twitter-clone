@@ -20,7 +20,7 @@ app.use(passport.initialize())
 
 app.get('/', async (req, res) => {
   try {
-    res.json({message: 'Welcome to Express Auth App!'})
+    res.json({message: 'Welcome Mike to Express Auth App!'})
   } catch (e) {
     res.status(e.status).json({ message: e.status })
   }
