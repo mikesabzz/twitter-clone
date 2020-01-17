@@ -36,3 +36,17 @@ export const login = async(data) => {
     throw e
   }
 }
+
+export const signUp = async(data) => {
+  try {
+    const response = await api.post('/auth/signup', data)
+    const { data: { user, token } } = response
+
+    console.log(response.data)
+
+    localStorage.setItem('token', token)
+    return user
+  } catch (e) {
+    throw e
+  }
+}

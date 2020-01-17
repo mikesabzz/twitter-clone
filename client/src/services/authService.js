@@ -9,6 +9,10 @@ const authService = {
   
       return true
     },
+
+    signOut: () => {
+        localStorage.removeItem('token')
+    }
   }
   
   export default authService
