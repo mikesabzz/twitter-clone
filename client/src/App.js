@@ -3,8 +3,9 @@ import './App.css'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import { Route, Link } from 'react-router-dom'
-import { login } from './services/apiService'
+import { login, getProfile } from './services/apiService'
 import ProtectedRoute from './components/ProtectedRoute'
+import authService from './services/authService'
 
 class App extends Component {
   constructor(props) {
@@ -27,6 +28,19 @@ class App extends Component {
       })
     } catch (e) {
       throw e
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      const fetchedUser = await getProfile()
+
+      this.setState({
+        isSignedIn: authService.isAuthenticated(),
+        user: fetchedUser
+      })
+    } catch (e) {
+      console.log('Issue fetching token')
     }
   }
 

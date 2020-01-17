@@ -10,6 +10,19 @@ const api = axios.create({
   }
 })
 
+export const getProfile = async() => {
+  try {
+    const response = await api.get('/app/profile')
+    const { data: { user } } = response
+
+    console.log(response.data)
+
+    return user
+  } catch (e) {
+    throw e
+  }
+}
+
 export const login = async(data) => {
   try {
     const response = await api.post('/auth/login', data)
