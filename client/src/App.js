@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
-import Home from './components/Home'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import { Route, Link } from 'react-router-dom'
 import { login } from './services/apiService'
+import ProtectedRoute from './components/ProtectedRoute'
 
 class App extends Component {
   constructor(props) {
@@ -31,25 +31,30 @@ class App extends Component {
   }
 
   render() {
-    const { isSignedIn } = this.state
+    const { isSignedIn, user } = this.state
 
     return (
       <div className='App'>
         <nav>
-          <div>
-            <Link to='/'>Home</Link>
-          </div>
-          <div>
-            <Link to='/dashboard'>Dashboard</Link>
-          </div>
-          <div>
-            <Link to='/login'>Login</Link>
-          </div>
+          { !isSignedIn &&
+            <div className='nav-section'>
+              <Link to='/login'>Login</Link>
+            </div>
+          }
+
+          { isSignedIn &&
+            <div className='nav-section'>
+              <Link to='/dashboard'>Dashboard</Link>
+            </div>
+          }
         </nav>
 
         <main>
-          <Route exact path='/' component={Home} />
-          <Route path='/dashboard' component={Dashboard} />
+          <ProtectedRoute 
+            path='/dashboard' 
+            user={user}
+            component={Dashboard} 
+          />
           <Route
             path='/login'
             render={
