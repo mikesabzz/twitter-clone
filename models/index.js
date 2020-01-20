@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const UserModel = require('./user')
+const TweetModel = require('./tweet')
+const profileModel = require('./profile')
 const bcrypt = require('bcrypt')
 
 const db = new Sequelize({
@@ -14,7 +16,17 @@ User.beforeCreate(async (user, options) => {
   user.password = hashedPassword
 })
 
+const Tweet = TweetModel(db, Sequelize)
+User.hasMany(Tweet)
+Tweet.belongsTo(User)
+
+const Profile = profileModel(db, Sequelize)
+User.hasOne(Profile)
+Profile.belongsTo(User)
+
 module.exports = {
   db,
-  User
+  User,
+  Tweet,
+  Profile
 }
