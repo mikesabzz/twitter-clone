@@ -1,11 +1,6 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Tweets from './ChildComponents/Tweets'
+import Navbar from './Navbar'
+import {BrowserRouter as Router} from 'react-router-dom'
 
 function Dashboard (props) {
   const { user } = props
@@ -15,21 +10,20 @@ function Dashboard (props) {
   const hours = date.getHours()
 
   if (hours < 12) {
-    timeOfDay = 'morning'
+    timeOfDay = 'Morning'
   } else if (hours >= 12 && hours < 17) {
-    timeOfDay = 'afternoon'
+    timeOfDay = 'Afternoon'
   } else {
-    timeOfDay = 'evening'
+    timeOfDay = 'Evening'
   }
 
   return (
     <div>
       <h1>{`Good ${timeOfDay}, ${name}`}</h1>
       <Router>
-      <div>
-        <Link to='/tweets'>Tweets</Link>
-        <Route path='/tweets'><Tweets /></Route>
-      </div>
+        <nav>
+          <Navbar name={name} />
+        </nav>
       </Router>
     </div>
   )
