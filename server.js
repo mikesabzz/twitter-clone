@@ -28,6 +28,7 @@ app.get('/', async (req, res) => {
     res.status(e.status).json({ message: e.status })
   }
 })
+
 app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.json({ message: err.message })
