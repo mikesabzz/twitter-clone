@@ -37,6 +37,28 @@ appRouter.get('/tweets/:id', async (req, res) => {
     console.log(error)
   }
 })
+//Edit a tweet
+appRouter.put('/tweets/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const editTweet = await Tweet.findByPk(id)
+    editTweet.update(req.body)
+    res.json(editTweet)
+  } catch(error) {
+    console.log(error)
+  }
+})
+//Delete a tweet
+appRouter.delete('/tweets/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const deleteTweet = await Tweet.findByPk(id)
+    await deleteTweet.destroy(req.body)
+    res.json(deleteTweet)
+  } catch(error) {
+    console.log(error)
+  }
+})
 
 
 
