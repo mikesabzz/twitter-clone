@@ -50,3 +50,12 @@ export const signUp = async(data) => {
     throw e
   }
 }
+
+export const getOneProfile = async (userId) => {
+  try {
+      const response = await api.get(`/app/profile/bio/${userId}`)
+      return response.data
+  } catch(error) {
+    throw error
+  }
+}

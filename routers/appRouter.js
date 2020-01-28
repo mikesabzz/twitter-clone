@@ -78,6 +78,15 @@ appRouter.get('/profile/bio', async (req, res) => {
     console.log(error)
   }
 })
+//Get one profile 
+appRouter.get('/profile/bio/:id', async (req, res) => {
+  try {
+    const oneProfile = await Profile.findByPk(req.params.id)
+    res.json(oneProfile)
+  } catch(error) {
+    console.log(error)
+  }
+})
 //Create a profile
 appRouter.post('/profile/bio', async (req, res) => {
   try {
