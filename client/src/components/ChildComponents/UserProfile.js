@@ -23,8 +23,8 @@ class UserProfile extends React.Component {
         if(this.state.data) {
             return this.state.data.map(profile => {
                 return (
-                    <h2 key={profile.userId}><Link to={{
-                        pathname: `/${this.props.name}/bio/${profile.userId}`,
+                    <h2 key={profile.id}><Link to={{
+                        pathname: `/${this.props.name}/bio/${profile.id}`,
                         state:{profiles:profile.bio},
                         state:{profile:profile.photo}
                     }}>{profile.bio}</Link></h2>

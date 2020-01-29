@@ -59,3 +59,17 @@ export const getOneProfile = async (userId) => {
     throw error
   }
 }
+
+export const getUserNames = async (id) => {
+  try {
+      const response = await api.get(`/app/profile/bio/1`)
+      const {user} = response.data
+      // console.log(this.state)
+      // console.log(this.props)
+      console.log(user)
+      console.log(response)
+      return response.data
+  } catch(error) {
+    throw error
+  }
+}
