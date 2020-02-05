@@ -3,7 +3,7 @@
 ### Express and PassportJS is used to build out an API that provides authentication functionality (Login, Sign Up).
 
 ### Blue Print:
-![](blueprint.jpeg)
+![](blueprint.jpeg | width=100)
 
 ### Associations:
 ![](assoc.jpeg)
