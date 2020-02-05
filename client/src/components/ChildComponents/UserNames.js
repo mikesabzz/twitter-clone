@@ -6,7 +6,7 @@ class UserNames extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: []
+            names: []
         }
     }
 
@@ -14,22 +14,26 @@ class UserNames extends React.Component {
         await this.getUser()
     }
     getUser = async () => {
-        const name = await getUserNames()
-        console.log(name)
-        this.setState({name})
-        console.log('getUser', name)
+        const names = await getUserNames()
+        this.setState({names})
     }
 
     renderPerson = () => {
-        if (this.state.name) {
+        if (this.state.names) {
+            return this.state.names.sort((a, b) => {
+                if(a.name < b.name) return -1;
+                if(a.name > b.name) return 1;
+                return 0
+            })
+            .map((name, id) => <p key={id}>{name.name}</p>)
         }
     }
     
     render() {
         return (
             <div>
-                <h1>User Names</h1>
-                {/* <div>{this.renderPerson()}</div> */}
+                <h1>Users</h1>
+                <div>{this.renderPerson()}</div>
             </div>
         )
     }
