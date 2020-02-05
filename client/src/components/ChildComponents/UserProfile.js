@@ -10,18 +10,30 @@ class UserProfile extends React.Component {
         }
     }
 
-    async componentWillMount () {
+    async componentDidMount () {
         await this.getProfile()
     }
 
     getProfile = async () => {
         const bios = await getOneProfile()
         this.setState({bios})
+        console.log('getProfile', bios)
     }
-
+    
     renderUserBio = () => {
         if (this.state.bios) {
-            console.log(this.state.bios)
+            return this.state.bios.map(bio => {
+                return (
+                    <div>
+                        {localStorage.getItem('userId') == this.props.match.params.id ?
+                        (
+                            <div key={bio.id}>hello {bio.bio}</div>
+                        ) : (
+                            <div></div>
+                        )}
+                    </div>
+                )
+            })
         }
     }
     
@@ -29,6 +41,7 @@ class UserProfile extends React.Component {
         return (
             <div>
                 <h1>{this.props.name}</h1>
+                <div>{this.renderUserBio()}</div>
             </div>
         )
     }
