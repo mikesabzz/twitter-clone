@@ -8,6 +8,15 @@ appRouter.get('/profile', passport.authenticate('jwt', { session: false}),
     res.json({ user: req.user, message: 'authenticated'})
   }
 )
+//Get all profiles
+appRouter.get('/profile/users', async(req,res) => {
+  try {
+    const allUsers = await User.findAll()
+    res.json(allUsers)
+  } catch(error) {
+    console.log(error)
+  }
+})
 //Delete account
 appRouter.delete('/profile/:id', async (req, res) => {
   try {

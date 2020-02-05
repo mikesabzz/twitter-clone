@@ -16,13 +16,12 @@ function Dashboard (props) {
   } else {
     timeOfDay = 'Evening'
   }
-
   return (
     <div>
       <h1>{`Good ${timeOfDay}, ${name}`}</h1>
       <Router>
         <nav>
-          <Navbar name={name} />
+          <Navbar name={name} user={user} />
         </nav>
       </Router>
     </div>

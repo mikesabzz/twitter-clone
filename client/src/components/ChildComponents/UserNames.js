@@ -6,8 +6,7 @@ class UserNames extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: [],
-            names: []
+            name: []
         }
     }
 
@@ -15,23 +14,14 @@ class UserNames extends React.Component {
         await this.getUser()
     }
     getUser = async () => {
-        const data = await getUserNames()
-        console.log(data)
-        this.setState({data})
-        console.log('getUser', data)
+        const name = await getUserNames()
+        console.log(name)
+        this.setState({name})
+        console.log('getUser', name)
     }
 
     renderPerson = () => {
-        if(this.state.data){
-            return this.state.data.map(user => {
-                return (
-                    <h2 key={user.id}><Link to={{
-                        pathname: `/dashboard/username/${user.id}`,
-                        state:{names:user.names}
-                    }}>LinkName</Link>
-                    </h2>
-                )
-            })
+        if (this.state.name) {
         }
     }
     
@@ -39,7 +29,7 @@ class UserNames extends React.Component {
         return (
             <div>
                 <h1>User Names</h1>
-                <div>{this.renderPerson()}</div>
+                {/* <div>{this.renderPerson()}</div> */}
             </div>
         )
     }
