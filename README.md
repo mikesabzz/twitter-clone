@@ -6,7 +6,7 @@
 ![](blueprint.jpeg)  
 
 ### Associations:
-![](assoc.jpeg | width=48)
+![](assoc.jpeg)
 
 
 
