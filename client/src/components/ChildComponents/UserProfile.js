@@ -6,7 +6,8 @@ class UserProfile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            bios: []
+            bios: [],
+            userId: this.props.user.id
         }
     }
 
@@ -17,27 +18,14 @@ class UserProfile extends React.Component {
     getProfile = async () => {
         const bios = await getOneProfile()
         this.setState({bios})
-        console.log('getProfile', bios)
     }
-    
+
     renderUserBio = () => {
-        if (this.state.bios) {
-            return this.state.bios.map(bio => {
-                return (
-                    <div>
-                        {localStorage.getItem('userId') == this.props.match.params.id ?
-                        (
-                            <div key={bio.id}>hello {bio.bio}</div>
-                        ) : (
-                            <div></div>
-                        )}
-                    </div>
-                )
-            })
-        }
+        console.log(this.state.bios)
     }
     
     render(){
+        console.log(this.state.userId)
         return (
             <div>
                 <h1>{this.props.name}</h1>
