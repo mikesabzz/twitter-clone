@@ -51,8 +51,9 @@ export const signUp = async(data) => {
   }
 }
 
-export const getOneProfile = async (userId) => {
+export const getOneProfile = async () => {
   try {
+      let userId = localStorage.getItem('userId')
       const response = await api.get(`/app/profile/bio/${userId}`)
       return response.data
   } catch(error) {

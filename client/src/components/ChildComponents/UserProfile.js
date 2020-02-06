@@ -26,14 +26,18 @@ class UserProfile extends React.Component {
 
     renderUserBio = () => {
         if(this.state.bios){
-            console.log(this.state.bios)
             const { bios } = this.state
             return (
                 <div>
+                    {localStorage.getItem('userId') == this.props.user.id ? (
+                    <div>
                     <p>{bios.userId}</p>
                     <img src={bios.photo} alt=""></img>
                     <h1>{this.props.name}</h1>
                     <div>{bios.bio}</div>
+                    </div>
+                   ) : (<div></div>)
+                    } 
                 </div>
             )
         }
