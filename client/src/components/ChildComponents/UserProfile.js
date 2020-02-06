@@ -6,8 +6,8 @@ class UserProfile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            bios: [],
-            userId: this.props.user.id
+            bios: {},
+            // userId: this.props.user.id
         }
     }
 
@@ -16,19 +16,32 @@ class UserProfile extends React.Component {
     }
 
     getProfile = async () => {
-        const bios = await getOneProfile()
-        this.setState({bios})
+        try {
+            const bios = await getOneProfile()
+            this.setState({bios})
+        }catch(e) {
+            console.error(e)
+        }
     }
 
     renderUserBio = () => {
-        console.log(this.state.bios)
+        if(this.state.bios){
+            console.log(this.state.bios)
+            const { bios } = this.state
+            return (
+                <div>
+                    <p>{bios.userId}</p>
+                    <img src={bios.photo} alt=""></img>
+                    <h1>{this.props.name}</h1>
+                    <div>{bios.bio}</div>
+                </div>
+            )
+        }
     }
     
     render(){
-        console.log(this.state.userId)
         return (
             <div>
-                <h1>{this.props.name}</h1>
                 <div>{this.renderUserBio()}</div>
             </div>
         )
