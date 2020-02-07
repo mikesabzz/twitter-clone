@@ -72,3 +72,13 @@ export const getUserNames = async () => {
     throw error
   }
 }
+
+export const getAllTweets = async () => {
+  try {
+    const tweets = await api.get(`/app/tweets`)
+    console.log(tweets)
+    return tweets.data
+  } catch (error) {
+    throw error
+  }
+}
