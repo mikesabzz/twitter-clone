@@ -20,12 +20,12 @@ function Navbar (props) {
                 <Link to='/users/'> Users</Link>
             </div>
             <Switch>
-                <Route path='/tweets'render={(props)=> <Tweets {...props} />}/>
+                <Route path='/tweets' ><Tweets {...props} /></Route>
                 <Route path={`/${props.name}`} render={() => <UserProfile {...props} name={props.name} />} />
                 <Route path='/users/' render={(props)=> <UserNames {...props} user={user}/>}/>
             </Switch>
         </div>
     );
-  }
-
+  
+    }
 export default Navbar;
