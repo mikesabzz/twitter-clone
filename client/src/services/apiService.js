@@ -31,6 +31,7 @@ export const login = async(data) => {
     console.log(response.data)
 
     localStorage.setItem('token', token)
+    // localStorage.setItem('userId', user.id)
     return user
   } catch (e) {
     throw e
@@ -51,7 +52,7 @@ export const signUp = async(data) => {
   }
 }
 
-export const getOneProfile = async () => {
+export const getOneProfile = async (userId) => {
   try {
       let userId = localStorage.getItem('userId')
       const response = await api.get(`/app/profile/bio/${userId}`)

@@ -14,7 +14,7 @@ function Navbar (props) {
     const {user} = props
     return (
         <div>
-            <div>
+            <div key={user.id}>
                 <Link to='/tweets'>Tweets</Link>
                 <Link to={`/${props.name}`}> {props.name}</Link>
                 <Link to='/users/'> Users</Link>

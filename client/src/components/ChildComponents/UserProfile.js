@@ -6,8 +6,7 @@ class UserProfile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            bios: {},
-            // userId: this.props.user.id
+            bios: {}
         }
     }
 
@@ -25,19 +24,19 @@ class UserProfile extends React.Component {
     }
 
     renderUserBio = () => {
-        if(this.state.bios){
+        if (this.state.bios) {
             const { bios } = this.state
             return (
                 <div>
                     {localStorage.getItem('userId') == this.props.user.id ? (
-                    <div>
-                    <p>{bios.userId}</p>
-                    <img src={bios.photo} alt=""></img>
-                    <h1>{this.props.name}</h1>
-                    <div>{bios.bio}</div>
-                    </div>
-                   ) : (<div></div>)
-                    } 
+                        <div key={bios.userId}>
+                            <p>{bios.userId}</p>
+                            <img src={bios.photo} alt=""></img>
+                            <h1>{this.props.name}</h1>
+                            <div>{bios.bio}</div>
+                        </div>
+                   ) : (<div></div>) 
+                     }  
                 </div>
             )
         }
