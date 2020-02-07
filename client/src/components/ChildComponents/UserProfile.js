@@ -1,6 +1,6 @@
 import React from 'react'
 import { getOneProfile } from '../../services/apiService'
-import {Link, Route} from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -10,41 +10,39 @@ class UserProfile extends React.Component {
         }
     }
 
-    async componentDidMount () {
+    async componentDidMount() {
         await this.getProfile()
     }
 
     getProfile = async () => {
         try {
             const bios = await getOneProfile()
-            this.setState({bios})
-        }catch(e) {
+            this.setState({ bios })
+        } catch (e) {
             console.error(e)
         }
     }
 
     renderUserBio = () => {
-        if (this.state.bios) {
-            const { bios } = this.state
+        const { bios } = this.state
+        console.log(bios)
+        if (bios) {
             return (
                 <div>
-                    {localStorage.getItem('userId') == this.props.user.id ? (
-                        <div key={bios.userId}>
-                            <p>{bios.userId}</p>
-                            <img src={bios.photo} alt=""></img>
-                            <h1>{this.props.name}</h1>
-                            <div>{bios.bio}</div>
-                        </div>
-                   ) : (<div></div>) 
-                     }  
+                    <div key={bios.userId}>
+                        <p>{bios.userId}</p>
+                        <img src={bios.photo} alt=""></img>
+                        <div>{bios.bio}</div>
+                    </div>
                 </div>
             )
         }
     }
-    
-    render(){
+
+    render() {
         return (
             <div>
+                <h1>{this.props.name}</h1>
                 <div>{this.renderUserBio()}</div>
             </div>
         )
