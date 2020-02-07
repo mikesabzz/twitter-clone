@@ -1,5 +1,6 @@
 import React from 'react'
 import { getAllTweets } from '../../services/apiService'
+import dateFormat from 'dateformat'
 
 class Tweets extends React.Component {
     constructor(props) {
@@ -23,13 +24,11 @@ class Tweets extends React.Component {
     renderTweets = () => {
         const {tweets}=this.state
         if(tweets){
-            console.log(tweets)
             return tweets.map(tweet => {
-                console.log(new Date(tweet.createdAt))
                 return (
                     <div key={tweet.userId}>
                         <p>{tweet.tweet}</p>
-                        <p>{Date(tweet.createdAt)}</p>
+                        <p>{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                     </div>
                 )
             })
@@ -40,7 +39,7 @@ class Tweets extends React.Component {
         return (
             <div>
                 <h1>Tweets</h1>
-                <div>{this.renderTweets()}</div>
+                <div className="border border-dark">{this.renderTweets()}</div>
             </div>
         )
     }
