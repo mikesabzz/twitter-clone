@@ -25,10 +25,11 @@ class Tweets extends React.Component {
         if(tweets){
             console.log(tweets)
             return tweets.map(tweet => {
+                console.log(new Date(tweet.createdAt))
                 return (
                     <div key={tweet.userId}>
                         <p>{tweet.tweet}</p>
-                        <p>{tweet.createdAt}</p>
+                        <p>{Date(tweet.createdAt)}</p>
                     </div>
                 )
             })
