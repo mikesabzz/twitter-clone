@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom';
 import { getUserNames } from '../../services/apiService'
-import SearchUsers from './SearchUsers'
 import SearchUser from './SearchUsers';
 
 class UserNames extends React.Component {

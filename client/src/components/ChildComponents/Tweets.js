@@ -1,17 +1,20 @@
 import React from 'react'
 import { getAllTweets } from '../../services/apiService'
+import { getUserNames } from '../../services/apiService'
 import dateFormat from 'dateformat'
 
 class Tweets extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            tweets: []
+            tweets: [],
+            names: []
         }
     }
 
     async componentDidMount() {
         await this.getTweets()
+        await this.getUser()
     }
     getTweets = async () => {
         try {
@@ -21,16 +24,24 @@ class Tweets extends React.Component {
             console.error(e)
         }
     }
+    getUser = async () => {
+        const names = await getUserNames()
+        this.setState({names})
+    }
     renderTweets = () => {
-        const {tweets}=this.state
-        if(tweets){
+        const { tweets } = this.state
+        const { names } = this.state
+        if (tweets, names) {
             return tweets.map(tweet => {
-                return (
-                    <div key={tweet.userId}>
-                        <p>{tweet.tweet}</p>
-                        <p>{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
-                    </div>
-                )
+                return names.map(name => {
+                    return (
+                        <div className="border border-dark" key={(tweet.id, name.id)}>
+                            <div>{tweet.userId === name.id ? <div>{name.name}</div> : <div></div>}</div>
+                            <p>{tweet.tweet}</p>
+                            <p>{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
+                        </div>
+                    )
+                })
             })
         }
     }
@@ -39,7 +50,7 @@ class Tweets extends React.Component {
         return (
             <div>
                 <h1>Tweets</h1>
-                <div className="border border-dark">{this.renderTweets()}</div>
+                <div>{this.renderTweets()}</div>
             </div>
         )
     }

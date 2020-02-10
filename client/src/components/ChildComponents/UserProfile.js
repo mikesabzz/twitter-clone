@@ -30,8 +30,8 @@ class UserProfile extends React.Component {
             return (
                 <div>
                     <div key={bios.userId}>
-                        <p>{bios.userId}</p>
                         <img src={bios.photo} alt=""></img>
+                        <h1>{this.props.name}</h1>
                         <div>{bios.bio}</div>
                     </div>
                 </div>
@@ -42,7 +42,6 @@ class UserProfile extends React.Component {
     render() {
         return (
             <div>
-                <h1>{this.props.name}</h1>
                 <div>{this.renderUserBio()}</div>
             </div>
         )
