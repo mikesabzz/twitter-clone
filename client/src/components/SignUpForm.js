@@ -72,7 +72,9 @@ class SignUpForm extends Component {
               type='text'
               name='name'
               onChange={this.handleTextInput}
-              value={this.state.name.charAt(0).toUpperCase() + this.state.name.slice(1)}
+              value={this.state.name.replace(/\w\S*/g, function(txt){
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+              })}
             />
           </div>
 
