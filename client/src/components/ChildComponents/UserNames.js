@@ -5,11 +5,29 @@ import SearchUsers from './SearchUsers'
 import SearchUser from './SearchUsers';
 
 class UserNames extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             names: [],
             inputValue: ''
+        }
+    }
+
+    handleFilterChange = (event) => {
+        try {
+            event.preventDefault()
+            this.setState({
+                inputValue: event.target.value
+            })
+            const inputUserName = this.state.names.filter((name) => {
+                console.log("name", name)
+            })
+            if (this.state.inputValue.length < 2) {
+                return this.getUser()
+            }
+            this.setState({ names: inputUserName })
+        } catch (e) {
+            console.error(e)
         }
     }
 
@@ -31,26 +49,12 @@ class UserNames extends React.Component {
             .map((name, id) => <p key={id}>{name.name}</p>)
         }
     }
-    handleFilterChange = (event) => {
-        event.preventDefault()
-        this.setState({
-            inputValue: event.target.value
-        })
-        const inputUserName = this.state.names.filter(name => {
-            console.log("Hello",name)
-            // return name.displayname.toLowerCase().includes(this.state.inputValue.toLowerCase())
-        })
-        if(this.state.inputValue.length < 2) {
-            return this.renderPerson()
-        }
-        this.setState({ names: inputUserName })
-    }
     
     render() {
         return (
             <div>
                 <h1>Users</h1>
-                <SearchUser name={this.state} onChange={this.handleFilterChange} />
+                <SearchUser name={this.state.names} onChange={this.handleFilterChange} />
                 <div>{this.renderPerson()}</div>
             </div>
         )
