@@ -13,24 +13,6 @@ class UserNames extends React.Component {
         }
     }
 
-    handleFilterChange = (event) => {
-        try {
-            event.preventDefault()
-            this.setState({
-                inputValue: event.target.value
-            })
-            const inputUserName = this.state.names.filter((name) => {
-                console.log("name", name)
-            })
-            if (this.state.inputValue.length < 2) {
-                return this.getUser()
-            }
-            this.setState({ names: inputUserName })
-        } catch (e) {
-            console.error(e)
-        }
-    }
-
     async componentDidMount () {
         await this.getUser()
     }
@@ -47,6 +29,23 @@ class UserNames extends React.Component {
                 return 0
             })
             .map((name, id) => <p key={id}>{name.name}</p>)
+        }
+    }
+    handleFilterChange = (event) => {
+        try {
+            event.preventDefault()
+            this.setState({
+                inputValue: event.target.value
+            })
+            const inputUserName = this.state.names.filter((name) => {
+                return name.name.toLowerCase().includes(this.state.inputValue)
+            })
+            if (this.state.inputValue.length < 2) {
+                return this.getUser()
+            }
+            this.setState({ names: inputUserName })
+        } catch (e) {
+            console.error(e)
         }
     }
     
