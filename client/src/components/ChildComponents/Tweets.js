@@ -34,7 +34,10 @@ class Tweets extends React.Component {
             const { names } = this.state
             return tweets.map(tweet => {
                 return names.map(name => {
-                    return (<div key={tweet.userId}>{tweet.userId === name.id ? name.name : ""}</div>)
+                    return (
+                        <div key={tweet.userId}>
+                            {tweet.userId === name.id ? name.name : ""}
+                        </div>)
                 })
             })
         } catch (e) {
@@ -43,14 +46,12 @@ class Tweets extends React.Component {
     }
     renderTweets = () => {
         const { tweets } = this.state
-        const { names } = this.state
         if (tweets) {
             return tweets.map(tweet => {
                     return (
-                        <div className="border border-dark" key={tweet.id} >
-                            <div>{this.matchUserToTweets()}</div>
+                        <div className="border border-dark" key={tweet.id}>
+                            <p>{this.matchUserToTweets()} {dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                             <p>{tweet.tweet}</p>
-                            <p>{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                         </div>
                     )
             })
