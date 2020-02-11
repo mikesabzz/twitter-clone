@@ -66,8 +66,17 @@ export const getOneProfile = async () => {
 export const getUserNames = async () => {
   try {
       const response = await api.get(`/app/profile/users`)      
-      console.log(response)
       return response.data
+  } catch(error) {
+    throw error
+  }
+}
+export const getOneUserName = async () => {
+  try{
+    let id = localStorage.getItem('userId')
+    const response = await api.get(`app/profile/${id}`)
+    console.log("user",response)
+    return response.data
   } catch(error) {
     throw error
   }
@@ -76,7 +85,6 @@ export const getUserNames = async () => {
 export const getAllTweets = async () => {
   try {
     const tweets = await api.get(`/app/tweets`)
-    console.log(tweets)
     return tweets.data
   } catch (error) {
     throw error
