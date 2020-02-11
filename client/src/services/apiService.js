@@ -71,16 +71,6 @@ export const getUserNames = async () => {
     throw error
   }
 }
-export const getOneUserName = async () => {
-  try{
-    let id = localStorage.getItem('userId')
-    const response = await api.get(`app/profile/${id}`)
-    console.log("user",response)
-    return response.data
-  } catch(error) {
-    throw error
-  }
-}
 
 export const getAllTweets = async () => {
   try {

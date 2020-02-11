@@ -8,12 +8,22 @@ appRouter.get('/profile', passport.authenticate('jwt', { session: false}),
     res.json({ user: req.user, message: 'authenticated'})
   }
 )
-//Get all profiles
+//Get all users
 appRouter.get('/profile/users', async(req,res) => {
   try {
     const allUsers = await User.findAll()
     res.json(allUsers)
   } catch(error) {
+    console.log(error)
+  }
+})
+//Get one user
+appRouter.get('/profile/:id', async(req,res)=> {
+  try{
+    const id = req.params.id
+    const oneUser = await User.findByPk(id)
+    res.json(oneUser)
+  } catch(error){
     console.log(error)
   }
 })

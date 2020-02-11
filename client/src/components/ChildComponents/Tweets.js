@@ -1,6 +1,6 @@
 import React from 'react'
 import { getAllTweets } from '../../services/apiService'
-import { getOneUserName } from '../../services/apiService'
+import { getUserNames } from '../../services/apiService'
 import dateFormat from 'dateformat'
 
 class Tweets extends React.Component {
@@ -8,7 +8,7 @@ class Tweets extends React.Component {
         super(props)
         this.state = {
             tweets: [],
-            names: {}
+            names: []
         }
     }
 
@@ -25,18 +25,30 @@ class Tweets extends React.Component {
         }
     }
     getUser = async () => {
-        const names = await getOneUserName()
+        const names = await getUserNames()
         this.setState({names})
+    }
+    matchUserToTweets = () => {
+        try {
+            const { tweets } = this.state
+            const { names } = this.state
+            return tweets.map(tweet => {
+                return names.map(name => {
+                    return (<div key={tweet.userId}>{tweet.userId === name.id ? name.name : ""}</div>)
+                })
+            })
+        } catch (e) {
+            console.log(e)
+        }
     }
     renderTweets = () => {
         const { tweets } = this.state
         const { names } = this.state
         if (tweets) {
             return tweets.map(tweet => {
-                let userName = tweet.userId === names.id 
                     return (
-                        <div className="border border-dark" key={tweet.id}>
-                            <div key={names.id}>{userName}</div>
+                        <div className="border border-dark" key={tweet.id} >
+                            <div>{this.matchUserToTweets()}</div>
                             <p>{tweet.tweet}</p>
                             <p>{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                         </div>
