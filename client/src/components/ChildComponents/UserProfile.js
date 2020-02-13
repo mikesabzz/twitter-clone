@@ -25,7 +25,6 @@ class UserProfile extends React.Component {
 
     renderUserBio = () => {
         const { bios } = this.state
-        console.log(bios)
         if (bios) {
             return (
                 <div>

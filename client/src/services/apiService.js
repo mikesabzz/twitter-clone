@@ -14,9 +14,6 @@ export const getProfile = async() => {
   try {
     const response = await api.get('/app/profile')
     const { data: { user } } = response
-
-    console.log(response.data)
-
     return user
   } catch (e) {
     throw e
@@ -76,6 +73,16 @@ export const getAllTweets = async () => {
   try {
     const tweets = await api.get(`/app/tweets`)
     return tweets.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getOneTweet = async (tweetId) => {
+  try {
+    const response = await api.get(`/app/tweets/${tweetId}`)
+    console.log(response.data)
+    return response.data
   } catch (error) {
     throw error
   }

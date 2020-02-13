@@ -8,6 +8,7 @@ class UserNames extends React.Component {
         super()
         this.state = {
             names: [],
+            tweets: [],
             inputValue: ''
         }
     }
@@ -23,11 +24,15 @@ class UserNames extends React.Component {
     renderPerson = () => {
         if (this.state.names) {
             return this.state.names.sort((a, b) => {
-                if(a.name < b.name) return -1;
-                if(a.name > b.name) return 1;
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
                 return 0
             })
-            .map((name, id) => <p key={id}>{name.name}</p>)
+                .map((name, id) => <p key={id}><Link to={{
+                    pathname: `/dashboard/tweets/${name.id}`,
+                    state: { tweets: name.tweets }
+                }}>{name.name}</Link></p>
+                )
         }
     }
     handleFilterChange = (event) => {
