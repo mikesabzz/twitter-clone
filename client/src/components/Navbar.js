@@ -8,6 +8,7 @@ import {
   import Tweets from './ChildComponents/Tweets'
   import UserProfile from './ChildComponents/UserProfile'
   import UserNames from './ChildComponents/UserNames'
+  import UsersProfilesAndTweets from './ChildComponents/UsersProfilesAndTweets'
 
 
 function Navbar (props) {
@@ -25,6 +26,7 @@ function Navbar (props) {
                 <Route path='/tweets' ><Tweets {...props} /></Route>
                 <Route path={`/${props.name}`} render={() => <UserProfile {...props} name={props.name} />} />
                 <Route path='/users/' render={(props)=> <UserNames {...props} user={user}/>}/>
+                <Route path='/user/:id' render={(props)=> <UsersProfilesAndTweets {...props} />} />
             </Switch>
         </div>
     );
