@@ -1,8 +1,13 @@
 import React from 'react'
+import getOneTweet from '../../services/apiService'
 
 const UsersProfilesAndTweets = (props) => {
+
+    const renderTweets = () => {
+        console.log(props.location)
+    }
     return (
-        <div>User profile and tweets</div>
+        <div>{renderTweets()}</div>
     )
 
 }
