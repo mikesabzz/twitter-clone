@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom';
-import { getUserNames } from '../../services/apiService'
+import { getUserNames, getAllTweets } from '../../services/apiService'
 import SearchUser from './SearchUsers';
 
 class UserNames extends React.Component {
@@ -20,8 +20,13 @@ class UserNames extends React.Component {
         const names = await getUserNames()
         this.setState({names})
     }
+    getTweets = async () => {
+        const tweets = await getAllTweets()
+        this.setState({tweets})
+    }
 
     renderPerson = () => {
+        const {tweets} = this.state
         if (this.state.names) {
             return this.state.names.sort((a, b) => {
                 if (a.name < b.name) return -1;
@@ -30,7 +35,7 @@ class UserNames extends React.Component {
             })
             .map((name, id) => <p key={id}><Link to={{
                 pathname: `/user/${name.id}`,
-                state: {tweets:name.tweets}
+                state: {tweets:tweets}
             }}>{name.name}</Link></p>
             )
         }

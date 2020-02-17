@@ -4,10 +4,19 @@ import getOneTweet from '../../services/apiService'
 const UsersProfilesAndTweets = (props) => {
 
     const renderTweets = () => {
-        console.log(props.location)
+        if (props.location.state) {
+            return props.location.state.tweets.map(tweet => {
+                return (
+                    <div>{tweet.tweet}</div>
+                )
+            })
+        }
     }
     return (
-        <div>{renderTweets()}</div>
+        <div>
+            <p>Users Profile and Tweets</p>
+            <div>{renderTweets()}</div>
+        </div>
     )
 
 }
