@@ -15,6 +15,7 @@ class UserNames extends React.Component {
 
     async componentDidMount () {
         await this.getUser()
+        await this.getTweets()
     }
     getUser = async () => {
         const names = await getUserNames()
@@ -24,9 +25,7 @@ class UserNames extends React.Component {
         const tweets = await getAllTweets()
         this.setState({tweets})
     }
-
     renderPerson = () => {
-        const {tweets} = this.state
         if (this.state.names) {
             return this.state.names.sort((a, b) => {
                 if (a.name < b.name) return -1;
@@ -35,7 +34,7 @@ class UserNames extends React.Component {
             })
             .map((name, id) => <p key={id}><Link to={{
                 pathname: `/user/${name.id}`,
-                state: {tweets:tweets}
+                state: {userId:name.id}
             }}>{name.name}</Link></p>
             )
         }
