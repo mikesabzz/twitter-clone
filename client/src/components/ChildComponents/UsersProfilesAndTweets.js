@@ -22,17 +22,18 @@ class UsersProfilesAndTweets extends React.Component {
         this.setState({profile})
     }
     renderTweets = () => {
+        console.log(this.props.location.state.tweets)
         return this.state.tweets.map(tweet => {
-            if (this.props.location.state.userId === (tweet.userId) ) {
+            if (this.props.location.state.tweets === (tweet.userId) ) {
                 return (
                     <div key={tweet.userId}>{tweet.tweet}</div>
                 )
-            }
+            } 
         })
     }
     renderProfile = () => {
         const {profile} = this.state
-        if (this.props.location.state.userId === (profile.userId) ) {
+        if (this.props.location.state.tweets === (profile.userId) ) {
             return (
                 <div key={profile.userId}>
                     <img src={profile.photo} alt=""></img>
