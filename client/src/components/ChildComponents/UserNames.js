@@ -4,8 +4,8 @@ import { getUserNames } from '../../services/apiService'
 import SearchUser from './SearchUsers';
 
 class UserNames extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             names: [],
             tweets: [],
@@ -27,11 +27,15 @@ class UserNames extends React.Component {
                 if (a.name > b.name) return 1;
                 return 0
             })
-            .map((name, id) => <p key={id}><Link to={{
-                pathname: `/dashboard/user/${name.id}`,
-                state: {tweets:name.tweets}
-            }}>{name.name}</Link></p>
-            )
+            .map(name => {
+                return (
+                    <div key={name.id}>
+                        <Link to={`/dashboard/user/${name.id}`} key={name.id}>
+                            <p>{name.name}</p>
+                        </Link>
+                    </div>
+                )
+            })
         }
     }
     handleFilterChange = (event) => {

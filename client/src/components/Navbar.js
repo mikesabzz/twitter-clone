@@ -33,7 +33,7 @@ class Navbar extends React.Component {
                     <Route path='/tweets' ><Tweets {...this.props} /></Route>
                     <Route path={`/${this.props.name}`} render={() => <UserProfile {...this.props} name={this.props.name} />} />
                     <Route path='/users/' render={(props) => <UserNames {...props} user={user} />} />
-                    <Route exact path='/dashboard/user/:id' render={(props) => <UsersProfilesAndTweets {...props} />} />
+                    <Route path='/dashboard/user/:id' render={(props) => <UsersProfilesAndTweets {...props} />} />
                 </Switch>
             </div>
         );
