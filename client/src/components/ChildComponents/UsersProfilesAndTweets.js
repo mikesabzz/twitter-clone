@@ -1,52 +1,33 @@
 import React from 'react'
-import {getAllTweets, getOneProfile} from '../../services/apiService'
+import axios from 'axios'
+import { getOneTweet } from '../../services/apiService'
 
 class UsersProfilesAndTweets extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            tweets: [],
-            profile: {}
+            tweets: ""
         }
     }
     async componentDidMount () {
         await this.getTweets()
-        await this.getProfile()
     }
     getTweets = async () => {
-        const tweets = await getAllTweets()
-        this.setState({tweets})
-    }
-    getProfile = async () => {
-        const profile = await getOneProfile()
-        this.setState({profile})
+        let id = this.props.match.params.id
+        axios(`/app/tweets/${id}`)
+            .then(response => {
+                return this.setState({tweets: response.tweets})
+            })
     }
     renderTweets = () => {
-        console.log(this.props.location.state.tweets)
-        return this.state.tweets.map(tweet => {
-            if (this.props.location.state.tweets === (tweet.userId) ) {
-                return (
-                    <div key={tweet.userId}>{tweet.tweet}</div>
-                )
-            } 
-        })
-    }
-    renderProfile = () => {
-        const {profile} = this.state
-        if (this.props.location.state.tweets === (profile.userId) ) {
-            return (
-                <div key={profile.userId}>
-                    <img src={profile.photo} alt=""></img>
-                    <h3>{profile.bio}</h3>
-                </div>
-            )
+        if (this.state.tweets){
+            console.log(this.state.tweets)
         }
     }
-    render(){
+    render = () => {
         return (
             <div>
                 <p>Users Profile and Tweets</p>
-                <div>{this.renderProfile()}</div>
                 <div>{this.renderTweets()}</div>
             </div>
         )

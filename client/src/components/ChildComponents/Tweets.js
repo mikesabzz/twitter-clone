@@ -50,8 +50,8 @@ class Tweets extends React.Component {
             return tweets.map(tweet => {
                     return (
                         <div className="border border-dark" key={tweet.id}>
-                            <p>{this.matchUserToTweets()} {dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
-                            <p>{tweet.tweet}</p>
+                            <div>{this.matchUserToTweets()} {dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</div>
+                            <div>{tweet.tweet}</div>
                         </div>
                     )
             })
