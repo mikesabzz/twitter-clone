@@ -36,3 +36,13 @@ class UsersProfilesAndTweets extends React.Component {
 }
 
 export default UsersProfilesAndTweets
+// const UsersProfilesAndTweets = (props) => {
+//     const renderTweets = () => {
+//         console.log(props.location.state)
+//     }
+//     return (
+//         <div>{renderTweets()}</div>
+//     )
+// }
+
+// export default UsersProfilesAndTweets

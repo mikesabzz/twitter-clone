@@ -78,11 +78,10 @@ export const getAllTweets = async () => {
   }
 }
 
-export const getOneTweet = async (userId) => {
+export const getOneTweet = async (tweetId) => {
   try {
-    const response = await api.get(`/app/tweets/${userId}`)
-    console.log(userId)
-    console.log(response)
+    const response = await api.get(`/app/tweets/${tweetId}`)
+    console.log(response.data)
     return response.data
   } catch (error) {
     throw error
