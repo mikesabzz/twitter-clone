@@ -1,23 +1,25 @@
 import React from 'react'
 import axios from 'axios'
-import { getOneTweet } from '../../services/apiService'
+import { getAllTweets } from '../../services/apiService'
 
 class UsersProfilesAndTweets extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            tweets: {}
+            tweets: ""
         }
     }
     async componentDidMount () {
         await this.getTweets()
     }
     getTweets = async () => {
-        const tweets = await getOneTweet()
+        let id = this.props.match.params.id
+        const tweets = await fetch(`/app/tweets/${id}`)
         this.setState({tweets})
+        
     }
     renderTweets = () => {
-        console.log(this.props.location.state)
+        console.log(this.state.tweets)
     }
     render = () => {
         return (
