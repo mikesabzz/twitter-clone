@@ -6,23 +6,18 @@ class UsersProfilesAndTweets extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            tweets: ""
+            tweets: {}
         }
     }
     async componentDidMount () {
         await this.getTweets()
     }
     getTweets = async () => {
-        let id = this.props.match.params.id
-        axios(`/app/tweets/${id}`)
-            .then(response => {
-                return this.setState({tweets: response.tweets})
-            })
+        const tweets = await getOneTweet()
+        this.setState({tweets})
     }
     renderTweets = () => {
-        if (this.state.tweets){
-            console.log(this.state.tweets)
-        }
+        console.log(this.props.location.state)
     }
     render = () => {
         return (
@@ -36,13 +31,3 @@ class UsersProfilesAndTweets extends React.Component {
 }
 
 export default UsersProfilesAndTweets
-// const UsersProfilesAndTweets = (props) => {
-//     const renderTweets = () => {
-//         console.log(props.location.state)
-//     }
-//     return (
-//         <div>{renderTweets()}</div>
-//     )
-// }
-
-// export default UsersProfilesAndTweets
