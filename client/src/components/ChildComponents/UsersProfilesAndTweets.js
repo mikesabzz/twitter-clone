@@ -1,21 +1,42 @@
 import React from 'react'
-import { getAllTweets } from '../../services/apiService'
+import { getAllTweets, getOneProfile } from '../../services/apiService'
 import dateFormat from 'dateformat'
 
 class UsersProfilesAndTweets extends React.Component {
     constructor(props){
         super(props)
         this.state = {
+            profile: {},
             tweets: []
         }
     }
     componentDidMount = async () => {
-        console.log(this.props)
         await this.getTweets()
+        await this.getProfile()
+    }
+    getProfile = async () => {
+        try {
+            const profile = await getOneProfile()
+            this.setState({profile})
+        } catch(e){
+            console.log(e)
+        }
     }
     getTweets = async () => {
         const tweets = await getAllTweets()
         this.setState({tweets})
+    }
+    renderProfile = () => {
+        let id = this.props.match.params.id
+        const { profile } = this.state
+        if (profile.userId == id) {
+            return (
+                <div key={profile.userId}>
+                    <img src={profile.photo} alt=""></img>
+                    <p>{profile.bio}</p>
+                </div>
+            )
+        }
     }
     renderTweets = () => {
         let id = this.props.match.params.id
@@ -39,7 +60,8 @@ class UsersProfilesAndTweets extends React.Component {
     render() {
         return (
             <div>
-                <p>{this.props.location.state.names.name}'s `Profile and Tweets</p>
+                <p>{this.props.location.state.names.name}'s Profile and Tweets</p>
+                <div>{this.renderProfile()}</div>
                 <div className="border border-dark">{this.renderTweets()}</div>
             </div>
         )
