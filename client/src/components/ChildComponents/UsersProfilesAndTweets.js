@@ -48,9 +48,9 @@ class UsersProfilesAndTweets extends React.Component {
                 return (
                     <div key={tweet.id}>
                         {tweet.userId == id ? 
-                        <div>
-                            <p>{this.props.location.state.names.name}</p>
-                            <p>{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
+                        <div className="border border-dark">
+                            <p className="text-danger">{this.props.location.state.names.name}</p>
+                            <p className="text-success">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                             <p>{tweet.tweet}</p>
                         </div> : 
                         <div></div>
@@ -63,7 +63,7 @@ class UsersProfilesAndTweets extends React.Component {
     render() {
         return (
             <div>
-                <p>{this.props.location.state.names.name}'s Profile and Tweets</p>
+                <h3>{this.props.location.state.names.name}</h3>
                 <div>{this.renderProfile()}</div>
                 <div className="border border-dark">{this.renderTweets()}</div>
             </div>
