@@ -28,35 +28,23 @@ class Tweets extends React.Component {
         const names = await getUserNames()
         this.setState({names})
     }
-    matchUserToTweets = () => {
-        try {
-            const { tweets } = this.state
-            const { names } = this.state
-            return tweets.map(tweet => {
-                return names.map(name => {
-                    return (
-                        <div key={tweet.userId}>
-                            {tweet.userId === name.id ? name.name : ""}
-                        </div>)
-                })
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
+   
     renderTweets = () => {
         const { tweets } = this.state
-        if (tweets) {
+        const { names } = this.state
             return tweets.map(tweet => {
-                    return (
-                        <div className="border border-dark" key={tweet.id}>
-                            <div>{this.matchUserToTweets()} {dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</div>
+                return names.map(name => {
+                    if (name.id === tweet.userId) {
+                        return <div className="border border-dark" key={tweet.id}>
+                            <div className="text-danger">{name.name}</div>
+                            <div className="text-success">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</div>
                             <div>{tweet.tweet}</div>
                         </div>
-                    )
+                    }
+                })
             })
-        }
     }
+
     
     render() {
         return (
