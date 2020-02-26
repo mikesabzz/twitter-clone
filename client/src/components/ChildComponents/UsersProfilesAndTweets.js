@@ -20,11 +20,12 @@ class UsersProfilesAndTweets extends React.Component {
         if (this.state.tweets) {
             return this.state.tweets.map(tweet => {
                 return (
-                    <div key={tweet.id}>{tweet.tweet}</div>
+                    <div key={tweet.id}>
+                        {tweet.userId == id ? <div>{tweet.tweet}</div> : <div></div>}
+                    </div>
                 )
             })
         }
-
     }
     render() {
         return (

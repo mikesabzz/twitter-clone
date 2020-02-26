@@ -1,6 +1,5 @@
 import React from 'react'
 import { getOneProfile } from '../../services/apiService'
-import { Link, Route } from 'react-router-dom'
 
 class UserProfile extends React.Component {
     constructor(props) {
