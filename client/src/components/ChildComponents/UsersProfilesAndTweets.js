@@ -25,7 +25,22 @@ class UsersProfilesAndTweets extends React.Component {
     }
     renderProfile = () => {
         let id = this.props.match.params.id
-        console.log(id)
+        const { profiles } = this.state
+        if (profiles) {
+            return profiles.map(profile => {
+                return (
+                    <div key={profile.id}>
+                        {profile.userId == id ?
+                            <div>
+                                <img src={profile.photo} alt=""></img>
+                                <p>{profile.bio}</p>
+                            </div> :
+                            <div></div>
+                        }
+                    </div>
+                )
+            })
+        }
     }
     renderTweets = () => {
         let id = this.props.match.params.id
