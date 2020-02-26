@@ -8,7 +8,6 @@ class UserNames extends React.Component {
         super(props)
         this.state = {
             names: [],
-            tweets: [],
             inputValue: ''
         }
     }

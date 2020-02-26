@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { getAllTweets, getAllProfiles } from '../../services/apiService'
 import dateFormat from 'dateformat'
 
