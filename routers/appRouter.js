@@ -98,7 +98,7 @@ appRouter.get('/profile/bio/all', async (req, res) => {
   }
 })
 //Get one profile 
-appRouter.get('/profile/bio/:userId', async (req, res) => {
+appRouter.get('/profile/bio/:id', async (req, res) => {
   try {
     const oneProfile = await Profile.findByPk(req.params.id)
     res.json(oneProfile)
