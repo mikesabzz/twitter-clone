@@ -30,7 +30,8 @@ class UserNames extends React.Component {
             .map(name => {
                 return (
                     <div key={name.id}>
-                        <Link to={`/user/tweets/${name.id}`} key={name.id}>
+                        <Link to={{
+                            pathname: `/user/tweets/${name.id}`, state:{names:name}}} key={name.id}>
                             <p>{name.name}</p>
                         </Link>
                     </div>

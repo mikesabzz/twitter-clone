@@ -10,6 +10,7 @@ class UsersProfilesAndTweets extends React.Component {
         }
     }
     componentDidMount = async () => {
+        console.log(this.props)
         await this.getTweets()
     }
     getTweets = async () => {
@@ -23,7 +24,8 @@ class UsersProfilesAndTweets extends React.Component {
                 return (
                     <div key={tweet.id}>
                         {tweet.userId == id ? 
-                        <div>``
+                        <div>
+                            <p>{this.props.location.state.names.name}</p>
                             <p>{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                             <p>{tweet.tweet}</p>
                         </div> : 
@@ -37,7 +39,7 @@ class UsersProfilesAndTweets extends React.Component {
     render() {
         return (
             <div>
-                <p>Users Profile and Tweets</p>
+                <p>{this.props.location.state.names.name}'s `Profile and Tweets</p>
                 <div className="border border-dark">{this.renderTweets()}</div>
             </div>
         )
