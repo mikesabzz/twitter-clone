@@ -65,7 +65,7 @@ class UsersProfilesAndTweets extends React.Component {
             <div>
                 <h3>{this.props.location.state.names.name}</h3>
                 <div>{this.renderProfile()}</div>
-                <div className="border border-dark">{this.renderTweets()}</div>
+                <div className="border border-dark">{this.renderTweets().reverse()}</div>
             </div>
         )
     }

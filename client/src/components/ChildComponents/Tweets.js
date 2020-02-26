@@ -50,7 +50,7 @@ class Tweets extends React.Component {
         return (
             <div>
                 <h1>Tweets</h1>
-                <div>{this.renderTweets()}</div>
+                <div>{this.renderTweets().reverse()}</div>
             </div>
         )
     }
