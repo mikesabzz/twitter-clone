@@ -89,7 +89,7 @@ appRouter.delete('/tweets/:id', async (req, res) => {
   }
 })
 //Get profiles
-appRouter.get('/profile/bio', async (req, res) => {
+appRouter.get('/profile/bio/all', async (req, res) => {
   try {
     const profile = await Profile.findAll()
     res.json(profile)

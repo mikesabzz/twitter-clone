@@ -1,12 +1,13 @@
 import React from 'react'
-import { getAllTweets, getOneProfile } from '../../services/apiService'
+import axios from 'axios'
+import { getAllTweets, getAllProfiles } from '../../services/apiService'
 import dateFormat from 'dateformat'
 
 class UsersProfilesAndTweets extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            profile: {},
+            profiles: [],
             tweets: []
         }
     }
@@ -15,12 +16,8 @@ class UsersProfilesAndTweets extends React.Component {
         await this.getProfile()
     }
     getProfile = async () => {
-        try {
-            const profile = await getOneProfile()
-            this.setState({profile})
-        } catch(e){
-            console.log(e)
-        }
+        const profiles = await getAllProfiles()
+        this.setState({profiles})
     }
     getTweets = async () => {
         const tweets = await getAllTweets()
@@ -28,15 +25,7 @@ class UsersProfilesAndTweets extends React.Component {
     }
     renderProfile = () => {
         let id = this.props.match.params.id
-        const { profile } = this.state
-        if (profile.userId == id) {
-            return (
-                <div key={profile.userId}>
-                    <img src={profile.photo} alt=""></img>
-                    <p>{profile.bio}</p>
-                </div>
-            )
-        }
+        console.log(id)
     }
     renderTweets = () => {
         let id = this.props.match.params.id

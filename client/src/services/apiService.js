@@ -49,7 +49,14 @@ export const signUp = async(data) => {
     throw e
   }
 }
-
+export const getAllProfiles = async () => {
+  try {
+      const response = await api.get(`app/profile/bio/all`)
+      return response.data
+  } catch(error) {
+    throw error
+  }
+}
 export const getOneProfile = async () => {
   try {
       let userId = localStorage.getItem('userId')
