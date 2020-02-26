@@ -18,12 +18,10 @@ class UsersProfilesAndTweets extends React.Component {
     renderTweets = () => {
         let id = this.props.match.params.id
         if (this.state.tweets) {
-            return this.state.tweets.forEach(tweet => {
-                console.log(tweet)
-                    <div>
-                        {tweet.tweet}
-                    </div>
-                
+            return this.state.tweets.map(tweet => {
+                return (
+                    <div key={tweet.id}>{tweet.tweet}</div>
+                )
             })
         }
 
