@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAllTweets } from '../../services/apiService'
 import { getUserNames } from '../../services/apiService'
+import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 
 class Tweets extends React.Component {
@@ -34,11 +35,12 @@ class Tweets extends React.Component {
         const { names } = this.state
             return tweets.map(tweet => {
                 return names.map(name => {
+                    console.log(tweet)
                     if (name.id === tweet.userId) {
                         return <div className="border border-dark" key={tweet.id}>
-                            <div className="text-danger">{name.name}</div>
-                            <div className="text-success">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</div>
-                            <div>{tweet.tweet}</div>
+                            <Link to={{ pathname: `/user/tweets/${name.id}`, state:{names:name} }} className="text-dark">{name.name}</Link>
+                            <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
+                            <div className="font-weight-normal">{tweet.tweet}</div>
                         </div>
                     }
                 })

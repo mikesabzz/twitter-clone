@@ -8,7 +8,6 @@ function Dashboard (props) {
   let timeOfDay
   const date = new Date()
   const hours = date.getHours()
-
   if (hours < 12) {
     timeOfDay = 'Morning'
   } else if (hours >= 12 && hours < 17) {

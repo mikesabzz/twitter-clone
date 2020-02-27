@@ -32,7 +32,7 @@ class UsersProfilesAndTweets extends React.Component {
                         {profile.userId == id ?
                             <div>
                                 <img src={profile.photo} alt=""></img>
-                                <p>{profile.bio}</p>
+                                <p className="font-weight-normal">{profile.bio}</p>
                             </div> :
                             <div></div>
                         }
@@ -49,9 +49,9 @@ class UsersProfilesAndTweets extends React.Component {
                     <div key={tweet.id}>
                         {tweet.userId == id ? 
                         <div className="border border-dark">
-                            <p className="text-danger">{this.props.location.state.names.name}</p>
-                            <p className="text-success">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
-                            <p>{tweet.tweet}</p>
+                            <p>{this.props.location.state.names.name}</p>
+                            <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
+                            <p className="font-weight-normal">{tweet.tweet}</p>
                         </div> : 
                         <div></div>
                         }
