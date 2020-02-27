@@ -30,7 +30,7 @@ class UserNames extends React.Component {
                 return (
                     <div key={name.id}>
                         <Link to={{
-                            pathname: `/user/tweets/${name.id}`, state:{names:name}}} key={name.id}>
+                            pathname: `/user/${name.name}/${name.id}`, state:{names:name}}} key={name.id}>
                             <p>{name.name}</p>
                         </Link>
                     </div>

@@ -35,10 +35,9 @@ class Tweets extends React.Component {
         const { names } = this.state
             return tweets.map(tweet => {
                 return names.map(name => {
-                    console.log(tweet)
                     if (name.id === tweet.userId) {
                         return <div className="border border-dark" key={tweet.id}>
-                            <Link to={{ pathname: `/user/tweets/${name.id}`, state:{names:name} }} className="text-dark">{name.name}</Link>
+                            <Link to={{ pathname: `/user/${name.name}/${name.id}`, state:{names:name} }} className="text-dark">{name.name}</Link>
                             <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                             <div className="font-weight-normal">{tweet.tweet}</div>
                         </div>
