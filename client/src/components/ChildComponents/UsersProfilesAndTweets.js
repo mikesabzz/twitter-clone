@@ -11,6 +11,7 @@ class UsersProfilesAndTweets extends React.Component {
         }
     }
     componentDidMount = async () => {
+        console.log(this.props.match.params.name)
         await this.getTweets()
         await this.getProfile()
     }
@@ -32,9 +33,9 @@ class UsersProfilesAndTweets extends React.Component {
                         {profile.userId == id ?
                             <div>
                                 <img src={profile.photo} alt=""></img>
+                                <h3>{this.props.match.params.name}</h3>
                                 <p className="font-weight-normal">{profile.bio}</p>
-                            </div> :
-                            <div></div>
+                            </div> : <div></div>
                         }
                     </div>
                 )
@@ -49,7 +50,7 @@ class UsersProfilesAndTweets extends React.Component {
                     <div key={tweet.id}>
                         {tweet.userId == id ? 
                         <div className="border border-dark">
-                            {/* <p>{this.props.location.state.names.name}</p> */}
+                            <p>{this.props.match.params.name}</p>
                             <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                             <p className="font-weight-normal">{tweet.tweet}</p>
                         </div> : 
@@ -63,7 +64,6 @@ class UsersProfilesAndTweets extends React.Component {
     render() {
         return (
             <div>
-                {/* <h3>{this.props.location.state.names.name}</h3> */}
                 <div>{this.renderProfile()}</div>
                 <div className="border border-dark">{this.renderTweets().reverse()}</div>
             </div>
