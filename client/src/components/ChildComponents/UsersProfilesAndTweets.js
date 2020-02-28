@@ -11,7 +11,6 @@ class UsersProfilesAndTweets extends React.Component {
         }
     }
     componentDidMount = async () => {
-        console.log(this.props.match.params.name)
         await this.getTweets()
         await this.getProfile()
     }
