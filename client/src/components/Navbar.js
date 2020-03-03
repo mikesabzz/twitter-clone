@@ -20,7 +20,6 @@ class Navbar extends React.Component {
     }
     render() {
         const { user } = this.props
-        console.log(user.id)
         return (
             <div>
                 <ul>
