@@ -25,8 +25,6 @@ export const login = async(data) => {
     const response = await api.post('/auth/login', data)
     const { data: { token, user } } = response
 
-    console.log(response.data)
-
     localStorage.setItem('token', token)
     localStorage.setItem('userId', user.id)
     return user
@@ -62,6 +60,16 @@ export const getOneProfile = async () => {
       let userId = localStorage.getItem('userId')
       const response = await api.get(`/app/profile/bio/${userId}`)
       return response.data
+  } catch(error) {
+    throw error
+  }
+}
+export const createProfile = async () => {
+  try {
+      const response = await api.get(`/app/profile/bio`)
+      const { user } = response.data
+      console.log(user)
+      return user
   } catch(error) {
     throw error
   }

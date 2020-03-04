@@ -71,7 +71,7 @@ class App extends Component {
 
   render() {
     const { isSignedIn, user } = this.state
-
+    console.log(user)
     return (
       <div className='App'>
         <nav>

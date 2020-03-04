@@ -39,7 +39,7 @@ class Tweets extends React.Component {
     renderTweets = () => {
         const { tweets } = this.state
         const { names } = this.state
-        console.log(this.state.photo)
+        // console.log(this.state.photo)
         return tweets.map(tweet => {
             return names.map(name => {
                 if (name.id === tweet.userId) {
