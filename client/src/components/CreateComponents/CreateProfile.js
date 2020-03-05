@@ -26,10 +26,10 @@ class CreateProfile extends React.Component {
         const newState = {}
         newState[name] = value
         this.setState(newState)
-        console.log(newState)
     }
 
     handleSubmit = async (event) => {
+        console.log('submitting')
         event.preventDefault()
         const { userId, name, bio, photo } = this.state
         const profile = { userId, name, bio, photo }
@@ -39,12 +39,11 @@ class CreateProfile extends React.Component {
     }
     render(){
         if (this.state.created) {
-            return <Redirect to='/dashboard'></Redirect> 
+            return <Redirect to={`/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
         } 
-        console.log(this.handleSubmit)
         return (
             <div>
-                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+                <form onChange={this.handleChange}>
                     <p>Create your Profile</p>
                     <label htmlFor="photo">Upload Image:</label>
                     <ImageUploader
@@ -59,7 +58,7 @@ class CreateProfile extends React.Component {
                     <br />
                     <textarea name="bio" type="text" />
                     <br />
-                    <div><input type='submit' /></div>
+                    <button onSubmit={this.handleSubmit}>Submit</button>
                 </form>
             </div>
         )

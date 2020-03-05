@@ -59,7 +59,7 @@ class SignUpForm extends Component {
     }
 
     if (isSignedIn) {
-      return <Redirect to={'/user/create'} />
+      return <Redirect to='/dashboard' />
     }
 
     return (
