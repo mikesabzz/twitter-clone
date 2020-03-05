@@ -101,3 +101,12 @@ export const getOneTweet = async () => {
     throw error
   }
 }
+export const createTweets = async (data) => {
+  try {
+      const response = await api.get('/app/tweets', data)
+      const { user } = response.data
+      return user
+  } catch(error) {
+    throw error
+  }
+}

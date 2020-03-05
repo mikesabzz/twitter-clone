@@ -20,19 +20,19 @@ class CreateProfile extends React.Component {
         this.setState({pictures: this.state.pictures.concat(picture)})
     }
     
-    handleChange = (e) => {
-        const currentElement = e.target
+    handleChange = (event) => {
+        console.log(event)
+        const currentElement = event.target
         const { name, value } = currentElement
         const newState = {}
         newState[name] = value
         this.setState(newState)
     }
 
-    handleSubmit = async (e) => {
-        e.preventDefault()
-        const { userId, name, bio, photo } = this.state
-        const profile = { userId, name, bio, photo }
-
+    handleSubmit = async (event) => {
+        event.preventDefault()
+        const { userId, name, photo, bio } = this.state
+        const profile = { userId, name, photo, bio }
         await createProfile(profile)
         this.setState({created: true})
     }

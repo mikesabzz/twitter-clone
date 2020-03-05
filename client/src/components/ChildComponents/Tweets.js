@@ -3,6 +3,7 @@ import { getAllTweets, getAllProfiles } from '../../services/apiService'
 import { getUserNames } from '../../services/apiService'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
+import CreateTweets from '../CreateComponents/CreateTweets'
 
 class Tweets extends React.Component {
     constructor(props) {
@@ -58,6 +59,7 @@ class Tweets extends React.Component {
         return (
             <div>
                 <h1>Tweets</h1>
+                <CreateTweets />
                 <div>{this.renderTweets().reverse()}</div>
             </div>
         )
