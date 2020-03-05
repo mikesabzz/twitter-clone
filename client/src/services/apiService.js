@@ -64,11 +64,10 @@ export const getOneProfile = async () => {
     throw error
   }
 }
-export const createProfile = async () => {
+export const createProfile = async (data) => {
   try {
-      const response = await api.get(`/app/profile/bio`)
+      const response = await api.get('/app/profile/bio', data)
       const { user } = response.data
-      console.log(user)
       return user
   } catch(error) {
     throw error
