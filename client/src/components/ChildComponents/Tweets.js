@@ -59,7 +59,7 @@ class Tweets extends React.Component {
         return (
             <div>
                 <h1>Tweets</h1>
-                <CreateTweets />
+                <CreateTweets {...this.props} />
                 <div>{this.renderTweets().reverse()}</div>
             </div>
         )
