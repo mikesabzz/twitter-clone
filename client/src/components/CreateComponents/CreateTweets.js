@@ -10,17 +10,20 @@ class CreateTweets extends React.Component {
             name: '',
             userId: this.props.user.id
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
-    handleChange = (event) => {
-        const currentElement = event.target
-        const { name, value } = currentElement
+    
+    handleChange(e){
+        const element = e.target
+        const { name, value } = element
         const newState = {}
         newState[name] = value
         this.setState(newState)
     }
 
-    handleSubmit = async (event) => {
-        event.preventDefault()
+    handleSubmit = async (e) => {
+        e.preventDefault()
         const { userId, name, tweet } = this.state
         const tweets = { userId, name, tweet }
         await createTweets(tweets)
@@ -28,15 +31,15 @@ class CreateTweets extends React.Component {
     }
     render(){
         if (this.state.created) {
-            return <Redirect to='/dashboard'></Redirect>
+            return <Redirect to='/tweets'></Redirect>
         }
         return (
             <div>
-                <form onChange={this.handleChange}>
+                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                     <label htmlFor="tweet">Whats happening?</label>
                     <br />
-                    <textarea name="tweet" type="text" />
-                    <button onSubmit={this.handleSubmit}>Submit</button>
+                    <textarea name="tweet" type="text" value={this.state.tweet} />
+                    <input type="submit"></input>
                 </form>
             </div>
         )
