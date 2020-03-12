@@ -20,26 +20,28 @@ class CreateTweets extends React.Component {
         const newState = {}
         newState[name] = value
         this.setState(newState)
+        console.log(newState)
     }
-
+    
     handleSubmit = async (e) => {
         e.preventDefault()
-        const { userId, name, tweet } = this.state
-        const tweets = { userId, name, tweet }
+        const { userId, tweet } = this.state
+        const tweets = { userId, tweet }
         await createTweets(tweets)
         this.setState({created: true})
+        console.log(tweets)
     }
     render(){
         if (this.state.created) {
-            return <Redirect to='/tweets'></Redirect>
+            return <Redirect to='/dashboard'></Redirect>
         }
         return (
             <div>
-                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+                <form onChange={this.handleChange} onSubmit={this.handleSubmit} value={this.state.userId}>
                     <label htmlFor="tweet">Whats happening?</label>
                     <br />
-                    <textarea name="tweet" type="text" value={this.state.tweet} />
-                    <input type="submit"></input>
+                    <textarea name="tweet" type="text" />
+                    <div><input type="submit"></input></div>
                 </form>
             </div>
         )
