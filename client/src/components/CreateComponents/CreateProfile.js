@@ -14,6 +14,8 @@ class CreateProfile extends React.Component {
             pictures: []
         }
         this.onDrop = this.onDrop.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
     
     onDrop(picture) {
@@ -35,15 +37,16 @@ class CreateProfile extends React.Component {
         const profile = { userId, name, photo, bio }
         await createProfile(profile)
         this.setState({created: true})
+        console.log(profile)
     }
     render(){
         if (this.state.created) {
-            return <Redirect to='/dashboard'></Redirect> 
+            return <Redirect to={`/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
         } 
         return (
             <div>
                 <p>Create your Profile</p>
-                <form onChange={this.handleChange}>
+                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                     <label htmlFor="photo">Upload Image:</label>
                     <ImageUploader
                         name="photo"
@@ -57,7 +60,7 @@ class CreateProfile extends React.Component {
                     <br />
                     <textarea name="bio" type="text" />
                     <br />
-                    <button onSubmit={this.handleSubmit}>Submit</button>
+                    <button>Submit</button>
                 </form>
             </div>
         )

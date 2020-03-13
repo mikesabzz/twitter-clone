@@ -66,7 +66,7 @@ export const getOneProfile = async () => {
 }
 export const createProfile = async (data) => {
   try {
-      const response = await api.get('/app/profile/bio', data)
+      const response = await api.post('/app/profile/bio', data)
       const { user } = response.data
       return user
   } catch(error) {
