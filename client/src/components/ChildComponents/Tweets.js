@@ -22,25 +22,25 @@ class Tweets extends React.Component {
     }
     getTweets = async () => {
         try {
-        const tweets = await getAllTweets()
-        this.setState({tweets})
-        } catch(e){
+            const tweets = await getAllTweets()
+            this.setState({ tweets })
+        } catch (e) {
             console.error(e)
         }
     }
     getUser = async () => {
         const names = await getUserNames()
-        this.setState({names})
+        this.setState({ names })
     }
     getProfile = async () => {
         const photo = await getAllProfiles()
-        this.setState({photo})
+        this.setState({ photo })
     }
     handleDelete = async (id) => {
         await deleteTweet(id);
-        this.setState({deleted: true})
+        this.setState({ deleted: true })
     }
-   
+
     renderTweets = () => {
         if (this.state.deleted) {
             return window.location.reload()
@@ -57,8 +57,8 @@ class Tweets extends React.Component {
                         <div className="font-weight-normal">{tweet.tweet}</div>
                         {localStorage.getItem('userId') == tweet.userId ?
                             <div>
-                            <button><Link to={{pathname:`/dashboard/tweet/${tweet.id}/update`, state: {editTweet: tweet.tweet}}}>Edit</Link></button>
-                            <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""
+                                <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, state: { editTweet: tweet.tweet } }}>Edit</Link></button>
+                                <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""
                         }
                     </div>
                 }
@@ -66,7 +66,7 @@ class Tweets extends React.Component {
         })
     }
 
-    
+
     render() {
         return (
             <div>

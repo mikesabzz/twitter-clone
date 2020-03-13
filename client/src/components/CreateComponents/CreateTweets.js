@@ -1,9 +1,8 @@
 import React from 'react'
 import { createTweets } from '../../services/apiService'
-import { Redirect } from 'react-router-dom'
 
 class CreateTweets extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             created: false,
@@ -13,23 +12,23 @@ class CreateTweets extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-    
-    handleChange(e){
+
+    handleChange(e) {
         const element = e.target
         const { name, value } = element
         const newState = {}
         newState[name] = value
         this.setState(newState)
     }
-    
+
     handleSubmit = async (e) => {
         e.preventDefault()
         const { userId, tweet } = this.state
         const tweets = { userId, tweet }
         await createTweets(tweets)
-        this.setState({created: true})
+        this.setState({ created: true })
     }
-    render(){
+    render() {
         if (this.state.created) {
             return window.location.reload()
         }
