@@ -47,7 +47,7 @@ class UsersProfilesAndTweets extends React.Component {
             return this.state.tweets.map(tweet => {
                 return (
                     <div key={tweet.id}>
-                        {tweet.userId === id ? 
+                        {tweet.userId == id ? 
                         <div className="border border-dark">
                             <p>{this.props.match.params.name}</p>
                             <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>

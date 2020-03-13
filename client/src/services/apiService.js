@@ -103,7 +103,7 @@ export const getOneTweet = async () => {
 }
 export const createTweets = async (data) => {
   try {
-      const response = await api.get('/app/tweets', data)
+      const response = await api.post('/app/tweets', data)
       const { user } = response.data
       return user
   } catch(error) {

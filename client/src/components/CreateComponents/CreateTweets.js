@@ -20,7 +20,6 @@ class CreateTweets extends React.Component {
         const newState = {}
         newState[name] = value
         this.setState(newState)
-        console.log(newState)
     }
     
     handleSubmit = async (e) => {
@@ -29,18 +28,17 @@ class CreateTweets extends React.Component {
         const tweets = { userId, tweet }
         await createTweets(tweets)
         this.setState({created: true})
-        console.log(tweets)
     }
     render(){
         if (this.state.created) {
-            return <Redirect to='/dashboard'></Redirect>
+            return <Redirect to={`/user/${this.props.user.name}/${this.props.user.id}`}></Redirect>
         }
         return (
             <div>
-                <form onChange={this.handleChange} onSubmit={this.handleSubmit} value={this.state.userId}>
+                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                     <label htmlFor="tweet">Whats happening?</label>
                     <br />
-                    <textarea name="tweet" type="text" />
+                    <textarea type="text" name="tweet" ></textarea>
                     <div><input type="submit"></input></div>
                 </form>
             </div>
