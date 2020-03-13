@@ -23,12 +23,10 @@ class CreateProfile extends React.Component {
     }
     
     handleChange = (event) => {
-        console.log(event)
         const currentElement = event.target
         const { name, value } = currentElement
         const newState = {}
         newState[name] = value
-        this.setState(newState)
     }
 
     handleSubmit = async (event) => {
@@ -37,7 +35,6 @@ class CreateProfile extends React.Component {
         const profile = { userId, name, photo, bio }
         await createProfile(profile)
         this.setState({created: true})
-        console.log(profile)
     }
     render(){
         if (this.state.created) {
@@ -50,6 +47,7 @@ class CreateProfile extends React.Component {
                     <label htmlFor="photo">Upload Image:</label>
                     <ImageUploader
                         name="photo"
+                        value={this.state.photo}
                         withIcon={true}
                         buttonText='Choose image'
                         onChange={this.onDrop}
