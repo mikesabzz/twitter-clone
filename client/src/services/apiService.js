@@ -110,3 +110,11 @@ export const createTweets = async (data) => {
     throw error
   }
 }
+export const deleteTweet = async (tweetId, data) => {
+  try {
+    const response = await api.delete(`app/tweets/${tweetId}`, data)
+    return response
+  } catch(error){
+    throw error
+  }
+}

@@ -27,6 +27,7 @@ class CreateProfile extends React.Component {
         const { name, value } = currentElement
         const newState = {}
         newState[name] = value
+        console.log(newState)
     }
 
     handleSubmit = async (event) => {
@@ -35,11 +36,12 @@ class CreateProfile extends React.Component {
         const profile = { userId, name, photo, bio }
         await createProfile(profile)
         this.setState({created: true})
+        console.log(profile)
     }
     render(){
-        if (this.state.created) {
-            return <Redirect to={`/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
-        } 
+        // if (this.state.created) {
+        //     return <Redirect to={`/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
+        // } 
         return (
             <div>
                 <p>Create your Profile</p>

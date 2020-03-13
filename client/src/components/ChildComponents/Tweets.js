@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAllTweets, getAllProfiles } from '../../services/apiService'
-import { getUserNames } from '../../services/apiService'
+import { getUserNames, deleteTweet } from '../../services/apiService'
+import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 import CreateTweets from '../CreateComponents/CreateTweets'
@@ -11,7 +12,8 @@ class Tweets extends React.Component {
         this.state = {
             tweets: [],
             names: [],
-            photo: []
+            photo: [],
+            deleted: false
         }
     }
 
@@ -36,8 +38,15 @@ class Tweets extends React.Component {
         const photo = await getAllProfiles()
         this.setState({photo})
     }
+    handleDelete = async (id) => {
+        await deleteTweet(id);
+        this.setState({deleted: true})
+    }
    
     renderTweets = () => {
+        if (this.state.deleted) {
+            return window.location.reload()
+        }
         const { tweets } = this.state
         const { names } = this.state
         // console.log(this.state.photo)
@@ -48,6 +57,9 @@ class Tweets extends React.Component {
                         <Link to={{ pathname: `/user/${name.name}/${name.id}`, state: { names: name } }} className="text-dark">{name.name}</Link>
                         <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                         <div className="font-weight-normal">{tweet.tweet}</div>
+                        {localStorage.getItem('userId') == tweet.userId ?
+                            <button onClick={() => this.handleDelete(tweet.id)}>Delete</button> : <div></div>
+                        }
                     </div>
                 }
             })
