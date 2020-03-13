@@ -47,7 +47,6 @@ class UsersProfilesAndTweets extends React.Component {
         }
     }
     renderTweets = () => {
-        console.log(localStorage.getItem('userId'))
         if (this.state.deleted){
             return window.location.reload()
         }

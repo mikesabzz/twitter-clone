@@ -1,6 +1,5 @@
 import React from 'react'
-import { getAllTweets, getAllProfiles } from '../../services/apiService'
-import { getUserNames, deleteTweet } from '../../services/apiService'
+import { getAllTweets, getAllProfiles, getUserNames, deleteTweet } from '../../services/apiService'
 import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'

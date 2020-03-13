@@ -110,6 +110,14 @@ export const createTweets = async (data) => {
     throw error
   }
 }
+export const editTweet = async (tweetId, data) => {
+  try {
+    const response = await api.put(`app/tweets/${tweetId}`, data)
+    return response
+  } catch(error){
+    throw error
+  }
+}
 export const deleteTweet = async (tweetId, data) => {
   try {
     const response = await api.delete(`app/tweets/${tweetId}`, data)
