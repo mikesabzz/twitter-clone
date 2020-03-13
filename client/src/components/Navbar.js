@@ -9,6 +9,7 @@ import Tweets from './ChildComponents/Tweets'
 import UserNames from './ChildComponents/UserNames'
 import UsersProfilesAndTweets from './ChildComponents/UsersProfilesAndTweets'
 import CreateProfile from './CreateComponents/CreateProfile'
+import UpdateTweets from './CreateComponents/UpdateTweets'
 
 
 class Navbar extends React.Component {
@@ -35,6 +36,7 @@ class Navbar extends React.Component {
                     <Route path='/dashboard/tweets' ><Tweets {...this.props} /></Route>
                     <Route path='/users/' render={(props) => <UserNames {...props} user={user} />} />
                     <Route path='/user/:name/:id' render={(props) => <UsersProfilesAndTweets {...props} name={this.props.name} />} />
+                    <Route path='/dashboard/tweet/:id/update' render={(props) => <UpdateTweets {...props} />} />
                     <Route path='/user/create' render={(props) => <CreateProfile {...props} user={user} />} />
                 </Switch>
             </div>

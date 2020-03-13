@@ -1,6 +1,5 @@
 import React from 'react'
 import { getAllTweets, getAllProfiles, getUserNames, deleteTweet } from '../../services/apiService'
-import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 import CreateTweets from '../CreateComponents/CreateTweets'
@@ -57,7 +56,9 @@ class Tweets extends React.Component {
                         <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                         <div className="font-weight-normal">{tweet.tweet}</div>
                         {localStorage.getItem('userId') == tweet.userId ?
-                            <button onClick={() => this.handleDelete(tweet.id)}>Delete</button> : ""
+                            <div>
+                            <button><Link to={{pathname:`/dashboard/tweet/${tweet.id}/update`}}>Edit</Link></button>
+                            <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""
                         }
                     </div>
                 }
