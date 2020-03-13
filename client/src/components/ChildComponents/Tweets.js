@@ -58,7 +58,7 @@ class Tweets extends React.Component {
                         <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                         <div className="font-weight-normal">{tweet.tweet}</div>
                         {localStorage.getItem('userId') == tweet.userId ?
-                            <button onClick={() => this.handleDelete(tweet.id)}>Delete</button> : <div></div>
+                            <button onClick={() => this.handleDelete(tweet.id)}>Delete</button> : ""
                         }
                     </div>
                 }

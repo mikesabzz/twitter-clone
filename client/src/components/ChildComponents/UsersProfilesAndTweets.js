@@ -1,5 +1,5 @@
 import React from 'react'
-import { getAllTweets, getAllProfiles } from '../../services/apiService'
+import { getAllTweets, getAllProfiles, deleteTweet } from '../../services/apiService'
 import dateFormat from 'dateformat'
 
 class UsersProfilesAndTweets extends React.Component {
@@ -7,7 +7,8 @@ class UsersProfilesAndTweets extends React.Component {
         super(props)
         this.state = {
             profiles: [],
-            tweets: []
+            tweets: [],
+            deleted: false
         }
     }
     componentDidMount = async () => {
@@ -21,6 +22,10 @@ class UsersProfilesAndTweets extends React.Component {
     getTweets = async () => {
         const tweets = await getAllTweets()
         this.setState({tweets})
+    }
+    handleDelete = async (id) => {
+        await deleteTweet(id);
+        this.setState({deleted: true})
     }
     renderProfile = () => {
         let id = this.props.match.params.id
@@ -42,6 +47,10 @@ class UsersProfilesAndTweets extends React.Component {
         }
     }
     renderTweets = () => {
+        console.log(localStorage.getItem('userId'))
+        if (this.state.deleted){
+            return window.location.reload()
+        }
         let id = this.props.match.params.id
         if (this.state.tweets) {
             return this.state.tweets.map(tweet => {
@@ -52,6 +61,8 @@ class UsersProfilesAndTweets extends React.Component {
                             <p>{this.props.match.params.name}</p>
                             <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                             <p className="font-weight-normal">{tweet.tweet}</p>
+                            {localStorage.getItem('userId') == tweet.userId ?
+                            <button onClick={() => this.handleDelete(tweet.id)}>Delete</button> : "" }
                         </div> : 
                         <div></div>
                         }
