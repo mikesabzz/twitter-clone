@@ -57,7 +57,7 @@ class Tweets extends React.Component {
                         <div className="font-weight-normal">{tweet.tweet}</div>
                         {localStorage.getItem('userId') == tweet.userId ?
                             <div>
-                            <button><Link to={{pathname:`/dashboard/tweet/${tweet.id}/update`}}>Edit</Link></button>
+                            <button><Link to={{pathname:`/dashboard/tweet/${tweet.id}/update`, state: {editTweet: tweet.tweet}}}>Edit</Link></button>
                             <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""
                         }
                     </div>

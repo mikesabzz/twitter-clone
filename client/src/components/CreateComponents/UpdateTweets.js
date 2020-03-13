@@ -26,7 +26,7 @@ class UpdateTweets extends React.Component {
         await editTweet(id, tweets)
         this.setState({updated: true})
     }
-    render(){
+    render(){     
         if (this.state.updated){
             return <Redirect to='/dashboard/tweets' />
         }
@@ -35,7 +35,7 @@ class UpdateTweets extends React.Component {
                 <form onChange={this.handleUpdate} onSubmit={this.handleSubmit}>
                     <label htmlFor="tweet">Whats happening?</label>
                     <br />
-                    <textarea name="tweet"></textarea>
+                    <textarea name="tweet" defaultValue={this.props.location.state.editTweet}></textarea>
                     <button>Submit</button>
                 </form>
             </div>
