@@ -52,7 +52,7 @@ class Tweets extends React.Component {
             return names.map(name => {
                 if (name.id === tweet.userId) {
                     return <div className="border border-dark" key={tweet.id}>
-                        <Link to={{ pathname: `/user/${name.name}/${name.id}`, state: { names: name } }} className="text-dark">{name.name}</Link>
+                        <Link to={{ pathname: `/dashboard/user/${name.name}/${name.id}`, state: { names: name } }} className="text-dark">{name.name}</Link>
                         <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
                         <div className="font-weight-normal">{tweet.tweet}</div>
                         {localStorage.getItem('userId') == tweet.userId ?

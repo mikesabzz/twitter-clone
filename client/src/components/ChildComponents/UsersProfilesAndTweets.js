@@ -1,7 +1,7 @@
 import React from 'react'
 import { getAllTweets, getAllProfiles, deleteTweet } from '../../services/apiService'
 import dateFormat from 'dateformat'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class UsersProfilesAndTweets extends React.Component {
     constructor(props){
@@ -9,7 +9,7 @@ class UsersProfilesAndTweets extends React.Component {
         this.state = {
             profiles: [],
             tweets: [],
-            deleted: false
+            deleted: false,
         }
     }
     componentDidMount = async () => {
@@ -42,6 +42,10 @@ class UsersProfilesAndTweets extends React.Component {
                                 <p className="font-weight-normal">{profile.bio}</p>
                             </div> : <div></div>
                         }
+                        {localStorage.getItem('userId') == id ?
+                            <button><Link to={{pathname: `/user/${this.props.name}/${id}/update`, state: { editProfile: profile.bio }}}>Edit</Link></button> :
+                            ""
+                        }
                     </div>
                 )
             })
@@ -63,7 +67,7 @@ class UsersProfilesAndTweets extends React.Component {
                             <p className="font-weight-normal">{tweet.tweet}</p>
                             {localStorage.getItem('userId') == tweet.userId ?
                             <div>
-                            <button><Link to={{pathname:`/dashboard/tweet/${tweet.id}/update`}}>Edit</Link></button>
+                            <button><Link to={{pathname:`/dashboard/tweet/${tweet.id}/update`, state: {editTweet: tweet.tweet } }}>Edit</Link></button>
                             <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : "" }
                         </div> : 
                         <div></div>
@@ -81,7 +85,6 @@ class UsersProfilesAndTweets extends React.Component {
             </div>
         )
     }
-
 }
 
 export default UsersProfilesAndTweets
