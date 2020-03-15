@@ -44,7 +44,7 @@ class UsersProfilesAndTweets extends React.Component {
                         }
                         {localStorage.getItem('userId') == id ?
                             <button><Link to={{pathname: `/user/${this.props.name}/${id}/update`, state: { editProfile: profile.bio }}}>Edit</Link></button> :
-                            ""
+                            <div></div>
                         }
                     </div>
                 )
