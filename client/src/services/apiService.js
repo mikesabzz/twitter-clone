@@ -73,6 +73,14 @@ export const createProfile = async (data) => {
     throw error
   }
 }
+export const editProfile = async (id, data) => {
+  try {
+      const response = await api.put(`/app/profile/bio/${id}`, data)
+      return response
+  } catch(error) {
+    throw error
+  }
+}
 
 export const getUserNames = async () => {
   try {

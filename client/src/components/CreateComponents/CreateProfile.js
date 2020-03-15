@@ -22,34 +22,33 @@ class CreateProfile extends React.Component {
         this.setState({pictures: this.state.pictures.concat(picture)})
     }
     
-    handleChange = (event) => {
-        const currentElement = event.target
-        const { name, value } = currentElement
+    handleChange = (e) => {
+        const element = e.target
+        const { name, value } = element
         const newState = {}
         newState[name] = value
-        console.log(newState)
+        this.setState(newState)
     }
 
-    handleSubmit = async (event) => {
-        event.preventDefault()
-        const { userId, name, photo, bio } = this.state
-        const profile = { userId, name, photo, bio }
+    handleSubmit = async (e) => {
+        e.preventDefault()
+        const { userId, photo, bio } = this.state
+        const profile = { userId, photo, bio }
         await createProfile(profile)
         this.setState({created: true})
-        console.log(profile)
     }
     render(){
-        // if (this.state.created) {
-        //     return <Redirect to={`/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
-        // } 
+        if (this.state.created) {
+            return <Redirect to={`/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
+        } 
         return (
             <div>
                 <p>Create your Profile</p>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                     <label htmlFor="photo">Upload Image:</label>
+                    <input name="photo" type="text" />
                     <ImageUploader
                         name="photo"
-                        value={this.state.photo}
                         withIcon={true}
                         buttonText='Choose image'
                         onChange={this.onDrop}
