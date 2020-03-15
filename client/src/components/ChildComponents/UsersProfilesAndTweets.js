@@ -42,9 +42,9 @@ class UsersProfilesAndTweets extends React.Component {
                                 <p className="font-weight-normal">{profile.bio}</p>
                             </div> : <div></div>
                         }
-                        {localStorage.getItem('userId') == id ?
+                        {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
                             <button><Link to={{pathname: `/user/${this.props.name}/${id}/update`, state: { editProfile: profile.bio }}}>Edit</Link></button> :
-                            <div></div>
+                            ""
                         }
                     </div>
                 )
