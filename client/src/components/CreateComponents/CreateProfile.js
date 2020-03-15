@@ -39,13 +39,13 @@ class CreateProfile extends React.Component {
     }
     render(){
         if (this.state.created) {
-            return <Redirect to={`/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
+            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
         } 
         return (
             <div>
                 <p>Create your Profile</p>
-                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-                    <label htmlFor="photo">Upload Image:</label>
+                <form onChange={this.handleChange} onSubmit={this.handleSubmit} action="/app/upload" method="post" encType="multipart/form-data">
+                    {/* <label htmlFor="photo">Upload Image:</label>
                     <input name="photo" type="text" />
                     <ImageUploader
                         name="photo"
@@ -54,7 +54,16 @@ class CreateProfile extends React.Component {
                         onChange={this.onDrop}
                         imgExtension={['.jpg', '.gif', '.png', '.gif', '.JPG', '.jpeg']}
                         maxFileSize={5242880}
+                    /> */}
+                    <label htmlFor="photo">Photo</label>
+                    <input 
+                        type="file" 
+                        accept={["https://*", "http://*", "file://*", "sms://*", "c:"]} 
+                        name="photo" 
+                        imgextension={['.jpg', '.gif', '.png', '.gif', '.JPG', '.jpeg']} 
+                        target="_blank" 
                     />
+     
                     <label htmlFor="bio">Bio Description:</label>
                     <br />
                     <textarea name="bio" type="text" />
