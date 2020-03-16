@@ -2,6 +2,32 @@ const express = require('express')
 const appRouter = express.Router()
 const { passport } = require('../auth/auth')
 const { Tweet, User, Profile } =require('../models')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+  }
+})
+
+const upload = multer({ storage: storage }).single('profileImage')
+
+appRouter.post('/profile', function (req, res) {
+  upload(req, res, function (err) {
+    if (err) {
+      // A Multer error occurred when uploading.
+    } 
+    res.json({
+        success: true,
+        message: 'Image uploaded!'
+    })
+    // Everything went fine.
+  })
+})
+
 
 appRouter.get('/profile', passport.authenticate('jwt', { session: false}),
   async (req, res) => {

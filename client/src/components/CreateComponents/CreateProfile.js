@@ -55,14 +55,9 @@ class CreateProfile extends React.Component {
                         imgExtension={['.jpg', '.gif', '.png', '.gif', '.JPG', '.jpeg']}
                         maxFileSize={5242880}
                     /> */}
-                    <label htmlFor="photo">Photo</label>
-                    <input 
-                        type="file" 
-                        accept={["https://*", "http://*", "file://*", "sms://*", "c:"]} 
-                        name="photo" 
-                        imgextension={['.jpg', '.gif', '.png', '.gif', '.JPG', '.jpeg']} 
-                        target="_blank" 
-                    />
+                  <form action="/profile" method="post" enctype="multipart/form-data">
+                    <input type="file" name="profileImage" />
+                </form>
      
                     <label htmlFor="bio">Bio Description:</label>
                     <br />
