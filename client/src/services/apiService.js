@@ -73,6 +73,16 @@ export const createProfile = async (data) => {
     throw error
   }
 }
+export const uploadImage = async (data) => {
+  try {
+      const response = await api.post('/app/profile/upload', data)
+      const { user } = response.data
+      console.log(response)
+      return user
+  } catch(error) {
+    throw error
+  }
+}
 export const editProfile = async (id, data) => {
   try {
       const response = await api.put(`/app/profile/bio/${id}`, data)

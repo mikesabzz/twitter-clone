@@ -13,9 +13,9 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage }).single('profileImage')
+const upload = multer({ storage: storage }).single('photo')
 
-appRouter.post('/profile', function (req, res) {
+appRouter.post('/profile/upload', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
       // A Multer error occurred when uploading.
