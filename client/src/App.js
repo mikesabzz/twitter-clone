@@ -93,7 +93,7 @@ class App extends Component {
         <main>
           <ProtectedRoute 
             path='/dashboard' 
-            user={user}
+            user={this.state.user}
             component={Dashboard} 
           />
           <Route

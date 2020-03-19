@@ -1,5 +1,6 @@
 import React from 'react'
 import { createTweets } from '../../services/apiService'
+import { Redirect } from 'react-router-dom'
 
 class CreateTweets extends React.Component {
     constructor(props) {
@@ -37,8 +38,8 @@ class CreateTweets extends React.Component {
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                     <label htmlFor="tweet">Whats happening?</label>
                     <br />
-                    <textarea type="text" name="tweet" ></textarea>
-                    <div><input type="submit"></input></div>
+                    <textarea type="text" name="tweet"></textarea>
+                    <input type="submit"></input>
                 </form>
             </div>
         )

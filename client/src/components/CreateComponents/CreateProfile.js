@@ -1,7 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom';
 import { createProfile, uploadImage } from '../../services/apiService';
-import ImageUploader from 'react-images-upload';
 
 class CreateProfile extends React.Component {
     constructor(props){
@@ -43,9 +42,7 @@ class CreateProfile extends React.Component {
                 <p>Create your Profile</p>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
          
-                  {/* <form action="/profile" method="post" encType="multipart/form-data"> */}
                     <input type="file" name="photo" />
-                {/* </form> */}
      
                     <label htmlFor="bio">Bio Description:</label>
                     <br />

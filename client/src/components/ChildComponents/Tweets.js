@@ -50,7 +50,7 @@ class Tweets extends React.Component {
         // console.log(this.state.photo)
         return tweets.map(tweet => {
             return names.map(name => {
-                if (name.id === tweet.userId) {
+                if (name.id == tweet.userId) {
                     return <div className="border border-dark" key={tweet.id}>
                         <Link to={{ pathname: `/dashboard/user/${name.name}/${name.id}`, state: { names: name } }} className="text-dark">{name.name}</Link>
                         <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
