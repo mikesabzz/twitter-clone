@@ -45,7 +45,7 @@ class CreateProfile extends React.Component {
     }
     render(){
         if (this.state.created) {
-            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}` (...this.props)}></Redirect> 
+            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
         } 
         return (
             <div>
