@@ -10,7 +10,7 @@ class CreateProfile extends React.Component {
             created: false,
             name: '',
             userId: props.user.id,
-            pictures: []
+            selectedFile: null
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -23,6 +23,11 @@ class CreateProfile extends React.Component {
         newState[name] = value
         this.setState(newState)
     }
+    fileSelectorHandler = (e) => {
+        this.setState({
+            selectedFile: e.target.files[0]
+        })
+    }
 
     handleSubmit = async (e) => {
         e.preventDefault()
@@ -30,19 +35,24 @@ class CreateProfile extends React.Component {
         const profile = { userId, bio }
         const image = { photo }
         await createProfile(profile)
-        await uploadImage(image)
+        const fd = new FormData()
+        fd.append('photo', this.state.selectedFile, this.state.selectedFile.name)
+        await uploadImage(image, fd)
+            .then(res => {
+                console.log(res)
+            })
         this.setState({created: true})
     }
     render(){
         if (this.state.created) {
-            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
+            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}` (...this.props)}></Redirect> 
         } 
         return (
             <div>
                 <p>Create your Profile</p>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
          
-                    <input type="file" name="photo" />
+                    <input htmlFor="photo" type="file" onChange={this.fileSelectorHandler} />
      
                     <label htmlFor="bio">Bio Description:</label>
                     <br />

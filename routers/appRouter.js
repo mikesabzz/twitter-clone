@@ -18,13 +18,11 @@ const upload = multer({ storage: storage }).single('photo')
 appRouter.post('/profile/upload', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
-      // A Multer error occurred when uploading.
     } 
     res.json({
         success: true,
         message: 'Image uploaded!'
     })
-    // Everything went fine.
   })
 })
 
