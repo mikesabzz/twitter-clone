@@ -19,8 +19,8 @@ class UpdateProfile extends React.Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault()
-        const { profileId, name, photo, bio } = this.state
-        const profile = { profileId, name, photo, bio }
+        const { profileId, name, photo, bio, location, birthdate, website } = this.state
+        const profile = { profileId, name, photo, bio, location, birthdate, website }
         const id = this.state.profileId
         await editProfile(id, profile)
         this.setState({ updated: true })
@@ -39,6 +39,16 @@ class UpdateProfile extends React.Component {
                     <label htmlFor="bio">Bio:</label>
                     <br />
                     <textarea name="bio" defaultValue={this.props.location.state.editProfile} />
+                    <br />
+                    <label htmlFor="location">Location:</label>
+                    <input name="location" type="text" defaultValue={this.props.location.state.editLocation} />
+                    <br />
+                    <label htmlFor="website">Website:</label>
+                    <input name="website" type="text" defaultValue={this.props.location.state.editWebsite} />
+                    <br />
+                    <label htmlFor="birthdate">Date of Birth:</label>
+                    <input name="birthdate" type="date" defaultValue={this.props.location.state.editBirthdate} />
+                    <br />
                     <button>Submit</button>
                 </form>
             </div>
