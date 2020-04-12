@@ -10,12 +10,12 @@ class CreateProfile extends React.Component {
             created: false,
             name: '',
             userId: props.user.id,
-            selectedFile: null
+            selectedFile: null,
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
-    
+
     handleChange = (e) => {
         const element = e.target
         const { name, value } = element
@@ -31,12 +31,12 @@ class CreateProfile extends React.Component {
 
     handleSubmit = async (e) => {
         e.preventDefault()
-        const { userId, photo, bio } = this.state
-        const profile = { userId, bio }
+        const { userId, photo, bio, location, website, birthdate } = this.state
+        const profile = { userId, bio, location, website, birthdate }
         const image = { photo }
         await createProfile(profile)
         const fd = new FormData()
-        fd.append('photo', this.state.selectedFile, this.state.selectedFile.name)
+        // fd.append('photo', this.state.selectedFile, this.state.selectedFile.name)
         await uploadImage(image, fd)
             .then(res => {
                 console.log(res)
@@ -57,6 +57,15 @@ class CreateProfile extends React.Component {
                     <label htmlFor="bio">Bio Description:</label>
                     <br />
                     <textarea name="bio" type="text" />
+                    <br />
+                    <label htmlFor="location">Location:</label>
+                    <input name="location" type="text" />
+                    <br />
+                    <label htmlFor="website">Website:</label>
+                    <input name="website" type="text" />
+                    <br />
+                    <label htmlFor="birthdate">Date of Birth:</label>
+                    <input name="birthdate" type="date" />
                     <br />
                     <button>Submit</button>
                 </form>
