@@ -41,7 +41,11 @@ class UsersProfilesAndTweets extends React.Component {
                                 <h3>{this.props.match.params.name}</h3>
                                 <p className="font-weight-normal">{profile.bio}</p>
                                 <br />
-                                <p className="text-secondary font-weight-normal">{profile.location} {profile.website} Born {profile.birthdate} Joined </p>
+                                <p className="text-secondary font-weight-normal">
+                                    {profile.location}, 
+                                    {profile.website}, 
+                                    Born {profile.birthdate}, 
+                                    Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
 
                             </div> : <div></div>
                         }
