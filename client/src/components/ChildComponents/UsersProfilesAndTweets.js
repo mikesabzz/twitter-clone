@@ -46,7 +46,7 @@ class UsersProfilesAndTweets extends React.Component {
                                     <span className="glyphicon glyphicon-map-marker"></span> {profile.location}_
                                 {typeof profile.website === 'undefined' ?
                                         "" : (<span className="glyphicon glyphicon-link">{profile.website}</span>)}
-                                    <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dS, yyyy")}_
+                                    <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dd, yyyy")}_
                                     <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
 
                             </div> : <div></div>
@@ -81,7 +81,7 @@ class UsersProfilesAndTweets extends React.Component {
                         {tweet.userId == id ?
                             <div className="border border-dark">
                                 <p>{this.props.match.params.name}</p>
-                                <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
+                                <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
                                 <p className="font-weight-normal">{tweet.tweet}</p>
                                 {localStorage.getItem('userId') == tweet.userId ?
                                     <div>
