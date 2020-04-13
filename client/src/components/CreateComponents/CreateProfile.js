@@ -53,7 +53,7 @@ class CreateProfile extends React.Component {
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
          
                     <input htmlFor="photo" type="file" onChange={this.fileSelectorHandler} />
-     
+
                     <label htmlFor="bio">Bio Description:</label>
                     <br />
                     <textarea name="bio" type="text" />
@@ -65,7 +65,7 @@ class CreateProfile extends React.Component {
                     <input name="website" type="text" />
                     <br />
                     <label htmlFor="birthdate">Date of Birth:</label>
-                    <input name="birthdate" type="date" />
+                    <input name="birthdate" type="date" required/>
                     <br />
                     <button>Submit</button>
                 </form>
