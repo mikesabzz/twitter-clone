@@ -2,9 +2,10 @@ import React from 'react'
 import { getAllTweets, getAllProfiles, deleteTweet } from '../../services/apiService'
 import dateFormat from 'dateformat'
 import { Link } from 'react-router-dom'
+import { FaBirthdayCake } from 'react-icons/fa'
 
 class UsersProfilesAndTweets extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             profiles: [],
@@ -18,15 +19,15 @@ class UsersProfilesAndTweets extends React.Component {
     }
     getProfile = async () => {
         const profiles = await getAllProfiles()
-        this.setState({profiles})
+        this.setState({ profiles })
     }
     getTweets = async () => {
         const tweets = await getAllTweets()
-        this.setState({tweets})
+        this.setState({ tweets })
     }
     handleDelete = async (id) => {
         await deleteTweet(id);
-        this.setState({deleted: true})
+        this.setState({ deleted: true })
     }
     renderProfile = () => {
         let id = this.props.match.params.id
@@ -42,20 +43,23 @@ class UsersProfilesAndTweets extends React.Component {
                                 <p className="font-weight-normal">{profile.bio}</p>
                                 <br />
                                 <p className="text-secondary font-weight-normal">
-                                <span className="glyphicon glyphicon-map-marker"></span> {profile.location}_
-                                {typeof profile.website == null ? 
-                                <div><span className="glyphicon glyphicon-link"></span>{profile.website}</div>: ""} 
-                                    Born {dateFormat(profile.birthdate, "mmmm dS, yyyy")}_
+                                    <span className="glyphicon glyphicon-map-marker"></span> {profile.location}_
+                                {typeof profile.website === 'undefined' ?
+                                        "" : (<span className="glyphicon glyphicon-link">{profile.website}</span>)}
+                                    <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dS, yyyy")}_
                                     <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
 
                             </div> : <div></div>
                         }
                         {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
-                            <button><Link to={{pathname: `/user/${this.props.name}/${id}/update`, 
-                            state: { editProfile: profile.bio, 
-                                editLocation: profile.location, 
-                                editWebsite: profile.website, 
-                                editBirthdate: profile.birthdate }
+                            <button><Link to={{
+                                pathname: `/user/${this.props.name}/${id}/update`,
+                                state: {
+                                    editProfile: profile.bio,
+                                    editLocation: profile.location,
+                                    editWebsite: profile.website,
+                                    editBirthdate: profile.birthdate
+                                }
                             }}>Edit</Link>
                             </button> :
                             ""
@@ -66,7 +70,7 @@ class UsersProfilesAndTweets extends React.Component {
         }
     }
     renderTweets = () => {
-        if (this.state.deleted){
+        if (this.state.deleted) {
             return window.location.reload()
         }
         let id = this.props.match.params.id
@@ -74,17 +78,17 @@ class UsersProfilesAndTweets extends React.Component {
             return this.state.tweets.map(tweet => {
                 return (
                     <div key={tweet.id}>
-                        {tweet.userId == id ? 
-                        <div className="border border-dark">
-                            <p>{this.props.match.params.name}</p>
-                            <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
-                            <p className="font-weight-normal">{tweet.tweet}</p>
-                            {localStorage.getItem('userId') == tweet.userId ?
-                            <div>
-                            <button><Link to={{pathname:`/dashboard/tweet/${tweet.id}/update`, state: {editTweet: tweet.tweet } }}>Edit</Link></button>
-                            <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : "" }
-                        </div> : 
-                        <div></div>
+                        {tweet.userId == id ?
+                            <div className="border border-dark">
+                                <p>{this.props.match.params.name}</p>
+                                <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmmm dS, yyyy")}</p>
+                                <p className="font-weight-normal">{tweet.tweet}</p>
+                                {localStorage.getItem('userId') == tweet.userId ?
+                                    <div>
+                                        <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, state: { editTweet: tweet.tweet } }}>Edit</Link></button>
+                                        <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""}
+                            </div> :
+                            <div></div>
                         }
                     </div>
                 )
