@@ -6,10 +6,13 @@ const authRouter = require('./routers/authRouter')
 const passport = require('passport')
 const appRouter = require('./routers/appRouter')
 const { authorized } = require('./auth/auth')
+// const swaggerUi = require('swagger-ui-dist')
+// const swaggerDocument = require('swagger-ui-express')
 
 const PORT = process.env.PORT || 4567
-
 const app = express()
+
+// global.appRoot = __dirname;
 
 app.use(logger('dev'))
 app.use(cors())
@@ -17,6 +20,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json())
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// categoryApi(app,db);
 app.use(passport.initialize())
 app.use('/auth', authRouter)
 app.use('/app', authorized, appRouter)

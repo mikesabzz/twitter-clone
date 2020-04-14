@@ -44,10 +44,10 @@ class UsersProfilesAndTweets extends React.Component {
                             <br />
                             <p className="text-secondary font-weight-normal">
                                 {profile.location === null ? "" :
-                                    <span className="glyphicon glyphicon-map-marker">{profile.location}</span>}
+                                    <span><span className="glyphicon glyphicon-map-marker"></span>{profile.location}</span>}
                                 {profile.website === null ? "" :
                                     <span className="glyphicon glyphicon-link">{profile.website}</span>}
-                                <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dd, yyyy")}_
+                                <FaBirthdayCake /> Born {dateFormat(profile.birthdate.replace(/-/g, '\/'), "mmmm dS, yyyy")}
                                     <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
                         </div>
                         {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?

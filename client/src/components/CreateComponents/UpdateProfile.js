@@ -19,8 +19,8 @@ class UpdateProfile extends React.Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault()
-        const { profileId, name, photo, bio, location, birthdate, website } = this.state
-        const profile = { profileId, name, photo, bio, location, birthdate, website }
+        const { profileId, name, bio, location, birthdate, website } = this.state
+        const profile = { profileId, name, bio, location, birthdate, website }
         const id = this.state.profileId
         await editProfile(id, profile)
         this.setState({ updated: true })
@@ -32,10 +32,6 @@ class UpdateProfile extends React.Component {
         return (
             <div>Update Profile
                 <form onChange={this.handleUpdate} onSubmit={this.handleSubmit}>
-                    <label htmlFor="photo">Image</label>
-                    <br />
-                    <input name="photo" type="text"></input>
-                    <br />
                     <label htmlFor="bio">Bio:</label>
                     <br />
                     <textarea name="bio" defaultValue={this.props.location.state.editProfile} />
