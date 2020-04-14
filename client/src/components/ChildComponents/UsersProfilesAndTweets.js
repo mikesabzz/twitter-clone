@@ -33,25 +33,23 @@ class UsersProfilesAndTweets extends React.Component {
         let id = this.props.match.params.id
         const { profiles } = this.state
         if (profiles) {
-            return profiles.map(profile => {
+            const userProfile = profiles.filter(profile => profile.userId == id)
+            return userProfile.map(profile => {
                 return (
                     <div key={profile.id}>
-                        {profile.userId == id ?
-                            <div>
-                                <img src={profile.photo} alt=""></img>
-                                <h3>{this.props.match.params.name}</h3>
-                                <p className="font-weight-normal">{profile.bio}</p>
-                                <br />
-                                <p className="text-secondary font-weight-normal">
-                                    {profile.location === null ? "" :
-                                        <span className="glyphicon glyphicon-map-marker">{profile.location}</span>}
-                                    {profile.website === null ? "" :
-                                        <span className="glyphicon glyphicon-link">{profile.website}</span>}
-                                    <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dd, yyyy")}_
+                        <div>
+                            <img src={profile.photo} alt=""></img>
+                            <h3>{this.props.match.params.name}</h3>
+                            <p className="font-weight-normal">{profile.bio}</p>
+                            <br />
+                            <p className="text-secondary font-weight-normal">
+                                {profile.location === null ? "" :
+                                    <span className="glyphicon glyphicon-map-marker">{profile.location}</span>}
+                                {profile.website === null ? "" :
+                                    <span className="glyphicon glyphicon-link">{profile.website}</span>}
+                                <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dd, yyyy")}_
                                     <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
-
-                            </div> : <div></div>
-                        }
+                        </div>
                         {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
                             <button><Link to={{
                                 pathname: `/user/${this.props.name}/${id}/update`,
@@ -76,21 +74,19 @@ class UsersProfilesAndTweets extends React.Component {
         }
         let id = this.props.match.params.id
         if (this.state.tweets) {
-            return this.state.tweets.map(tweet => {
+            const userTweets = this.state.tweets.filter(tweet => tweet.userId == id)
+            return userTweets.map(tweet => {
                 return (
                     <div key={tweet.id}>
-                        {tweet.userId == id ?
-                            <div className="border border-dark">
-                                <p>{this.props.match.params.name}</p>
-                                <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
-                                <p className="font-weight-normal">{tweet.tweet}</p>
-                                {localStorage.getItem('userId') == tweet.userId ?
-                                    <div>
-                                        <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, state: { editTweet: tweet.tweet } }}>Edit</Link></button>
-                                        <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""}
-                            </div> :
-                            <div></div>
-                        }
+                        <div className="border border-dark">
+                            <p>{this.props.match.params.name}</p>
+                            <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
+                            <p className="font-weight-normal">{tweet.tweet}</p>
+                            {localStorage.getItem('userId') == tweet.userId ?
+                                <div>
+                                    <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, state: { editTweet: tweet.tweet } }}>Edit</Link></button>
+                                    <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""}
+                                </div>
                     </div>
                 )
             })
