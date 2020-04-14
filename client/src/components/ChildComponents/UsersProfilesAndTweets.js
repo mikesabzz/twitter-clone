@@ -43,8 +43,10 @@ class UsersProfilesAndTweets extends React.Component {
                                 <p className="font-weight-normal">{profile.bio}</p>
                                 <br />
                                 <p className="text-secondary font-weight-normal">
-                                    <span className="glyphicon glyphicon-map-marker"></span> {profile.location}_
-                                    <span className="glyphicon glyphicon-link">{profile.website}</span>
+                                    {profile.location === null ? "" :
+                                    <span className="glyphicon glyphicon-map-marker">{profile.location}</span>}
+                                    {profile.website === null ? "" :
+                                        <span className="glyphicon glyphicon-link">{profile.website}</span>}
                                     <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dd, yyyy")}_
                                     <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
 
