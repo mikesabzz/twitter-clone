@@ -18,7 +18,6 @@ const seedDb = async () => {
 
     const demoProfile = await Profile.create({
       bio: "I am the first user",
-      photo: 'https://www.isupportcause.com/r/images/previewImage.png',
       location: "New York, USA",
       birthdate: "January 1, 2000"
     })
