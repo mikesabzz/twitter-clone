@@ -10,7 +10,7 @@ class CreateProfile extends React.Component {
             created: false,
             name: '',
             userId: props.user.id,
-            selectedFile: null,
+            selectedFile: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -36,7 +36,7 @@ class CreateProfile extends React.Component {
         const image = { photo }
         await createProfile(profile)
         const fd = new FormData()
-        // fd.append('photo', this.state.selectedFile, this.state.selectedFile.name)
+        fd.append('photo', this.state.selectedFile, this.state.selectedFile.name)
         await uploadImage(image, fd)
             .then(res => {
                 console.log(res)
@@ -44,6 +44,7 @@ class CreateProfile extends React.Component {
         this.setState({created: true})
     }
     render(){
+        console.log(this.state.selectedFile.name)
         if (this.state.created) {
             return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
         } 

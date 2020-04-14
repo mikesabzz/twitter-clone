@@ -44,7 +44,7 @@ class UsersProfilesAndTweets extends React.Component {
                                 <br />
                                 <p className="text-secondary font-weight-normal">
                                     {profile.location === null ? "" :
-                                    <span className="glyphicon glyphicon-map-marker">{profile.location}</span>}
+                                        <span className="glyphicon glyphicon-map-marker">{profile.location}</span>}
                                     {profile.website === null ? "" :
                                         <span className="glyphicon glyphicon-link">{profile.website}</span>}
                                     <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dd, yyyy")}_
