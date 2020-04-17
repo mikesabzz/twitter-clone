@@ -1,7 +1,7 @@
 const express = require('express')
 const appRouter = express.Router()
 const { passport } = require('../auth/auth')
-const { Tweet, User, Profile } =require('../models')
+const { Tweet, User, Profile, Image } =require('../models')
 
 //upload image
 const multer = require('multer')
@@ -16,16 +16,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single('image')
 
-appRouter.post('/profile', function (req, res) {
-  upload(req, res, function (err) {
-    if (err) {
-      
-    }
-    res.json({
-      success: true,
-      message: 'Image uploaded'
+appRouter.post('/upload', async (req, res) => {
+  try {
+    const uploadImage = await Image.create(req.body)
+    upload(req, res, () => {
+      res.json({
+        uploadImage,
+        success: true,
+        message: 'Image uploaded'
+      })
     })
-  })
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 //upload image
