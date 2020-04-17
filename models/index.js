@@ -3,6 +3,7 @@ const UserModel = require('./user')
 const TweetModel = require('./tweet')
 const profileModel = require('./profile')
 const bcrypt = require('bcrypt')
+const CategoryModel = require('./category')
 
 const db = new Sequelize({
   database: 'twitter_clone_db',
@@ -15,6 +16,11 @@ User.beforeCreate(async (user, options) => {
   const hashedPassword = await bcrypt.hash(user.password, 12)
   user.password = hashedPassword
 })
+const Category = CategoryModel(db, Sequelize)
+db.sync() 
+  .then(() => {
+    console.log(`Database & tables created!`)
+});
 
 const Tweet = TweetModel(db, Sequelize)
 User.hasMany(Tweet)
@@ -28,5 +34,6 @@ module.exports = {
   db,
   User,
   Tweet,
-  Profile
+  Profile,
+  Category
 }

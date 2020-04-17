@@ -10,20 +10,6 @@ const api = axios.create({
   }
 })
 
-export const uploadImage = async (formData) => {
-  try {
-      const response = await api.post('/app/upload', formData ({
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }))
-      const { user } = response.data
-      console.log(response)
-      return user
-  } catch(error) {
-    throw error
-  }
-}
 
 export const getProfile = async() => {
   try {
