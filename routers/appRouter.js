@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage }).single('image')
+const upload = multer({ storage: storage }).single('image', 'userId')
 
 appRouter.post('/upload', async (req, res) => {
   try {
@@ -22,6 +22,7 @@ appRouter.post('/upload', async (req, res) => {
     upload(req, res, () => {
       res.json({
         uploadImage,
+        userId: req.body,
         success: true,
         message: 'Image uploaded'
       })
