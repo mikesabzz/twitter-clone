@@ -6,8 +6,8 @@ const authRouter = require('./routers/authRouter')
 const passport = require('passport')
 const appRouter = require('./routers/appRouter')
 const { authorized } = require('./auth/auth')
-const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require('swagger-ui-dist')
+// const swaggerUi = require('swagger-ui-express')
+// const swaggerDocument = require('swagger-ui-dist')
 
 const PORT = process.env.PORT || 4567
 const app = express()
@@ -23,9 +23,7 @@ app.use(bodyParser.json())
 app.use(passport.initialize())
 app.use('/auth', authRouter)
 app.use('/app', authorized, appRouter)
-// app.use(bodypareser.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// categoryApi(app,db);
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', async (req, res) => {
   try {

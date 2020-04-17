@@ -16,11 +16,11 @@ User.beforeCreate(async (user, options) => {
   const hashedPassword = await bcrypt.hash(user.password, 12)
   user.password = hashedPassword
 })
-const Category = CategoryModel(db, Sequelize)
-db.sync() 
-  .then(() => {
-    console.log(`Database & tables created!`)
-});
+// const Category = CategoryModel(db, Sequelize)
+// db.sync() 
+//   .then(() => {
+//     console.log(`Database & tables created!`)
+// });
 
 const Tweet = TweetModel(db, Sequelize)
 User.hasMany(Tweet)
@@ -34,6 +34,6 @@ module.exports = {
   db,
   User,
   Tweet,
-  Profile,
-  Category
+  Profile
+  // Category
 }
