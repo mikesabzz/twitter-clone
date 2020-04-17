@@ -10,6 +10,21 @@ const api = axios.create({
   }
 })
 
+export const uploadImage = async (formData) => {
+  try {
+      const response = await api.post('/app/upload', formData ({
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }))
+      const { user } = response.data
+      console.log(response)
+      return user
+  } catch(error) {
+    throw error
+  }
+}
+
 export const getProfile = async() => {
   try {
     const response = await api.get('/app/profile')
@@ -73,16 +88,7 @@ export const createProfile = async (data) => {
     throw error
   }
 }
-export const uploadImage = async (data) => {
-  try {
-      const response = await api.post('/app/profile/upload', data)
-      const { user } = response.data
-      console.log(response)
-      return user
-  } catch(error) {
-    throw error
-  }
-}
+
 export const editProfile = async (id, data) => {
   try {
       const response = await api.put(`/app/profile/bio/${id}`, data)
