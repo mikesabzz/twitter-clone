@@ -10,7 +10,7 @@ class FileUpload extends React.Component {
             filename: 'Choose File',
             // setFilename: ''
             uploadedFile: '',
-            // setUploadedFile: ''
+            setUploadedFile: ''
         }
     }
     onChange = e => {
@@ -26,7 +26,7 @@ class FileUpload extends React.Component {
         try {
             const res = await uploadImage
             const {fileName, filePath } = res.data
-            setUploadedFile({ fileName, filePath})
+            this.state.setUploadedFile({ fileName, filePath})
         }catch(err) {
             if(err.response.status === 500){
                 console.log('There was a problem with the server')
