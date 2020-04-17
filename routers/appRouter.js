@@ -2,39 +2,25 @@ const express = require('express')
 const appRouter = express.Router()
 const { passport } = require('../auth/auth')
 const { Tweet, User, Profile } =require('../models')
-const multer = require('multer')
-const fs = require('fs')
+const fileUpload = require('express-fileupload')
 
-//for image uploading
-const upload = multer({ dest: '/tmp/'});
-
-module.exports = (app, db) => {
-  app.get("/categories", (req, res) =>
-    db.Category.findAll({ raw: true })
-      .then((result) => res.json(result))
-  );
-
-  app.post('/categories', upload.single('file'), (req, res) => {
-    const file = global.appRoot + '/uploads/' + req.file.filename;
-    fs.rename(req.file.path, file, function (err) {
-      if (err) {
-        console.log(err);
-        res.send(500);
-      }
-      else {
-        db.Category.create({
-          name: req.body.name,
-          description: req.body.description,
-          poster: req.file.filename,
-          userId: req.body.userId
-        })
-          .then(r => {
-            res.send(r.get({ plain: true }));
-          });
-      }
-    });
+appRouter.use(fileUpload())
+// Upload Endpoint
+appRouter.post('/upload', (req, res) => {
+  if(req.files === null){
+    return res.status(400).json({ msg: 'No file uploaded' })
+  }
+  const file = req.files.file
+  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+    if(err) {
+      console.error(err)
+      return res.status(500).send(err)
+    }
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` })
   })
-}
+})
+
+
 
 //get user profile
 appRouter.get('/profile', passport.authenticate('jwt', { session: false}),
