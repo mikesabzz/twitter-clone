@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.filename + '-' + Date.now())
+    cb(null, file.filename + '-' + Date.now() + '.jpg')
   }
 })
 
@@ -19,8 +19,12 @@ const upload = multer({ storage: storage }).single('image')
 appRouter.post('/profile', function (req, res) {
   upload(req, res, function (err) {
     if (err) {
-      return
+      
     }
+    res.json({
+      success: true,
+      message: 'Image uploaded'
+    })
   })
 })
 
