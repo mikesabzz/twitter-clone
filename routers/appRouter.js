@@ -26,7 +26,8 @@ appRouter.post('/upload', upload.single('file'), async (req, res) => {
         await Image.create({
           name: req.body.name,
           description: req.body.description,
-          poster: req.file.filename
+          poster: req.file.filename,
+          userId: req.body.userId
         })
         .then(r => {
           res.send(r.get({plain: true}))
