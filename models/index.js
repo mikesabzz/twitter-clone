@@ -16,8 +16,10 @@ User.beforeCreate(async (user, options) => {
   const hashedPassword = await bcrypt.hash(user.password, 12)
   user.password = hashedPassword
 })
+
 const Image = imageModel(db, Sequelize)
 User.hasOne(Image)
+Image.belongsTo(User)
 db.sync() 
   .then(() => {
     console.log(`Database & tables created!`)
