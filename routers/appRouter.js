@@ -1,7 +1,7 @@
 const express = require('express')
 const appRouter = express.Router()
 const { passport } = require('../auth/auth')
-const { Tweet, User, Profile, Image } =require('../models')
+const { Tweet, User, Profile, Image } = require('../models')
 
 //upload image
 const multer = require('multer')
@@ -15,10 +15,11 @@ const storage = multer.diskStorage({
     cb(null, file.filename + '-' + Date.now() + '.jpg')
   }
 })
-appRouter.get('/upload', async (req, res) => {
-  db.Image.findAll({raw: true})
+// module.exports = (appRouter, db) => {
+appRouter.get('/upload', async (req, res) => 
+  await Image.findAll({raw: true})
     .then((result) => res.json(result))
-})
+)
 
 const upload = multer({ storage: storage })
 // .single('image')
@@ -26,12 +27,13 @@ const upload = multer({ storage: storage })
 appRouter.post('/upload', upload.single('file'), async (req, res) => {
   // try {
     // const uploadImage = await Image.create(req.body)
-    fs.rename(req.file.path, file, (err) =>{
-      if (err) {
-        console.log(err)
-        res.send(500)
-      } else {
-        db.Image.create({
+    // fs.rename(req.file.path, file, (err) =>{
+      // if (err) {
+      //   console.log(err)
+      //   res.send(500)
+      // } else
+      try {
+        await Image.create({
           name: req.body.name,
           description: req.body.description,
           poster: req.file.filename
@@ -39,12 +41,12 @@ appRouter.post('/upload', upload.single('file'), async (req, res) => {
         .then(r => {
           res.send(r.get({plain: true}))
         })
-        res.json({
-          success: true,
-          message: 'Image uploaded'
-        })
       }
-    })
+      catch(error){
+        console.log(error)
+      }
+    // })
+  })
     // upload(req, res, () => {
     //   res.json({
     //     uploadImage,
@@ -56,7 +58,7 @@ appRouter.post('/upload', upload.single('file'), async (req, res) => {
   // } catch (err) {
   //   console.log(err)
   // }
-})
+// })
 
 //upload image
 
