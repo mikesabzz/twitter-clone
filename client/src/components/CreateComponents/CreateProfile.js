@@ -11,7 +11,6 @@ class CreateProfile extends React.Component {
             created: false,
             name: '',
             userId: props.user.id,
-            selectedFile: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -40,7 +39,7 @@ class CreateProfile extends React.Component {
             <div>
                 <p>Create your Profile</p>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
-                    <FileUpload />
+                    <FileUpload userId={this.state.userId} userName={this.props.user.name} />
                     <label htmlFor="bio">Bio Description:</label>
                     <br />
                     <textarea name="bio" type="text" />

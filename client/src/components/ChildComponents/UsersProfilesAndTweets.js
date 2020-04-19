@@ -3,6 +3,7 @@ import { getAllTweets, getAllProfiles, deleteTweet } from '../../services/apiSer
 import dateFormat from 'dateformat'
 import { Link } from 'react-router-dom'
 import { FaBirthdayCake } from 'react-icons/fa'
+import UserImage from './UserImage'
 
 class UsersProfilesAndTweets extends React.Component {
     constructor(props) {
@@ -95,6 +96,7 @@ class UsersProfilesAndTweets extends React.Component {
     render() {
         return (
             <div>
+                <UserImage userId={this.props.match.params.id} />
                 <div>{this.renderProfile()}</div>
                 <div className="border border-dark">{this.renderTweets().reverse()}</div>
             </div>
