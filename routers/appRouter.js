@@ -5,7 +5,6 @@ const { Tweet, User, Profile, Image } = require('../models')
 const multer = require('multer')
 
 //upload image
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/')
@@ -14,33 +13,29 @@ const storage = multer.diskStorage({
     cb(null, file.filename + '-' + Date.now() + '.jpg')
   }
 })
-appRouter.get('/upload', async (req, res) => 
-  await Image.findAll({raw: true})
+appRouter.get('/upload', async (req, res) =>
+  await Image.findAll({ raw: true })
     .then((result) => res.json(result))
 )
 
 const upload = multer({ storage: storage })
 
 appRouter.post('/upload', upload.single('file'), async (req, res) => {
-      try {
-        await Image.create({
-          name: req.body.name,
-          description: req.body.description,
-          poster: req.file.filename,
-          userId: req.body.userId
-        })
-        .then(r => {
-          res.send(r.get({plain: true}))
-        })
-      }
-      catch(error){
-        console.log(error)
-      }
-  })
-
-//upload image
-
-
+  try {
+    await Image.create({
+      name: req.body.name,
+      description: req.body.description,
+      poster: req.file.filename,
+      userId: req.body.userId
+    })
+      .then(r => {
+        res.send(r.get({ plain: true }))
+      })
+  }
+  catch (error) {
+    console.log(error)
+  }
+})
 
 //get user profile
 appRouter.get('/profile', passport.authenticate('jwt', { session: false}),
@@ -177,7 +172,5 @@ appRouter.delete('/profile/bio/:id', async (req, res) => {
     console.log(error)
   }
 })
-
-
 
 module.exports = (appRouter)

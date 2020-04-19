@@ -56,15 +56,6 @@ export const getAllProfiles = async () => {
     throw error
   }
 }
-export const getOneProfile = async () => {
-  try {
-      let userId = localStorage.getItem('userId')
-      const response = await api.get(`/app/profile/bio/${userId}`)
-      return response.data
-  } catch(error) {
-    throw error
-  }
-}
 export const createProfile = async (data) => {
   try {
       const response = await api.post('/app/profile/bio', data)
@@ -79,6 +70,25 @@ export const editProfile = async (id, data) => {
   try {
       const response = await api.put(`/app/profile/bio/${id}`, data)
       return response
+  } catch(error) {
+    throw error
+  }
+}
+
+export const getAllUploads = async () => {
+  try {
+      const response = await api.get(`app/upload`)
+      return response.data
+  } catch(error) {
+    throw error
+  }
+}
+
+export const uploadImage = async (data) => {
+  try {
+      const response = await api.post('/app/upload', data)
+      const { user } = response.data
+      return user
   } catch(error) {
     throw error
   }
@@ -102,15 +112,6 @@ export const getAllTweets = async () => {
   }
 }
 
-export const getOneTweet = async () => {
-  try {
-    let userId = localStorage.getItem('userId')
-    const response = await api.get(`/app/tweets/${userId}`)
-    return response.data
-  } catch (error) {
-    throw error
-  }
-}
 export const createTweets = async (data) => {
   try {
       const response = await api.post('/app/tweets', data)

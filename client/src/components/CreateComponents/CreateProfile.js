@@ -40,7 +40,7 @@ class CreateProfile extends React.Component {
             <div>
                 <p>Create your Profile</p>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
-                    {/* <FileUpload /> */}
+                    <FileUpload />
                     <label htmlFor="bio">Bio Description:</label>
                     <br />
                     <textarea name="bio" type="text" />
