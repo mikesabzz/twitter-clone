@@ -23,7 +23,12 @@ class UserImage extends React.Component {
                 return (
                     <div key={img.id}>
                         <p>{img.name}</p>
-                        <img src={img.poster} className="img-responsive" />
+                        <img src={img.poster}
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                            }}
+                        />
                     </div>
                 )
             })
