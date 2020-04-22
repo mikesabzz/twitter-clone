@@ -7,7 +7,8 @@ class FileUpload extends React.Component {
         this.state = {
             created: false,
             userId: this.props.userId,
-            name: this.props.userName
+            name: this.props.userName,
+            filename: 'Choose File'
         }
     }
     onChange = (e) => {
@@ -16,7 +17,9 @@ class FileUpload extends React.Component {
         const newState = {}
         newState[name] = value
         this.setState(newState)
+        this.setState({filename: element.value})
     }
+
     handleSubmit = async (e) => {
         e.preventDefault()
         const {userId, file, name, poster} = this.state
@@ -26,9 +29,10 @@ class FileUpload extends React.Component {
     }
     render () {
         return (
-            <div className="form-group files">
-                <label htmlFor="file">Upload Your File </label>
-                <input type="file" name="file" className="form-control" onChange={this.onChange} />
+            <div className="custom-file">
+                <input type="file" className="custom-file-input" id="customFile" onChange={this.onChange} />
+                <label className="custom-file-label" htmlFor="file">{this.state.filename}</label>
+                <input type="submit" value="Upload" className='btn btn-primary btn-block mt-4' onSubmit={this.handleSubmit} />
             </div>
         )
     }
