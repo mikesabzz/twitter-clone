@@ -13,7 +13,6 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/')
   }
 })
-console.log(this.filename)
 appRouter.get('/upload', async (req, res) =>
   await Image.findAll({ raw: true })
     .then((result) => res.json(result))
@@ -31,11 +30,14 @@ appRouter.post('/upload', upload.single('file'), async (req, res) => {
       .then(r => {
         res.send(r.get({ plain: true }))
       })
+      const file = req.file
+      file.mv(`${__dirname}/client/public/uploads/${poster}`)
   }
   catch (error) {
     console.log(error)
   }
 })
+
 
 //get user profile
 appRouter.get('/profile', passport.authenticate('jwt', { session: false}),
