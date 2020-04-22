@@ -6,13 +6,14 @@ const multer = require('multer')
 
 //upload image
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/')
-  },
   filename: function (req, file, cb) {
     cb(null, file.filename + '-' + Date.now() + '.jpg')
+  },
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
   }
 })
+console.log(this.filename)
 appRouter.get('/upload', async (req, res) =>
   await Image.findAll({ raw: true })
     .then((result) => res.json(result))

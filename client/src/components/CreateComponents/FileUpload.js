@@ -24,10 +24,15 @@ class FileUpload extends React.Component {
         e.preventDefault()
         const {userId, file, name, poster} = this.state
         const imageUpload = {userId, file, name, poster}
-        await uploadImage(imageUpload)
+        const formData = new FormData()
+        formData.append('file', file)
+
+        await uploadImage(imageUpload, formData)
         this.setState({created: true})
+
     }
     render () {
+        console.log(this.state.file)
         return (
             <div className="custom-file">
                 <input type="file" className="custom-file-input" id="customFile" onChange={this.onChange} />
