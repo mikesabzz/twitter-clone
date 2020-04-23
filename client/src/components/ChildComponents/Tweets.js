@@ -47,8 +47,11 @@ class Tweets extends React.Component {
         }
         const { tweets } = this.state
         const { names } = this.state
-        // console.log(this.state.photo)
-        return tweets.map(tweet => {
+        const sortTweets = tweets.sort((a, b) => {
+            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        });
+
+        return sortTweets.map(tweet => {
             return names.map(name => {
                 if (name.id == tweet.userId) {
                     return <div className="border border-dark" key={tweet.id}>
@@ -65,6 +68,7 @@ class Tweets extends React.Component {
             })
         })
     }
+
 
 
     render() {

@@ -32,7 +32,6 @@ class FileUpload extends React.Component {
 
     }
     render () {
-        console.log(this.state.file)
         return (
             <div className="custom-file">
                 <input type="file" className="custom-file-input" id="customFile" onChange={this.onChange} />
