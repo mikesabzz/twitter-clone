@@ -76,7 +76,10 @@ class UsersProfilesAndTweets extends React.Component {
         let id = this.props.match.params.id
         if (this.state.tweets) {
             const userTweets = this.state.tweets.filter(tweet => tweet.userId == id)
-            return userTweets.map(tweet => {
+            const sortTweets = userTweets.sort((a,b) => {
+                return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            })
+            return sortTweets.map(tweet => {
                 return (
                     <div key={tweet.id}>
                         <div className="border border-dark">
