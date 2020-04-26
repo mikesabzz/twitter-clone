@@ -87,14 +87,15 @@ export const getAllUploads = async () => {
 export const uploadImage = async (data) => {
   try {
     const formData = new FormData()
-    formData.append('file', file)
+    formData.append('file')
     const response = await api.post('/app/upload', formData, {
       headers: {
         'content-type': 'multipart/form-data'
       }
     })
-    const { user } = response.data
-    return user
+    const { user, fileName, filePath } = response.data
+    console.log(response.data)
+    return user, fileName, filePath
   } catch (error) {
     throw error
   }
