@@ -77,8 +77,8 @@ export const editProfile = async (id, data) => {
 
 export const getAllUploads = async () => {
   try {
-      const response = await api.get(`app/upload`)
-      return response.data
+    const response = await api.get(`app/upload`)
+    return response.data
   } catch(error) {
     throw error
   }
@@ -86,10 +86,16 @@ export const getAllUploads = async () => {
 
 export const uploadImage = async (data) => {
   try {
-      const response = await api.post('/app/upload', data)
-      const { user } = response.data
-      return user
-  } catch(error) {
+    const formData = new FormData()
+    formData.append('file', file)
+    const response = await api.post('/app/upload', formData, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+    const { user } = response.data
+    return user
+  } catch (error) {
     throw error
   }
 }

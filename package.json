@@ -41,6 +41,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.0.2",
     "pq": "0.0.3",
+    "react-move": "^6.1.0",
     "react-router-dom": "^5.1.2",
     "sequelize": "^5.21.6",
     "server.js": "^1.0.0",

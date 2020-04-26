@@ -25,20 +25,13 @@ class FileUpload extends React.Component {
         e.preventDefault()
         const {userId, file, name, poster} = this.state
         const imageUpload = {userId, file, name, poster}
-        const formData = new FormData()
-        formData.append('file', file)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        await uploadImage(imageUpload, formData, config)
+        await uploadImage(imageUpload)
         this.setState({created: true})
     }
     render () {
         return (
             <div className="custom-file">
-                <input type="file" name="file" className="custom-file-input" id="customFile" onChange={this.onChange} />
+                <input type="file" name="sampleFile" className="custom-file-input" id="customFile" onChange={this.onChange} />
                 <label className="custom-file-label" htmlFor="file">{this.state.filename}</label>
                 <input type="submit" value="Upload" className='btn btn-primary btn-block mt-4' onSubmit={this.handleSubmit} />
             </div>
