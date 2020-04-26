@@ -24,20 +24,11 @@ const upload = multer({ storage: storage })
 appRouter.post('/upload', upload.single('file'), async (req, res) => {
   try {
     await Image.create({
-      name: req.body.name,
       poster: req.file.filename,
       userId: req.body.userId
     })
-      .then(r => {
+    .then(r => {
         res.send(r.get({ plain: true }))
-      })
-    let  file = req.files.sampleFile
-    file.mv(`${__dirname}/client/public/uploads/${req.file.filename}`, err => {
-      if (err) {
-        console.error(err)
-        return res.status(500).send(err)
-      }
-      res.json({ fileName: req.file.filename, filePath: `uploads/${req.file.filename}` })
     })
   }
   catch (error) {
