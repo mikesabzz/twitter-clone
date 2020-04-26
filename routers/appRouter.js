@@ -30,6 +30,14 @@ appRouter.post('/upload', upload.single('file'), async (req, res) => {
       .then(r => {
         res.send(r.get({ plain: true }))
       })
+    const file = req.files.file
+    file.mv(`${__dirname}/client/public/uploads/${req.file.filename}`, err => {
+      if (err) {
+        console.error(err)
+        return res.status(500).send(err)
+      }
+      res.json({ fileName: req.file.filename, filePath: `/uploads/${req.file.filename}` })
+    })
   }
   catch (error) {
     console.log(error)

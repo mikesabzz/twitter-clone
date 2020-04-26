@@ -8,7 +8,8 @@ class FileUpload extends React.Component {
             created: false,
             userId: this.props.userId,
             name: this.props.userName,
-            filename: 'Choose File'
+            file: null,
+            filename: 'Choose Image'
         }
     }
     onChange = (e) => {
@@ -26,15 +27,18 @@ class FileUpload extends React.Component {
         const imageUpload = {userId, file, name, poster}
         const formData = new FormData()
         formData.append('file', file)
-
-        await uploadImage(imageUpload, formData)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        await uploadImage(imageUpload, formData, config)
         this.setState({created: true})
-
     }
     render () {
         return (
             <div className="custom-file">
-                <input type="file" className="custom-file-input" id="customFile" onChange={this.onChange} />
+                <input type="file" name="file" className="custom-file-input" id="customFile" onChange={this.onChange} />
                 <label className="custom-file-label" htmlFor="file">{this.state.filename}</label>
                 <input type="submit" value="Upload" className='btn btn-primary btn-block mt-4' onSubmit={this.handleSubmit} />
             </div>
