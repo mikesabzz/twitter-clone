@@ -75,9 +75,10 @@ export const editProfile = async (id, data) => {
   }
 }
 
-export const getAllUploads = async () => {
+export const getOneUpload = async () => {
   try {
-    const response = await api.get(`app/upload`)
+    const userId = localStorage.getItem('userId')
+    const response = await api.get(`app/upload/${userId}`)
     return response.data
   } catch(error) {
     throw error
@@ -93,9 +94,8 @@ export const uploadImage = async (data) => {
         'content-type': 'multipart/form-data'
       }
     })
-    const { user, fileName, filePath } = response.data
-    console.log(response.data)
-    return user, fileName, filePath
+    const { user } = response.data
+    return user
   } catch (error) {
     throw error
   }
