@@ -1,5 +1,6 @@
 import React from 'react'
 import { uploadImage } from '../../services/apiService'
+import multer from 'multer'
 
 class FileUpload extends React.Component {
     constructor(props){
