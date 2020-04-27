@@ -9,17 +9,24 @@ class FileUpload extends React.Component {
             userId: this.props.userId,
             file: null
         }
+        this.onFileChange = this.onFileChange.bind(this)
+        this.onFileUpload = this.onFileUpload.bind(this)
     }
     onFileChange = event => {
         this.setState({ file: event.target.files[0] })
     }
 
     onFileUpload = async () => {
-        const { userId, poster, file } = this.state
+        const { userId, file, poster } = this.state
         const imageUpload = { userId, file, poster }
         const formData = new FormData()
         formData.append("file", file, file.name)
-        await uploadImage(imageUpload, formData)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        await uploadImage(imageUpload, formData, config)
         this.setState({ created: true })
     }
     fileData = () => {

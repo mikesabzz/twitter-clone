@@ -89,13 +89,9 @@ export const editProfile = async (id, data) => {
 export const uploadImage = async (data) => {
   try {
     const response = await api.post('/app/upload', data)
-      .then(() => {
-        console.log("The file is successfully uploaded");
-      }).catch((error) => {
-        console.error(error)
-      });
-      const { user } = response.data
-      return user
+    const { user } = response.data
+    console.log('Upload success!')
+    return user
   } catch (error) {
     throw error
   }
