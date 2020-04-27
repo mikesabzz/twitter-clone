@@ -88,25 +88,19 @@ export const editProfile = async (id, data) => {
 
 export const uploadImage = async (data) => {
   try {
-    const formData = new FormData()
-    formData.append('file')
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
-    }
-    const response = await api.post('/app/upload', formData, config, data)
+    const response = await api.post('/app/upload', data)
       .then(() => {
         console.log("The file is successfully uploaded");
       }).catch((error) => {
         console.error(error)
       });
-    const { user } = response.data
-    return user
+      const { user } = response.data
+      return user
   } catch (error) {
     throw error
   }
 }
+
 
 export const getUserNames = async () => {
   try {

@@ -1,6 +1,5 @@
 import React from 'react'
 import { uploadImage } from '../../services/apiService'
-import multer from 'multer'
 
 class FileUpload extends React.Component {
     constructor(props){
@@ -8,32 +7,53 @@ class FileUpload extends React.Component {
         this.state = {
             created: false,
             userId: this.props.userId,
-            file: "",
-            filename: 'Choose Image'
+            file: null
         }
-        this.onChange = this.onChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
-    onChange = (e) => {
-        this.setState({ file: e.target.files[0] })
-        const element = e.target
-        this.setState({filename: element.value})
+    onFileChange = event => {
+        this.setState({ file: event.target.files[0] })
     }
 
-    handleSubmit = async (e) => {
-        e.preventDefault()
-        const { userId, file, poster } = this.state
+    onFileUpload = async () => {
+        const { userId, poster, file } = this.state
         const imageUpload = { userId, file, poster }
-        await uploadImage(imageUpload)
+        const formData = new FormData()
+        formData.append("file", file, file.name)
+        await uploadImage(imageUpload, formData)
         this.setState({ created: true })
     }
+    fileData = () => {
+        if (this.state.file) {
+            console.log(this.state.file.name)
+            return (
+                <div>
+                    <h2>File Details:</h2>
+                    <p>File Name: {this.state.file.name}</p>
+                    <p>File Type: {this.state.file.type}</p>
+                    <p>
+                        Last Modified:{" "}
+                        {this.state.file.lastModifiedDate.toDateString()}
+                    </p>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <br />
+                    <h4>Choose before pressing the Upload button</h4>
+                </div>
+            )
+        }
+    }
     render () {
-        console.log(this.state.file.name)
         return (
-            <div className="custom-file">
-                <input type="file" name="file" className="custom-file-input" id="customFile" onChange={this.onChange} />
-                <label className="custom-file-label" htmlFor="file">{this.state.filename}</label>
-                <input type="submit" value="Upload" className='btn btn-primary btn-block mt-4' onSubmit={this.handleSubmit} />
+            <div>
+                <h1>File Upload</h1>
+                <div>
+                    <input type="file" htmlFor="file" onChange={this.onFileChange} />
+                    <button onClick={this.onFileUpload}>Upload!</button>
+                </div>
+                {this.fileData()}
             </div>
         )
     }

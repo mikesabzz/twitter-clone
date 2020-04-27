@@ -51,7 +51,7 @@ class CreateProfile extends React.Component {
                     <input name="website" type="text" />
                     <br />
                     <label htmlFor="birthdate">Date of Birth:</label>
-                    <input name="birthdate" type="date" required/>
+                    <input name="birthdate" type="date" />
                     <br />
                     <button>Submit</button>
                 </form>
