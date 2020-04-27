@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { fileURLToPath } from 'url'
 const BASE_URL = 'http://localhost:4567'
 // process.env.REACT_APP_HEROKU_URL
 const JWT_TOKEN = localStorage.getItem('token')
@@ -94,13 +95,12 @@ export const uploadImage = async (data) => {
         'content-type': 'multipart/form-data'
       }
     }
-    const response = await api.post('/app/upload', formData, config)
+    const response = await api.post('/app/upload', formData, config, data)
       .then(() => {
         console.log("The file is successfully uploaded");
       }).catch((error) => {
         console.error(error)
       });
-    // const response = await api.post('/app/upload')
     const { user } = response.data
     return user
   } catch (error) {
