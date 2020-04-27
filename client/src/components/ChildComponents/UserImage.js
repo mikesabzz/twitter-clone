@@ -1,5 +1,5 @@
 import React from 'react'
-import { getOneUpload } from '../../services/apiService'
+// import { getOneUpload } from '../../services/apiService'
 
 
 class UserImage extends React.Component {
@@ -10,19 +10,18 @@ class UserImage extends React.Component {
             poster: ''
         }
     }
-    componentDidMount = async () => {
-        await this.getImage()
-    }
-    getImage = async () => {
-        const image = await getOneUpload()
-        this.setState({ image })
+    // componentDidMount = async () => {
+    //     await this.getImage()
+    // }
+    // getImage = async () => {
+    //     const image = await getOneUpload()
+    //     this.setState({ image })
         
-    }
+    // }
     renderImage = () => {
         const { image } = this.state
         return (
             <div key={image.id}>
-                <h1>{image.poster}</h1>
                 <img src={image.poster}
                     onError={(e) => {
                         e.target.onerror = null;

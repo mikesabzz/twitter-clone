@@ -75,25 +75,32 @@ export const editProfile = async (id, data) => {
   }
 }
 
-export const getOneUpload = async () => {
-  try {
-    const userId = localStorage.getItem('userId')
-    const response = await api.get(`app/upload/${userId}`)
-    return response.data
-  } catch(error) {
-    throw error
-  }
-}
+// export const getOneUpload = async () => {
+//   try {
+//     const userId = localStorage.getItem('userId')
+//     const response = await api.get(`app/upload/${userId}`)
+//     return response.data
+//   } catch(error) {
+//     throw error
+//   }
+// }
 
 export const uploadImage = async (data) => {
   try {
     const formData = new FormData()
     formData.append('file')
-    const response = await api.post('/app/upload', formData, {
+    const config = {
       headers: {
         'content-type': 'multipart/form-data'
       }
-    })
+    }
+    const response = await api.post('/app/upload', formData, config)
+      .then(() => {
+        console.log("The file is successfully uploaded");
+      }).catch((error) => {
+        console.error(error)
+      });
+    // const response = await api.post('/app/upload')
     const { user } = response.data
     return user
   } catch (error) {

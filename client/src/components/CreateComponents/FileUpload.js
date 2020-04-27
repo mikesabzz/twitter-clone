@@ -7,27 +7,27 @@ class FileUpload extends React.Component {
         this.state = {
             created: false,
             userId: this.props.userId,
-            file: null,
+            file: "",
             filename: 'Choose Image'
         }
+        this.onChange = this.onChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     onChange = (e) => {
+        this.setState({ file: e.target.files[0] })
         const element = e.target
-        const { name, value } = element
-        const newState = {}
-        newState[name] = value
-        this.setState(newState)
         this.setState({filename: element.value})
     }
 
     handleSubmit = async (e) => {
         e.preventDefault()
-        const {userId, file, poster} = this.state
-        const imageUpload = {userId, file, poster}
+        const { userId, file, poster } = this.state
+        const imageUpload = { userId, file, poster }
         await uploadImage(imageUpload)
-        this.setState({created: true})
+        this.setState({ created: true })
     }
     render () {
+        console.log(this.state.file.name)
         return (
             <div className="custom-file">
                 <input type="file" name="file" className="custom-file-input" id="customFile" onChange={this.onChange} />
