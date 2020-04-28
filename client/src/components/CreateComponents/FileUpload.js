@@ -20,14 +20,15 @@ class FileUpload extends React.Component {
 
     onFileUpload = async () => {
         const { userId, file, poster } = this.state
+        let newImage = {userId}
         const formData = new FormData()
-        formData.append("file", file, file.name, "userId", userId, userId.name)
+        formData.append("file", file, file.name, newImage)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         }
-        await apiRouter.post('/app/upload', formData, config)
+        apiRouter.post('/app/upload', formData, config)
         console.log('image uploaded')
         this.setState({ created: true })
     }
