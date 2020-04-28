@@ -1,6 +1,5 @@
 import React from 'react'
 import {api} from '../../services/apiService'
-
 const apiRouter = api
 
 
@@ -22,13 +21,13 @@ class FileUpload extends React.Component {
     onFileUpload = async () => {
         const { userId, file, poster } = this.state
         const formData = new FormData()
-        formData.append("file", file, file.name)
+        formData.append("file", file, file.name, "userId", userId, userId.name)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         }
-        apiRouter.post('/app/upload', formData, config)
+        await apiRouter.post('/app/upload', formData, config)
         console.log('image uploaded')
         this.setState({ created: true })
     }
