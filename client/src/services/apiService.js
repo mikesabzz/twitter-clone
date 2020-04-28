@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { fileURLToPath } from 'url'
-import multer from 'multer'
 const BASE_URL = 'http://localhost:4567'
 // process.env.REACT_APP_HEROKU_URL
 const JWT_TOKEN = localStorage.getItem('token')
@@ -86,17 +84,6 @@ export const editProfile = async (id, data) => {
 //     throw error
 //   }
 // }
-
-export const uploadImage = async (data) => {
-  try {
-    const response = await api.post('/app/upload', data)
-    const { user } = response.data
-    return user
-  } catch (error) {
-    throw error
-  }
-}
-
 
 export const getUserNames = async () => {
   try {

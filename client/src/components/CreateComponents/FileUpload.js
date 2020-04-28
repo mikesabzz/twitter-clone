@@ -1,5 +1,13 @@
 import React from 'react'
-import { uploadImage } from '../../services/apiService'
+import axios from 'axios'
+const BASE_URL = 'http://localhost:4567'
+const JWT_TOKEN = localStorage.getItem('token')
+const api = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Authorization': `Bearer ${JWT_TOKEN}`
+  }
+})
 
 class FileUpload extends React.Component {
     constructor(props){
@@ -26,12 +34,12 @@ class FileUpload extends React.Component {
                 'content-type': 'multipart/form-data'
             }
         }
-        await uploadImage(imageUpload, formData, config)
+        api.post('/app/upload', formData, config)
+        console.log('image uploaded')
         this.setState({ created: true })
     }
     fileData = () => {
         if (this.state.file) {
-            console.log(this.state.file.name)
             return (
                 <div>
                     <h2>File Details:</h2>
