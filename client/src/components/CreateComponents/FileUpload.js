@@ -1,13 +1,8 @@
 import React from 'react'
-import axios from 'axios'
-const BASE_URL = 'http://localhost:4567'
-const JWT_TOKEN = localStorage.getItem('token')
-const api = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'Authorization': `Bearer ${JWT_TOKEN}`
-  }
-})
+import {api} from '../../services/apiService'
+
+const apiRouter = api
+
 
 class FileUpload extends React.Component {
     constructor(props){
@@ -26,7 +21,6 @@ class FileUpload extends React.Component {
 
     onFileUpload = async () => {
         const { userId, file, poster } = this.state
-        const imageUpload = { userId, file, poster }
         const formData = new FormData()
         formData.append("file", file, file.name)
         const config = {
@@ -34,7 +28,7 @@ class FileUpload extends React.Component {
                 'content-type': 'multipart/form-data'
             }
         }
-        api.post('/app/upload', formData, config)
+        apiRouter.post('/app/upload', formData, config)
         console.log('image uploaded')
         this.setState({ created: true })
     }

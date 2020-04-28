@@ -3,7 +3,7 @@ const BASE_URL = 'http://localhost:4567'
 // process.env.REACT_APP_HEROKU_URL
 const JWT_TOKEN = localStorage.getItem('token')
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Authorization': `Bearer ${JWT_TOKEN}`
