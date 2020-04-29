@@ -20,9 +20,8 @@ class FileUpload extends React.Component {
 
     onFileUpload = async () => {
         const { userId, file, poster } = this.state
-        let newImage = {userId}
         const formData = new FormData()
-        formData.append("file", file, file.name, newImage)
+        formData.append("file", file, file.name)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -39,6 +38,7 @@ class FileUpload extends React.Component {
                     <h2>File Details:</h2>
                     <p>File Name: {this.state.file.name}</p>
                     <p>File Type: {this.state.file.type}</p>
+                    <p htmlFor="userId">{this.props.userId}</p>
                     <p>
                         Last Modified:{" "}
                         {this.state.file.lastModifiedDate.toDateString()}
