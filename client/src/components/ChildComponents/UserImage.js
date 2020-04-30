@@ -19,17 +19,18 @@ class UserImage extends React.Component {
     }
     renderImage = () => {
         const { image } = this.state
-        console.log(image.poster)
-        return (
-            <div key={image.id}>
-                <img src={`./uploads/${image.poster}`}
-                    onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
-                    }}
-                />
-            </div>
-        )
+        if (image) {
+            return (
+                <div key={image.id}>
+                    <img src={`./uploads/${image.poster}`}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                        }}
+                    />
+                </div>
+            )
+        }
     }
 
     render() {

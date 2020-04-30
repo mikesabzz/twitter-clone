@@ -81,7 +81,7 @@ export const getOneUpload = async () => {
     const response = await api.get(`app/upload/${userId}`)
     return response.data
   } catch(error) {
-    throw error
+    console.log(error)
   }
 }
 
