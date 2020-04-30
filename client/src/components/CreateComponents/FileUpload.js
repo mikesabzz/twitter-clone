@@ -6,9 +6,10 @@ const apiRouter = api
 class FileUpload extends React.Component {
     constructor(props){
         super(props)
+        this.props = props
         this.state = {
             created: false,
-            userId: this.props.userId,
+            userId: props.userId,
             file: null
         }
         this.onFileChange = this.onFileChange.bind(this)
@@ -19,9 +20,10 @@ class FileUpload extends React.Component {
     }
 
     onFileUpload = async () => {
-        const { userId, file, poster } = this.state
+        const { userId, file } = this.state
         const formData = new FormData()
         formData.append("file", file, file.name)
+        formData.append("userId", userId)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -38,7 +40,6 @@ class FileUpload extends React.Component {
                     <h2>File Details:</h2>
                     <p>File Name: {this.state.file.name}</p>
                     <p>File Type: {this.state.file.type}</p>
-                    <p htmlFor="userId">{this.props.userId}</p>
                     <p>
                         Last Modified:{" "}
                         {this.state.file.lastModifiedDate.toDateString()}
