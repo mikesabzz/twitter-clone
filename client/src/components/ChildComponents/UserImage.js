@@ -1,35 +1,34 @@
 import React from 'react'
-// import { getOneUpload } from '../../services/apiService'
-
+import { getOneUpload } from '../../services/apiService'
 
 class UserImage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             image: {},
-            poster: ''
+            userId: this.props.userId
         }
     }
-    // componentDidMount = async () => {
-    //     await this.getImage()
-    // }
-    // getImage = async () => {
-    //     const image = await getOneUpload()
-    //     this.setState({ image })
+    componentDidMount = async () => {
+        await this.getImage()
+    }
+    getImage = async () => {
+        const image = await getOneUpload()
+        this.setState({ image })
         
-    // }
+    }
     renderImage = () => {
         const { image } = this.state
+        console.log(image.poster)
         return (
-            // <div key={image.id}>
-            //     <img src={image.poster}
-            //         onError={(e) => {
-            //             e.target.onerror = null;
-            //             e.target.src = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
-            //         }}
-            //     />
-            // </div>
-            <div>Image</div>
+            <div key={image.id}>
+                <img src={`./uploads/${image.poster}`}
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                    }}
+                />
+            </div>
         )
     }
 

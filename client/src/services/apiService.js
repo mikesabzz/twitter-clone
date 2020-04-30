@@ -75,15 +75,15 @@ export const editProfile = async (id, data) => {
   }
 }
 
-// export const getOneUpload = async () => {
-//   try {
-//     const userId = localStorage.getItem('userId')
-//     const response = await api.get(`app/upload/${userId}`)
-//     return response.data
-//   } catch(error) {
-//     throw error
-//   }
-// }
+export const getOneUpload = async () => {
+  try {
+    const userId = localStorage.getItem('userId')
+    const response = await api.get(`app/upload/${userId}`)
+    return response.data
+  } catch(error) {
+    throw error
+  }
+}
 
 export const getUserNames = async () => {
   try {
