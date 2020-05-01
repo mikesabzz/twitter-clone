@@ -14,9 +14,9 @@ class UserImage extends React.Component {
     }
     getImage = async () => {
         const image = await getOneUpload()
-        this.setState({ image })
-        
+        this.setState({ image }) 
     }
+
     renderImage = () => {
         const { image } = this.state
         if (image) {
