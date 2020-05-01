@@ -74,11 +74,9 @@ export const editProfile = async (id, data) => {
     throw error
   }
 }
-
-export const getOneUpload = async () => {
+export const getImages = async () => {
   try {
-    const userId = localStorage.getItem('userId')
-    const response = await api.get(`app/upload/${userId}`)
+    const response = await api.get(`app/upload`)
     return response.data
   } catch(error) {
     console.log(error)

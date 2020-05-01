@@ -13,16 +13,7 @@ const storage = multer.diskStorage({
     cb(null, `client/public/uploads/`)
   }
 })
-appRouter.get('/upload/:userId', async (req, res) => {
-  try {
-    await Image.findOne({
-      where: {userId: req.params.userId}
-    })
-      .then((result) => res.json(result))
-  } catch (error) {
-    console.log(error)
-  }
-})
+
 appRouter.get('/upload', async(req,res) => {
   try {
     await Image.findAll()

@@ -99,7 +99,7 @@ class UsersProfilesAndTweets extends React.Component {
     render() {
         return (
             <div>
-                <UserImage userId={this.props.match.params.id} />
+                <UserImage id={this.props.match.params.id} />
                 <div>{this.renderProfile()}</div>
                 <div className="border border-dark">{this.renderTweets().reverse()}</div>
             </div>
