@@ -24,12 +24,7 @@ class UserImage extends React.Component {
             return userImage.map(image => {
                 return (
                     <div key={image.id}>
-                        <img src={window.location.origin + `/uploads/${image.poster}`}
-                            onError={(e) => {
-                                e.target.onerror = null;
-                                e.target.src = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
-                            }}
-                        />
+                        <img src={window.location.origin + `/uploads/${image.poster}`} /> 
                     </div>
                     )
                 }
