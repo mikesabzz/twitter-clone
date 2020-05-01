@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     cb(null, Image.name + '-' + Date.now() + '.jpg')
   },
   destination: function (req, file, cb) {
-    cb(null, `client/src/components/ChildComponents/uploads/`)
+    cb(null, `client/public/uploads/`)
   }
 })
 appRouter.get('/upload/:userId', async (req, res) => {

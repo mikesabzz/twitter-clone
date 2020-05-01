@@ -18,11 +18,12 @@ class UserImage extends React.Component {
     }
 
     renderImage = () => {
+        console.log(this.props)
         const { image } = this.state
         if (image) {
             return (
                 <div key={image.id}>
-                    <img src={`./uploads/${image.poster}`}
+                    <img src={window.location.origin + `/uploads/${image.poster}`}
                         onError={(e) => {
                             e.target.onerror = null;
                             e.target.src = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
