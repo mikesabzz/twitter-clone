@@ -20,18 +20,22 @@ class FileUpload extends React.Component {
     }
 
     onFileUpload = async () => {
-        const { userId, file } = this.state
-        const formData = new FormData()
-        formData.append("file", file, file.name)
-        formData.append("userId", userId)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
+        try {
+            const { userId, file } = this.state
+            const formData = new FormData()
+            formData.append("file", file, file.name)
+            formData.append("userId", userId)
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
             }
+            apiRouter.post('/app/upload', formData, config)
+            console.log('image uploaded')
+            this.setState({ created: true })
+        } catch(error) {
+            console.log(error)
         }
-        apiRouter.post('/app/upload', formData, config)
-        console.log('image uploaded')
-        this.setState({ created: true })
     }
     fileData = () => {
         if (this.state.file) {
@@ -60,7 +64,7 @@ class FileUpload extends React.Component {
             <div>
                 <h1>File Upload</h1>
                 <div>
-                    <input type="file" htmlFor="file" onChange={this.onFileChange} />
+                    <input type="file" htmlFor="file" onChange={this.onFileChange} required/>
                     <button onClick={this.onFileUpload}>Upload!</button>
                 </div>
                 {this.fileData()}
