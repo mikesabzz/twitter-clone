@@ -30,7 +30,6 @@ class Navbar extends React.Component {
                         <li><Link to='/dashboard/tweets'>Tweets</Link></li>
                         <li><Link to={{ pathname: `/dashboard/user/${user.name}/${user.id}` }}> {this.props.name}</Link></li>
                         <li><Link to='/users/'> Users</Link></li>
-                        <li><Link to='/user/create'>Create</Link></li>
                     </div>
                 </ul>
                 <Switch>
@@ -39,7 +38,7 @@ class Navbar extends React.Component {
                     <Route path='/dashboard/user/:name/:id' render={(props) => <UsersProfilesAndTweets {...props} name={this.props.name} createdAt={user.createdAt}/>} />
                     <Route path='/dashboard/tweet/:id/update' render={(props) => <UpdateTweets {...props} />} />
                     <Route path='/user/:name/:id/update' render={(props) => <UpdateProfile {...props} />} />
-                    <Route path='/user/create' render={(props) => <CreateProfile {...props} user={user} />} />
+                    <Route path='/dashboard/user/create' render={(props) => <CreateProfile {...props} user={user} />} />
                 </Switch>
             </div>
         );

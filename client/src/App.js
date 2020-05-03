@@ -46,7 +46,6 @@ class App extends Component {
     try {
       console.log('credentials in signUpUser', credentials)
       const user = await signUp(credentials)
-
       this.setState({
         isSignedIn: true,
         user: user
