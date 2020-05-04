@@ -48,7 +48,7 @@ class UsersProfilesAndTweets extends React.Component {
                                     <span><span className="glyphicon glyphicon-map-marker"></span>{profile.location}</span>}
                                 {profile.website === null ? "" :
                                     <span className="glyphicon glyphicon-link"><a href={profile.website} target="_blank">{profile.website}</a></span>}
-                                <FaBirthdayCake /> Born {dateFormat(profile.birthdate, "mmmm dS, yyyy")}
+                                <FaBirthdayCake /> Born {dateFormat(profile.birthdate, `mmmm d, yyyy`)}
                                     <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
                         </div>
                         {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
