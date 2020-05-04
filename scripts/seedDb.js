@@ -13,7 +13,7 @@ const seedDb = async () => {
     })
 
     const demoTweet = await Tweet.create({
-      tweet: "first tweet from demo, Hello Tweeters!"
+      tweet: "First tweet from demo, Hello Tweeters!"
     })
 
     const demoProfile = await Profile.create({

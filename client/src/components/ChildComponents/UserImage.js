@@ -23,7 +23,7 @@ class UserImage extends React.Component {
         return userImage.map(image => {
             return (
                 <div key={image.id}>
-                    <img src={window.location.origin + `/uploads/${image.poster}`} />
+                    <img className="w-25 p-3 rounded-circle" src={window.location.origin + `/uploads/${image.poster}`} />
                 </div>
             )
         })
