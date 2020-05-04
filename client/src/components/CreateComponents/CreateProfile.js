@@ -39,10 +39,10 @@ class CreateProfile extends React.Component {
             <div>
                 <p>Create your Profile</p>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
-                    <FileUpload userId={this.state.userId} userName={this.props.user.name} />
+                    {/* <FileUpload userId={this.state.userId} userName={this.props.user.name} /> */}
                     <label htmlFor="bio">Bio Description:</label>
                     <br />
-                    <textarea name="bio" type="text" />
+                    <textarea name="bio" type="text" required/>
                     <br />
                     <label htmlFor="location">Location:</label>
                     <input name="location" type="text" />
@@ -51,7 +51,7 @@ class CreateProfile extends React.Component {
                     <input name="website" type="text" />
                     <br />
                     <label htmlFor="birthdate">Date of Birth:</label>
-                    <input name="birthdate" type="date" />
+                    <input name="birthdate" type="date" required/>
                     <br />
                     <button>Submit</button>
                 </form>
@@ -61,3 +61,5 @@ class CreateProfile extends React.Component {
 }
 
 export default CreateProfile
+
+

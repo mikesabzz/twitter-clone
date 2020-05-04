@@ -1,4 +1,5 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 import {api} from '../../services/apiService'
 const apiRouter = api
 
@@ -7,8 +8,8 @@ class FileUpload extends React.Component {
         super(props)
         this.props = props
         this.state = {
-            created: false,
-            userId: props.userId,
+            uploaded: false,
+            userId: props.user.id,
             file: null
         }
         this.onFileChange = this.onFileChange.bind(this)
@@ -31,15 +32,18 @@ class FileUpload extends React.Component {
             }
             apiRouter.post('/app/upload', formData, config)
             console.log('image uploaded')
-            this.setState({ created: true })
+            this.setState({ uploaded: true })
         } catch(error) {
             console.log(error)
         }
     }
     render () {
+        if (this.state.uploaded) {
+            return <Redirect to={'/dashboard/user/create'}></Redirect> 
+        } 
         return (
             <div>
-                <h1>File Upload</h1>
+                <h1>Upload Profile Picture</h1>
                 <div>
                     <input type="file" htmlFor="file" onChange={this.onFileChange} required/>
                     <button onClick={this.onFileUpload}>Upload!</button>

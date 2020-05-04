@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Tweets from './ChildComponents/Tweets'
 import UserNames from './ChildComponents/UserNames'
 import UsersProfilesAndTweets from './ChildComponents/UsersProfilesAndTweets'
+import FileUpload from './CreateComponents/FileUpload'
 import CreateProfile from './CreateComponents/CreateProfile'
 import UpdateTweets from './CreateComponents/UpdateTweets'
 import UpdateProfile from './CreateComponents/UpdateProfile'
@@ -40,6 +41,7 @@ class Navbar extends React.Component {
                     <Route path='/dashboard/tweet/:id/update' render={(props) => <UpdateTweets {...props} />} />
                     <Route path='/user/:name/:id/update' render={(props) => <UpdateProfile {...props} />} />
                     <Route path='/dashboard/user/create' render={(props) => <CreateProfile {...props} user={user} />} />
+                    <Route path='/dashboard/user/upload' render={(props) => <FileUpload {...props} user={user} />} />
                 </Switch>
             </div>
         );
