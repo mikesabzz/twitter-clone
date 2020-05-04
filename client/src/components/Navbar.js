@@ -30,6 +30,7 @@ class Navbar extends React.Component {
                         <li><Link to='/dashboard/tweets'>Tweets</Link></li>
                         <li><Link to={{ pathname: `/dashboard/user/${user.name}/${user.id}` }}> {this.props.name}</Link></li>
                         <li><Link to='/users/'> Users</Link></li>
+                        {/* <li><Link to='/dashboard/user/create'>Create</Link></li> */}
                     </div>
                 </ul>
                 <Switch>
