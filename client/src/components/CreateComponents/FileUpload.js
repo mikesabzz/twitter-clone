@@ -37,10 +37,28 @@ class FileUpload extends React.Component {
             console.log(error)
         }
     }
+    renderFile = () => {
+        if (this.state.file) {
+            return (
+                <div>
+                    <p>File Name: {this.state.file.name}</p>
+                    <p>File Type: {this.state.file.type}</p>
+                    <p>Modification Date:{" "}{this.state.file.lastModifiedDate.toDateString()}</p>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <h4>Upload a profile picture before pressing the 'Upload!' button</h4>
+                </div>
+            )
+        }
+    }
     render () {
         if (this.state.uploaded) {
             return <Redirect to={'/dashboard/user/create'}></Redirect> 
         } 
+        console.log("file name", this.state.file, "file type", this.state.file)
         return (
             <div>
                 <h1>Upload Profile Picture</h1>
@@ -48,6 +66,8 @@ class FileUpload extends React.Component {
                     <input type="file" htmlFor="file" onChange={this.onFileChange} required/>
                     <button onClick={this.onFileUpload}>Upload!</button>
                 </div>
+                <br />
+                {this.renderFile()}
             </div>
         )
     }
