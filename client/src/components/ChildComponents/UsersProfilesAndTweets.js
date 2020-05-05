@@ -4,6 +4,7 @@ import dateFormat from 'dateformat'
 import { Link } from 'react-router-dom'
 import { FaBirthdayCake } from 'react-icons/fa'
 import UserImage from './UserImage'
+import './styles.css'
 
 class UsersProfilesAndTweets extends React.Component {
     constructor(props) {
@@ -81,8 +82,8 @@ class UsersProfilesAndTweets extends React.Component {
             })
             return sortTweets.map(tweet => {
                 return (
-                    <div key={tweet.id}>
-                        <div className="border border-dark">
+                    <div key={tweet.id} className="border border-white">
+                        <div className="border border-dark w-75">
                             <p>{this.props.match.params.name}</p>
                             <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
                             <p className="font-weight-normal">{tweet.tweet}</p>
@@ -98,7 +99,7 @@ class UsersProfilesAndTweets extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="user-profile-container">
                 <UserImage id={this.props.match.params.id} />
                 <div>{this.renderProfile()}</div>
                 <div className="border border-dark">{this.renderTweets().reverse()}</div>

@@ -1,3 +1,9 @@
+.tweet-box {
+    border-top:    1px solid rgb(209, 208, 208);
+    border-right:  1px solid rgb(209, 208, 208); 
+    border-left:  1px solid rgb(209, 208, 208); 
+    border-bottom: 10px solid rgb(209, 208, 208);
+}
 .tweet-image{
     width: 10vh;
     border-radius: 50%;
@@ -14,4 +20,7 @@
 .tweet-edit-delete-button{
     display: flex;
     justify-content: space-around;
+}
+.user-profile-container {
+    width: 100vh
 }
