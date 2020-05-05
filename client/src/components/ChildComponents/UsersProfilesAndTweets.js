@@ -46,11 +46,11 @@ class UsersProfilesAndTweets extends React.Component {
                             <br />
                             <p className="text-secondary font-weight-normal">
                                 {profile.location === null ? "" :
-                                    <span><span className="glyphicon glyphicon-map-marker"></span>{profile.location}</span>}
+                                    <span className="mr-3"><span className="glyphicon glyphicon-map-marker"></span>{profile.location}</span>}
                                 {profile.website === null ? "" :
-                                    <span className="glyphicon glyphicon-link"><a href={profile.website} target="_blank">{profile.website}</a></span>}
+                                    <span className="glyphicon glyphicon-link mr-3"><a href={profile.website} target="_blank">{profile.website}</a></span>}
                                 <FaBirthdayCake /> Born {dateFormat(profile.birthdate.replace(/-/g, '\/'), "mmm dS, yyyy")}
-                                <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
+                                <span className="ml-3 glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
                         </div>
                         {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
                             <button className="btn btn-primary"><Link to={{
