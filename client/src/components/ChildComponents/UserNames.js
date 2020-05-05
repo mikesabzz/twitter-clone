@@ -31,7 +31,8 @@ class UserNames extends React.Component {
                 return (
                     <div key={name.id}>
                         <Link to={{
-                            pathname: `/dashboard/user/${name.name}/${name.id}`, state:{names:name}}} key={name.id}>
+                            pathname: `/dashboard/user/${name.name}/${name.id}`, 
+                            state:{names:name}}} key={name.id}>
                             <p className="border border-secondary p-3">{name.name}</p>
                         </Link>
                     </div>
