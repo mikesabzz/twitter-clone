@@ -90,7 +90,7 @@ class UsersProfilesAndTweets extends React.Component {
                             </p>
                             <p className="font-weight-normal">{tweet.tweet}</p>
                             {localStorage.getItem('userId') == tweet.userId ?
-                                <div>
+                                <div className="tweet-edit-delete-button">
                                     <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, 
                                                         state: { editTweet: tweet.tweet } }}>
                                             <span className="glyphicon glyphicon-edit"></span>

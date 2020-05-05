@@ -3,6 +3,7 @@
     border-right:  1px solid rgb(209, 208, 208); 
     border-left:  1px solid rgb(209, 208, 208); 
     border-bottom: 10px solid rgb(209, 208, 208);
+    padding: 0.5pc;
 }
 .tweet-image{
     width: 10vh;
