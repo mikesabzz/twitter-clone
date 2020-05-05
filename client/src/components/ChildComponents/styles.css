@@ -25,3 +25,14 @@
 .user-profile-container {
     width: 100vh
 }
+.usernames-container {
+    position: absolute;
+    left: 150px;
+    font-size: larger;
+}
+.search-users-input {
+    width: 20pc;
+    height: 3pc;
+    border-radius: 30px 30px 30px 30px;
+    padding-left: 1pc;
+}

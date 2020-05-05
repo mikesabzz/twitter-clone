@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { getUserNames } from '../../services/apiService'
 import SearchUser from './SearchUsers';
+import './styles.css'
 
 class UserNames extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class UserNames extends React.Component {
                     <div key={name.id}>
                         <Link to={{
                             pathname: `/dashboard/user/${name.name}/${name.id}`, state:{names:name}}} key={name.id}>
-                            <p>{name.name}</p>
+                            <p className="border border-secondary p-3">{name.name}</p>
                         </Link>
                     </div>
                 )
@@ -58,9 +59,10 @@ class UserNames extends React.Component {
     
     render() {
         return (
-            <div>
+            <div className="usernames-container">
                 <h1>Users</h1>
                 <SearchUser name={this.state.names} onChange={this.handleFilterChange} />
+                <br />
                 <div>{this.renderPerson()}</div>
             </div>
         )
