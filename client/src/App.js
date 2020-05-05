@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import TwitterLogo from './twitter-clone-logo.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import Dashboard from './components/Dashboard'
@@ -76,6 +77,7 @@ class App extends Component {
         <nav>
           { !isSignedIn &&
             <div className='nav-section'>
+              <img className="twitter-logo-img" src={TwitterLogo} />
               <Link to='/login'>Login</Link>
               <Link to='/signup'>Sign Up</Link>
             </div>
@@ -83,7 +85,7 @@ class App extends Component {
 
           { isSignedIn &&
             <div className='nav-section'>
-              <Link to='/dashboard'>Dashboard</Link>
+              <img className="twitter-logo-img" src={TwitterLogo} />
               <button onClick={this.signOutUser}>Sign out</button>
             </div>
           }
