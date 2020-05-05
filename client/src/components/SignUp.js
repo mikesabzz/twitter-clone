@@ -5,7 +5,7 @@ import './SignIn.css'
 function SignUp (props) {
   return (
     <div className="signup-component">
-      <h1>Create your account</h1>
+      <h3>Create your account</h3>
       <SignUpForm {...props} />
     </div>
   )

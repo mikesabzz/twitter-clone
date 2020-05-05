@@ -63,11 +63,10 @@ class SignUpForm extends Component {
     }
 
     return (
-      <div>
+      <div className="signup-form">
         { errorMessage }
         <form className='form' onSubmit={this.handleSubmitForm}>
           <div>
-            <label>Name</label>
             <input
               type='text'
               name='name'
@@ -75,30 +74,31 @@ class SignUpForm extends Component {
               value={this.state.name.replace(/\w\S*/g, function(txt){
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
               })}
+              placeholder="name"
             />
           </div>
 
           <div>
-            <label>Email</label>
             <input
               type='text'
               name='email'
               onChange={this.handleTextInput}
               value={this.state.email}
+              placeholder="email"
             />
           </div>
 
           <div>
-            <label>Password</label>
             <input
               type='password'
               name='password'
               onChange={this.handleTextInput}
               value={this.state.password}
+              placeholder="password"
             />
           </div>
 
-          <button>Sign Up</button>
+          <button className="btn btn-primary">Sign Up</button>
         </form>
       </div>
     )
