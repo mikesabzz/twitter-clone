@@ -32,7 +32,7 @@ class CreateTweets extends React.Component {
     }
     render() {
         if (this.state.created) {
-            return window.location.reload()
+            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
         }
         return (
             <div>

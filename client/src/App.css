@@ -48,6 +48,10 @@
   border: red 1px solid;
   background-color: #FAE2E2;
   padding: 10px;
+  position: absolute;
+  top: 60px;
+  font-weight: bolder;
+  font-size: large;
 }
 
 nav {
