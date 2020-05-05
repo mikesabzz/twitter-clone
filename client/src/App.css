@@ -54,7 +54,6 @@ nav {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
-  padding: 10px;
 }
 
 .nav-section {
@@ -68,11 +67,9 @@ a {
 }
 
 .nav-section button {
-  border: none;
   font-weight: bold;
-  padding: 0;
   text-decoration: none;
-  font-size: inherit;
+  font-size: larger;
 }
 
 nav button, nav a {

@@ -1,10 +1,11 @@
 import React from 'react'
 import LoginForm from './LoginForm'
+import './SignIn.css'
 
 function Login (props) {
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-component">
+      <h3>Log in to Twitter</h3>
       <LoginForm {...props} />
     </div>
   )
