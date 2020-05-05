@@ -1,0 +1,17 @@
+.tweet-image{
+    width: 10vh;
+    border-radius: 50%;
+}
+.tweet-date{
+    display: inline;
+    margin: 2pc;
+}
+#tweet-container{
+    display: inline-block;
+    margin-left: 1pc;
+    width: 30pc;
+}
+.tweet-edit-delete-button{
+    display: flex;
+    justify-content: space-around;
+}
