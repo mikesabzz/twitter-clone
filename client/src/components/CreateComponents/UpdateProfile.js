@@ -30,22 +30,38 @@ class UpdateProfile extends React.Component {
             return <Redirect to={`/dashboard/user/${this.props.match.params.name}/${this.state.profileId}`} />
         }
         return (
-            <div>Update Profile
+            <div className="update-profile-containter">
                 <form onChange={this.handleUpdate} onSubmit={this.handleSubmit}>
-                    <label htmlFor="bio">Bio:</label>
+                    <label htmlFor="bio">Edit Profile</label>
                     <br />
-                    <textarea name="bio" defaultValue={this.props.location.state.editProfile} />
+                    <textarea 
+                        name="bio" 
+                        defaultValue={this.props.location.state.editProfile} 
+                        placeholder="bio" 
+                    />
                     <br />
-                    <label htmlFor="location">Location:</label>
-                    <input name="location" type="text" defaultValue={this.props.location.state.editLocation} />
+                    <input 
+                        name="location" 
+                        type="text" 
+                        defaultValue={this.props.location.state.editLocation} 
+                        placeholder="location"
+                    />
                     <br />
-                    <label htmlFor="website">Website:</label>
-                    <input name="website" type="text" defaultValue={this.props.location.state.editWebsite} />
+                    <input 
+                        name="website" 
+                        type="text" 
+                        defaultValue={this.props.location.state.editWebsite} 
+                        placeholder="website"
+                    />
                     <br />
-                    <label htmlFor="birthdate">Date of Birth:</label>
-                    <input name="birthdate" type="date" defaultValue={this.props.location.state.editBirthdate} />
+                    <label htmlFor="birthdate">Date of Birth</label>
+                    <input 
+                        name="birthdate" 
+                        type="date" 
+                        defaultValue={this.props.location.state.editBirthdate} 
+                    />
                     <br />
-                    <button>Submit</button>
+                    <button className="btn btn-primary font-weight-bold">Save</button>
                 </form>
             </div>
         )

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { editTweet } from '../../services/apiService'
+import './styles.css'
 
 class UpdateTweets extends React.Component {
     constructor(props) {
@@ -30,12 +31,13 @@ class UpdateTweets extends React.Component {
             return <Redirect to='/dashboard/tweets' />
         }
         return (
-            <div>Update
+            <div className="edit-tweet-container">
                 <form onChange={this.handleUpdate} onSubmit={this.handleSubmit}>
-                    <label htmlFor="tweet">Whats happening?</label>
+                    <label htmlFor="tweet">Edit Tweet</label>
                     <br />
                     <textarea name="tweet" defaultValue={this.props.location.state.editTweet}></textarea>
-                    <button>Submit</button>
+                    <br />
+                    <button className="btn btn-primary font-weight-bold">Save</button>
                 </form>
             </div>
         )
