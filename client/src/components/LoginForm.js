@@ -55,7 +55,7 @@ class LoginForm extends Component {
     }
 
     if (isSignedIn) {
-      return <Redirect to='/dashboard' />
+      return <Redirect to='/dashboard/tweets' />
     }
     return (
       <div>

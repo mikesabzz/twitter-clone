@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom';
 import { createProfile } from '../../services/apiService';
+import './styles.css'
 
 class CreateProfile extends React.Component {
     constructor(props){
@@ -35,23 +36,20 @@ class CreateProfile extends React.Component {
             return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
         } 
         return (
-            <div>
-                <p>Create your Profile</p>
+            <div className="create-profile-containter">
+                <h2>Create your Profile</h2>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
-\                    <label htmlFor="bio">Bio Description:</label>
+                    <textarea className="bio-textarea" name="bio" type="text" placeholder="Bio" required/>
                     <br />
-                    <textarea name="bio" type="text" required/>
+                    <input name="location" type="text" placeholder="Location" />
                     <br />
-                    <label htmlFor="location">Location:</label>
-                    <input name="location" type="text" />
+                    <input name="website" type="text" placeholder="Website" />
                     <br />
-                    <label htmlFor="website">Website:</label>
-                    <input name="website" type="text" />
+                    <label className="mt-4" htmlFor="birthdate">Date of Birth</label>
                     <br />
-                    <label htmlFor="birthdate">Date of Birth:</label>
-                    <input name="birthdate" type="date" required/>
+                    <input className="w-50" name="birthdate" type="date" required/>
                     <br />
-                    <button>Submit</button>
+                    <button className="mt-3 btn btn-primary font-weight-bold">Save</button>
                 </form>
             </div>
         )

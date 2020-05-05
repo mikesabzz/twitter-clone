@@ -1,8 +1,59 @@
-textarea{
+.tweet-textarea{
     width: 100vh;
     height: 10vh;
 }
 ::placeholder { 
     font-size: 1.2em;
     font-weight: 400; 
+}
+h4 {
+    border: red 3px inset;
+    padding: 1pc;
+    background-color: pink;
+    animation: blinking-light 4s infinite alternate;
+}
+@keyframes blinking-light {
+    50% {
+        background-color: maroon;
+        color: white;
+    }
+}
+.image-uploader-contaner {
+    border-radius: 2pc;
+    padding: 3pc;
+    box-shadow: 0 0 4px #000000;
+}
+.image-uploader-contaner h1 {
+    position: relative;
+    top: -1em;
+    font-weight: bolder;
+    font-family: "Lucida Console", monospace;
+}
+.file-data {
+    font-family: "Lucida Console", monospace;
+    font-size: 20px;
+}
+.bio-textarea {
+    width: 65vh;
+    height: 12vh;
+    padding: 1%;
+    font-size: 1pc;
+    background-color: rgba(226, 226, 250, 0.486);
+}
+.create-profile-containter {
+    border-radius: 2pc;
+    padding: 3pc;
+    box-shadow: 0 0 4px #000000;
+}
+.create-profile-containter input {
+    background-color: rgba(226, 226, 250, 0.486);
+    width: 65vh;
+    height: 5vh;
+    display: flex;
+}
+.create-profile-containter h2 {
+    position: relative;
+    top: -1em;
+    font-weight: bolder;
+    font-family: "Lucida Console", monospace;
 }

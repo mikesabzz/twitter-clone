@@ -1,6 +1,7 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import {api} from '../../services/apiService'
+import './styles.css'
 const apiRouter = api
 
 class FileUpload extends React.Component {
@@ -40,7 +41,7 @@ class FileUpload extends React.Component {
     renderFile = () => {
         if (this.state.file) {
             return (
-                <div>
+                <div className="file-data">
                     <p>File Name: {this.state.file.name}</p>
                     <p>File Type: {this.state.file.type}</p>
                     <p>Modification Date:{" "}{this.state.file.lastModifiedDate.toDateString()}</p>
@@ -48,9 +49,7 @@ class FileUpload extends React.Component {
             )
         } else {
             return (
-                <div>
-                    <h4>Upload a profile picture before pressing the 'Upload!' button</h4>
-                </div>
+                <h4 className="font-weight-bold">Upload a profile picture before pressing the 'Upload!' button!</h4>
             )
         }
     }
@@ -58,13 +57,13 @@ class FileUpload extends React.Component {
         if (this.state.uploaded) {
             return <Redirect to={'/dashboard/user/create'}></Redirect> 
         } 
-        console.log("file name", this.state.file, "file type", this.state.file)
         return (
-            <div>
-                <h1>Upload Profile Picture</h1>
+            <div className="image-uploader-contaner">
+                <h1>Upload profile picture</h1>
                 <div>
                     <input type="file" htmlFor="file" onChange={this.onFileChange} required/>
-                    <button onClick={this.onFileUpload}>Upload!</button>
+                    <br />
+                    <button className="btn btn-primary font-weight-bold rounded" onClick={this.onFileUpload}>Upload!</button>
                 </div>
                 <br />
                 {this.renderFile()}
