@@ -39,7 +39,7 @@ class CreateTweets extends React.Component {
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                     <textarea className="tweet-textarea" type="text" name="tweet" placeholder="Whats happening?"></textarea>
                     <br />
-                    <button className="btn btn-primary">Tweet</button>
+                    <button className="btn btn-primary mb-2 font-weight-bold">Tweet</button>
                 </form>
             </div>
         )

@@ -29,9 +29,12 @@ class Navbar extends React.Component {
             <div>
                 <ul>
                     <div key={user.id} className="navbar-list">
-                        <li className="glyphicon glyphicon-home"><Link to='/dashboard/tweets'>Tweets</Link></li>
-                        <li className="glyphicon glyphicon-user"><Link to={{ pathname: `/dashboard/user/${user.name}/${user.id}` }}>{this.props.name}</Link></li>
-                        <li className="glyphicon glyphicon-search"><Link to='/users/'>Users</Link></li>
+                        <li><Link to='/dashboard/tweets'>
+                            <span className="glyphicon glyphicon-home"></span></Link></li>
+                        <li><Link to={{ pathname: `/dashboard/user/${user.name}/${user.id}` }}>
+                            <span className="glyphicon glyphicon-user"></span></Link></li>
+                        <li><Link to='/users/'>
+                            <span className="glyphicon glyphicon-search"></span></Link></li>
                     </div>
                 </ul>
                 <Switch>

@@ -60,7 +60,7 @@ class Tweets extends React.Component {
             return names.map(name => {
                 return photo.map(img => {                
                 if ((name.id == tweet.userId) && (name.id == img.userId)) {
-                    return <div className="tweet-box p-3" key={tweet.id}>
+                    return <div className="tweet-box" key={tweet.id}>
                         <img className="tweet-image" src={window.location.origin + `/uploads/${img.poster}`} />
                         <div id="tweet-container">
                         <Link to={{ pathname: `/dashboard/user/${name.name}/${name.id}`, state: { names: name } }} 
@@ -87,7 +87,7 @@ class Tweets extends React.Component {
 
     render() {
         return (
-            <div id="tweet-component">
+            <div className="tweet-data">
                 <h1>Tweets</h1>
                 <CreateTweets {...this.props} />
                 <div>{this.renderTweets().reverse()}</div>

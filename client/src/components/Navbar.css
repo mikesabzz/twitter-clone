@@ -1,16 +1,22 @@
 .navbar-list {
     position: absolute;
+    position: fixed;
     left: 0;
-    bottom: 50%;
+    bottom: 10pc;
     margin-left: 1pc;
     font-size: large;
-    width: 15vh;
-    border: 1px solid black;
+    width: 12vh;
+    border-right: 10px solid rgb(209, 208, 208);
 }
 ul {
     list-style: none;
 }
 li {
-    margin: 10px 0;
-    font-size: larger;
+    margin: 20px 0 12vh 7vh;
+}
+.navbar-list a {
+    transition: font-size 1s;
+}
+.navbar-list a:hover {
+    font-size: 4vh;
 }

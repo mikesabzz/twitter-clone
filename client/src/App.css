@@ -73,7 +73,8 @@ a {
 }
 
 nav button, nav a {
-  color: blue;
+  color: black;
+  font-size: larger;
 }
 
 nav button:hover, nav a:hover {

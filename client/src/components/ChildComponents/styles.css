@@ -4,6 +4,7 @@
     border-left:  1px solid rgb(209, 208, 208); 
     border-bottom: 10px solid rgb(209, 208, 208);
     padding: 0.5pc;
+    width: 80vh;
 }
 .tweet-image{
     width: 10vh;
@@ -35,4 +36,8 @@
     height: 3pc;
     border-radius: 30px 30px 30px 30px;
     padding-left: 1pc;
+}
+.tweet-data {
+    position: relative;
+    left: -10%;
 }
