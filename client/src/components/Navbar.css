@@ -1,0 +1,8 @@
+.navbar-list {
+    position: absolute;
+    left: 0;
+    bottom: 50%;
+    margin-left: 1pc;
+    font-size: large;
+    width: 15vh;
+}

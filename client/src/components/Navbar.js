@@ -12,6 +12,7 @@ import FileUpload from './CreateComponents/FileUpload'
 import CreateProfile from './CreateComponents/CreateProfile'
 import UpdateTweets from './CreateComponents/UpdateTweets'
 import UpdateProfile from './CreateComponents/UpdateProfile'
+import './Navbar.css'
 
 
 class Navbar extends React.Component {
@@ -27,7 +28,7 @@ class Navbar extends React.Component {
         return (
             <div>
                 <ul>
-                    <div key={user.id}>
+                    <div key={user.id} className="navbar-list">
                         <li><Link to='/dashboard/tweets'>Tweets</Link></li>
                         <li><Link to={{ pathname: `/dashboard/user/${user.name}/${user.id}` }}> {this.props.name}</Link></li>
                         <li><Link to='/users/'> Users</Link></li>

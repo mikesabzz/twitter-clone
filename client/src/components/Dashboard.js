@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './Navbar'
 import {BrowserRouter as Router} from 'react-router-dom'
+import './Dashboard.css'
 
 function Dashboard (props) {
   const { user } = props
@@ -19,7 +20,7 @@ function Dashboard (props) {
     <div>
       <h1>{`Good ${timeOfDay}, ${name}`}</h1>
       <Router>
-        <nav>
+        <nav className="navbar-container">
           <Navbar name={name} user={user} />
         </nav>
       </Router>
