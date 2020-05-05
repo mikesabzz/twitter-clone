@@ -18,7 +18,7 @@ function Dashboard (props) {
   }
   return (
     <div>
-      <h1>{`Good ${timeOfDay}, ${name}`}</h1>
+      <h2 id="dashboard-header">{`Good ${timeOfDay}, ${name}`}</h2>
       <Router>
         <nav className="navbar-container">
           <Navbar name={name} user={user} />

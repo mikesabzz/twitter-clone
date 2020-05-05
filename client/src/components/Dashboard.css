@@ -2,3 +2,12 @@
     display: flex;
     justify-content: space-evenly;
 }
+#dashboard-header {
+    color: #1DA1F2;
+    position: relative;
+    top: -35px;
+    left: 124px;
+    font-weight: bold;
+    font-family: "Arial Black", Gadget, sans-serif;
+    text-shadow: 1px 1px #585757;
+}
