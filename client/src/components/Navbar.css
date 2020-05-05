@@ -6,3 +6,9 @@
     font-size: large;
     width: 15vh;
 }
+ul {
+    list-style: none;
+}
+li {
+    margin: 10px 0;
+}
