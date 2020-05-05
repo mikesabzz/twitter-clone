@@ -41,7 +41,7 @@ class CreateTweets extends React.Component {
                     <br />
                     <textarea type="text" name="tweet" placeholder="Whats happening?"></textarea>
                     <br />
-                    <button>Tweet</button>
+                    <button className="btn btn-success">Tweet</button>
                 </form>
             </div>
         )

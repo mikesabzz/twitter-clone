@@ -53,7 +53,7 @@ class UsersProfilesAndTweets extends React.Component {
                                 <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
                         </div>
                         {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
-                            <button><Link to={{
+                            <button className="btn btn-primary"><Link to={{
                                 pathname: `/user/${this.props.name}/${id}/update`,
                                 state: {
                                     editProfile: profile.bio,
@@ -61,7 +61,7 @@ class UsersProfilesAndTweets extends React.Component {
                                     editWebsite: profile.website,
                                     editBirthdate: profile.birthdate
                                 }
-                            }}>Edit</Link>
+                            }}>Edit Profile</Link>
                             </button> :
                             ""
                         }
@@ -82,15 +82,24 @@ class UsersProfilesAndTweets extends React.Component {
             })
             return sortTweets.map(tweet => {
                 return (
-                    <div key={tweet.id} className="border border-white">
-                        <div className="border border-dark w-75">
+                    <div key={tweet.id}>
+                        <div className="tweet-box w-75">
                             <p>{this.props.match.params.name}</p>
-                            <p className="text-secondary font-weight-normal">{dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
+                            <p className="text-secondary font-weight-normal">
+                                {dateFormat(tweet.createdAt, "mmm dd, yyyy")}
+                            </p>
                             <p className="font-weight-normal">{tweet.tweet}</p>
                             {localStorage.getItem('userId') == tweet.userId ?
                                 <div>
-                                    <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, state: { editTweet: tweet.tweet } }}>Edit</Link></button>
-                                    <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""}
+                                    <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, 
+                                                        state: { editTweet: tweet.tweet } }}>
+                                            <span className="glyphicon glyphicon-edit"></span>
+                                    </Link></button>
+                                    <button onClick={() => this.handleDelete(tweet.id)}>
+                                        <span className="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </div> : ""
+                            }
                         </div>
                     </div>
                 )
@@ -102,7 +111,7 @@ class UsersProfilesAndTweets extends React.Component {
             <div className="user-profile-container">
                 <UserImage id={this.props.match.params.id} />
                 <div>{this.renderProfile()}</div>
-                <div className="border border-dark">{this.renderTweets().reverse()}</div>
+                <div>{this.renderTweets().reverse()}</div>
             </div>
         )
     }
