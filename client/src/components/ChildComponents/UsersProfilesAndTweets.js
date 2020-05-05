@@ -48,8 +48,8 @@ class UsersProfilesAndTweets extends React.Component {
                                     <span><span className="glyphicon glyphicon-map-marker"></span>{profile.location}</span>}
                                 {profile.website === null ? "" :
                                     <span className="glyphicon glyphicon-link"><a href={profile.website} target="_blank">{profile.website}</a></span>}
-                                <FaBirthdayCake /> Born {dateFormat(profile.birthdate, `mmmm d, yyyy`)}
-                                    <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
+                                <FaBirthdayCake /> Born {dateFormat(profile.birthdate.replace(/-/g, '\/'), "mmm dS, yyyy")}
+                                <span className="glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
                         </div>
                         {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
                             <button><Link to={{
@@ -76,7 +76,7 @@ class UsersProfilesAndTweets extends React.Component {
         let id = this.props.match.params.id
         if (this.state.tweets) {
             const userTweets = this.state.tweets.filter(tweet => tweet.userId == id)
-            const sortTweets = userTweets.sort((a,b) => {
+            const sortTweets = userTweets.sort((a, b) => {
                 return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
             })
             return sortTweets.map(tweet => {
@@ -90,7 +90,7 @@ class UsersProfilesAndTweets extends React.Component {
                                 <div>
                                     <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, state: { editTweet: tweet.tweet } }}>Edit</Link></button>
                                     <button onClick={() => this.handleDelete(tweet.id)}>Delete</button></div> : ""}
-                                </div>
+                        </div>
                     </div>
                 )
             })

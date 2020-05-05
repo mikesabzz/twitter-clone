@@ -1,7 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom';
 import { createProfile } from '../../services/apiService';
-import FileUpload from './FileUpload'
 
 class CreateProfile extends React.Component {
     constructor(props){
@@ -39,8 +38,7 @@ class CreateProfile extends React.Component {
             <div>
                 <p>Create your Profile</p>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
-                    {/* <FileUpload userId={this.state.userId} userName={this.props.user.name} /> */}
-                    <label htmlFor="bio">Bio Description:</label>
+\                    <label htmlFor="bio">Bio Description:</label>
                     <br />
                     <textarea name="bio" type="text" required/>
                     <br />
