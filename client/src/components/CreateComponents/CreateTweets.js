@@ -1,5 +1,6 @@
 import React from 'react'
 import { createTweets } from '../../services/apiService'
+import './styles.css'
 import { Redirect } from 'react-router-dom'
 
 class CreateTweets extends React.Component {
@@ -36,10 +37,11 @@ class CreateTweets extends React.Component {
         return (
             <div>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-                    <label htmlFor="tweet">Whats happening?</label>
+                    <label htmlFor="tweet" />
                     <br />
-                    <textarea type="text" name="tweet"></textarea>
-                    <input type="submit"></input>
+                    <textarea type="text" name="tweet" placeholder="Whats happening?"></textarea>
+                    <br />
+                    <button>Tweet</button>
                 </form>
             </div>
         )

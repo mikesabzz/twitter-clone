@@ -1,0 +1,8 @@
+textarea{
+    width: 100vh;
+    height: 10vh;
+}
+::placeholder { 
+    font-size: 1.2em;
+    font-weight: 400; 
+}

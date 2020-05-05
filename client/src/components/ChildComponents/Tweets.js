@@ -60,7 +60,7 @@ class Tweets extends React.Component {
             return names.map(name => {
                 return photo.map(img => {                
                 if ((name.id == tweet.userId) && (name.id == img.userId)) {
-                    return <div className="border border-dark w-75" key={tweet.id}>
+                    return <div className="border border-dark w-75 p-3" key={tweet.id}>
                         <img className="tweet-image" src={window.location.origin + `/uploads/${img.poster}`} />
                         <div id="tweet-container">
                         <Link to={{ pathname: `/dashboard/user/${name.name}/${name.id}`, state: { names: name } }} 
