@@ -67,7 +67,7 @@ class Tweets extends React.Component {
                             className="text-dark h4 font-weight-bold">
                                 {name.name}
                         </Link>
-                        <p className="tweet-date text-secondary font-weight-normal">
+                        <p className="tweet-date text-secondary font-weight-normal pull-right">
                                 {dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
                         <div className="font-weight-normal">{tweet.tweet}</div>
                         </div>

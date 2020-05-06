@@ -23,8 +23,8 @@ class UserImage extends React.Component {
             return image.filter(poster => poster.userId == userId)
                 .map(image => {
                     return (
-                        <div key={image.id}>
-                            <img className="w-25 p-3 rounded-circle"
+                        <div key={image.id} id="profile-image">
+                            <img className="profile-image"
                                 src={window.location.origin + `/uploads/${image.poster}`}
                             />
                         </div>

@@ -38,11 +38,11 @@ class UsersProfilesAndTweets extends React.Component {
             const userProfile = profiles.filter(profile => profile.userId == id)
             return userProfile.map(profile => {
                 return (
-                    <div key={profile.id}>
+                    <div className="user-profile" key={profile.id}>
                         <div>
                             <UserImage id={this.props.match.params.id} />
                             <h3>{this.props.match.params.name}</h3>
-                            <p className="font-weight-normal">{profile.bio}</p>
+                            <p className="font-weight-normal h4">{profile.bio}</p>
                             <br />
                             <p className="text-secondary font-weight-normal">
                                 {profile.location === null ? "" :
@@ -83,7 +83,7 @@ class UsersProfilesAndTweets extends React.Component {
                     <div key={tweet.id}>
                         <div className="tweet-box w-75">
                             <p>{this.props.match.params.name}</p>
-                            <p className="text-secondary font-weight-normal">
+                            <p className="user-tweet-date text-secondary font-weight-normal">
                                 {dateFormat(tweet.createdAt, "mmm dd, yyyy")}
                             </p>
                             <p className="font-weight-normal">{tweet.tweet}</p>

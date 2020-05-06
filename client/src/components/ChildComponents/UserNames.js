@@ -61,7 +61,6 @@ class UserNames extends React.Component {
     render() {
         return (
             <div className="usernames-container">
-                <h1>Users</h1>
                 <SearchUser name={this.state.names} onChange={this.handleFilterChange} />
                 <br />
                 <div>{this.renderPerson()}</div>

@@ -1,10 +1,16 @@
 .tweet-box {
-    border-top:    1px solid rgb(209, 208, 208);
-    border-right:  1px solid rgb(209, 208, 208); 
-    border-left:  1px solid rgb(209, 208, 208); 
+    border-top: 1px solid rgb(209, 208, 208);
+    border-right: 1px solid rgb(209, 208, 208); 
+    border-left: 1px solid rgb(209, 208, 208); 
     border-bottom: 10px solid rgb(209, 208, 208);
     padding: 0.5pc;
     width: 80vh;
+}
+.user-tweet-date {  
+    display: inline;
+    position: relative;
+    top: -30px;
+    float: right;
 }
 .tweet-image{
     width: 10vh;
@@ -13,6 +19,8 @@
 .tweet-date{
     display: inline;
     margin: 2pc;
+    position: relative;
+    top: -30px;
 }
 #tweet-container{
     display: inline-block;
@@ -29,15 +37,47 @@
 .usernames-container {
     position: absolute;
     left: 150px;
+    top: 4cm;
     font-size: larger;
 }
 .search-users-input {
+    background-color: rgba(226, 226, 250, 0.486);
     width: 20pc;
     height: 3pc;
+    font-size: large;
     border-radius: 30px 30px 30px 30px;
     padding-left: 1pc;
 }
 .tweet-data {
     position: relative;
     left: -10%;
+}
+.tweet-data h1 {
+    color: #1DA1F2;
+    text-shadow: 1px 1px #646464;
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+.user-profile {
+    border-top: 1px solid rgb(209, 208, 208);
+    border-right: 1px solid rgb(209, 208, 208); 
+    border-left: 1px solid rgb(209, 208, 208); 
+    border-bottom: 10px solid rgb(209, 208, 208);
+    width: 35pc;
+    padding: 2%;
+}
+.user-profile h3 {
+    text-shadow: 1px 1px #b3b3b3;
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+.profile-image {
+    border-radius: 50%;
+    height: 250px;
+    border: white 7px solid;
+}
+#profile-image {
+    background-color: rgba(29, 160, 242, 0.276);
+    margin: -3%;
+    padding: 2ch;
+    height: 12pc;
+    margin-bottom: 6pc;
 }
