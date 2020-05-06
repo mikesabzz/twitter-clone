@@ -1,6 +1,5 @@
 import axios from 'axios'
-const BASE_URL = 'http://localhost:4567' 
-// || process.env.REACT_APP_HEROKU_URL 
+const BASE_URL = 'http://localhost:4567' || process.env.REACT_APP_HEROKU_URL 
 
 const JWT_TOKEN = localStorage.getItem('token')
 
