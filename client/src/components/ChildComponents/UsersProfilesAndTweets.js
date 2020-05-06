@@ -40,7 +40,7 @@ class UsersProfilesAndTweets extends React.Component {
                 return (
                     <div key={profile.id}>
                         <div>
-                            <img src={profile.photo} alt=""></img>
+                            <UserImage id={this.props.match.params.id} />
                             <h3>{this.props.match.params.name}</h3>
                             <p className="font-weight-normal">{profile.bio}</p>
                             <br />
@@ -53,7 +53,7 @@ class UsersProfilesAndTweets extends React.Component {
                                 <span className="ml-3 glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
                         </div>
                         {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
-                            <button className="btn btn-primary"><Link to={{
+                            <Link to={{
                                 pathname: `/user/${this.props.name}/${id}/update`,
                                 state: {
                                     editProfile: profile.bio,
@@ -61,9 +61,7 @@ class UsersProfilesAndTweets extends React.Component {
                                     editWebsite: profile.website,
                                     editBirthdate: profile.birthdate
                                 }
-                            }}>Edit Profile</Link>
-                            </button> :
-                            ""
+                            }}><button className="btn btn-primary font-weight-bold m-2">Edit Profile</button></Link> : ""
                         }
                     </div>
                 )
@@ -91,9 +89,11 @@ class UsersProfilesAndTweets extends React.Component {
                             <p className="font-weight-normal">{tweet.tweet}</p>
                             {localStorage.getItem('userId') == tweet.userId ?
                                 <div className="tweet-edit-delete-button">
-                                    <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, 
-                                                        state: { editTweet: tweet.tweet } }}>
-                                            <span className="glyphicon glyphicon-edit"></span>
+                                    <button><Link to={{
+                                        pathname: `/dashboard/tweet/${tweet.id}/update`,
+                                        state: { editTweet: tweet.tweet }
+                                    }}>
+                                        <span className="glyphicon glyphicon-edit"></span>
                                     </Link></button>
                                     <button onClick={() => this.handleDelete(tweet.id)}>
                                         <span className="glyphicon glyphicon-trash"></span>
@@ -109,7 +109,6 @@ class UsersProfilesAndTweets extends React.Component {
     render() {
         return (
             <div className="user-profile-container">
-                <UserImage id={this.props.match.params.id} />
                 <div>{this.renderProfile()}</div>
                 <div>{this.renderTweets().reverse()}</div>
             </div>
