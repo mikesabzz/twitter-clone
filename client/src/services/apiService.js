@@ -1,5 +1,6 @@
 import axios from 'axios'
-const BASE_URL = process.env.REACT_APP_HEROKU_URL || 'http://localhost:4567' 
+// const BASE_URL = 'http://localhost:4567' || process.env.REACT_APP_HEROKU_URL 
+const BASE_URL = 'https://twitter-clone-by-sabz.herokuapp.com/'
 
 const JWT_TOKEN = localStorage.getItem('token')
 

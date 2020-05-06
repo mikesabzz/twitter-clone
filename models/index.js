@@ -13,6 +13,17 @@ const db = new Sequelize((process.env.DATABASE_URL || 'postgres://localhost:5432
     returning: true
   }
 })
+if (process.env.NODE_ENV === 'production') {
+  const db = new Sequelize(process.env.DATABASE_URL , {
+    dialect: 'postgres'
+  });
+}
+else {
+  const db = new Sequelize({
+    database: 'twitter_clone_db', 
+    dialect: 'postgres'
+  });
+}
 
 const User = UserModel(db, Sequelize)
 
