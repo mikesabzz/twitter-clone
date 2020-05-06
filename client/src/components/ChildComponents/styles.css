@@ -27,13 +27,17 @@
     margin-left: 1pc;
     width: 30pc;
 }
-.tweet-edit-button button{
+.tweet-edit-button {
     position: relative;
-    right: -34pc;
+    right: -28pc;
 }
 .tweet-edit-delete-button {
     display: flex;
     justify-content: space-evenly;
+}
+.tweet-edit-delete-button button {
+    background: transparent;
+    border: none ;
 }
 .user-profile-container {
     width: 100vh
