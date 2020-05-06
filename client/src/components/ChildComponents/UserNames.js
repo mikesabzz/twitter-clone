@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { getUserNames } from '../../services/apiService'
+import { getUserNames, getImages } from '../../services/apiService'
 import SearchUser from './SearchUsers';
 import './styles.css'
 
@@ -9,16 +9,22 @@ class UserNames extends React.Component {
         super(props)
         this.state = {
             names: [],
+            images: [],
             inputValue: ''
         }
     }
 
-    async componentDidMount () {
+    async componentDidMount() {
         await this.getUser()
+        await this.getImage()
     }
     getUser = async () => {
         const names = await getUserNames()
-        this.setState({names})
+        this.setState({ names })
+    }
+    getImage = async () => {
+        const images = await getImages()
+        this.setState({ images })
     }
     renderPerson = () => {
         if (this.state.names) {
@@ -27,17 +33,27 @@ class UserNames extends React.Component {
                 if (a.name > b.name) return 1;
                 return 0
             })
-            .map(name => {
-                return (
-                    <div key={name.id}>
-                        <Link to={{
-                            pathname: `/dashboard/user/${name.name}/${name.id}`, 
-                            state:{names:name}}} key={name.id}>
-                            <p className="border border-secondary p-3">{name.name}</p>
-                        </Link>
-                    </div>
-                )
-            })
+                .map(name => {
+                    return this.state.images.map(image => {
+                        if (image.userId == name.id) {
+                            return (
+                                <div key={name.id}>
+                                    <Link to={{
+                                        pathname: `/dashboard/user/${name.name}/${name.id}`,
+                                        state: { names: name }
+                                    }} key={name.id}>
+                                        <p className="border border-secondary p-3">
+                                            <img className="tweet-image mr-2"
+                                                src={window.location.origin + `/uploads/${image.poster}`}
+                                            />
+                                            {name.name}
+                                        </p>
+                                    </Link>
+                                </div>
+                            )
+                        }
+                    })
+                })
         }
     }
     handleFilterChange = (event) => {
@@ -57,7 +73,7 @@ class UserNames extends React.Component {
             console.error(e)
         }
     }
-    
+
     render() {
         return (
             <div className="usernames-container">
