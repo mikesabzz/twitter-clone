@@ -2,7 +2,6 @@ import React from 'react'
 import { 
     getAllTweets, 
     getUserNames, 
-    deleteTweet, 
     getImages 
 } from '../../services/apiService'
 import { Link } from 'react-router-dom'
@@ -42,15 +41,8 @@ class Tweets extends React.Component {
         const photo = await getImages()
         this.setState({ photo })
     }
-    handleDelete = async (id) => {
-        await deleteTweet(id);
-        this.setState({ deleted: true })
-    }
 
     renderTweets = () => {
-        if (this.state.deleted) {
-            return window.location.reload()
-        }
         const { tweets, names, photo } = this.state
         const sortTweets = tweets.sort((a, b) => {
             return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
@@ -72,11 +64,11 @@ class Tweets extends React.Component {
                         <div className="font-weight-normal">{tweet.tweet}</div>
                         </div>
                         {localStorage.getItem('userId') == tweet.userId ?
-                            <div className="tweet-edit-delete-button">
+                            <div className="tweet-edit-button">
                                 <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, state: { editTweet: tweet.tweet } }}>
                                     <span className="glyphicon glyphicon-edit"></span></Link>
                                 </button>
-                                <button onClick={() => this.handleDelete(tweet.id)}><span className="glyphicon glyphicon-trash"></span></button></div> : ""
+                            </div> : ""
                         }
                     </div>
                 }
