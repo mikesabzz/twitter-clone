@@ -1,4 +1,4 @@
-const { User, Tweet, Profile }  = require('../models/index')
+const { User, Tweet, Profile, Image }  = require('../models/index')
 
 const seedDb = async () => {
   try {
@@ -22,8 +22,13 @@ const seedDb = async () => {
       birthdate: "January 1, 2000"
     })
 
+    const demoImage = await Image.create({
+      poster: 'image-1588787136889.jpg'
+    })
+
     await demoTweet.setUser(demo)
     await demoProfile.setUser(demo)
+    await demoImage.setUser(demo)
 
   } catch(e) {
     console.log(e);

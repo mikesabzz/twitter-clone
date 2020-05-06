@@ -28,7 +28,7 @@ class UpdateTweets extends React.Component {
     }
     render() {
         if (this.state.updated) {
-            return <Redirect to='/dashboard/tweets' />
+            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`} />
         }
         return (
             <div className="edit-tweet-container">
