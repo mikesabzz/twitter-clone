@@ -39,6 +39,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "pg": "^8.0.2",
     "pq": "0.0.3",
     "react-move": "^6.1.0",

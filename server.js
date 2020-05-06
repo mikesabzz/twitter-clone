@@ -6,6 +6,7 @@ const authRouter = require('./routers/authRouter')
 const passport = require('passport')
 const appRouter = require('./routers/appRouter')
 const { authorized } = require('./auth/auth')
+const path = require('path')
 
 const PORT = process.env.PORT || 4567
 const app = express()
@@ -33,5 +34,10 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.json({ message: err.message })
 })
+app.use(express.static(path.join(__dirname, './client/build')))
+
+if (process.env.NODE_ENV == "production") {
+  app.use('*', (req, res) => res.sendFile(path.join(__dirname, './client/build', "index.html")));
+}
 
 app.listen(PORT, () => console.log(`App is up and running listening on port ${PORT}`))

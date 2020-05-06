@@ -65,7 +65,8 @@ class Tweets extends React.Component {
                         </div>
                         {localStorage.getItem('userId') == tweet.userId ?
                             <div className="tweet-edit-button">
-                                <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, state: { editTweet: tweet.tweet } }}>
+                                <button><Link to={{ pathname: `/dashboard/tweet/${tweet.id}/update`, 
+                                        state: { editTweet: tweet.tweet } }}>
                                     <span className="glyphicon glyphicon-edit"></span></Link>
                                 </button>
                             </div> : ""
