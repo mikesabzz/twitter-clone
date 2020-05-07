@@ -13,8 +13,11 @@
     float: right;
 }
 .tweet-image{
-    width: 10vh;
     border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 .tweet-date{
     display: inline;
@@ -79,8 +82,14 @@
 }
 .profile-image {
     border-radius: 50%;
-    height: 250px;
+    /* height: 250px; */
     border: white 7px solid;
+
+    /* border-radius: 50%; */
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    object-position: 50% 15%;
 }
 #profile-image {
     background-color: rgba(29, 160, 242, 0.276);
