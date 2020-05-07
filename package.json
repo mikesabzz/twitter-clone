@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "client": "cd client && npm start",
     "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run client\"",
     "db:init": "dropdb --if-exists twitter_clone_db && createdb twitter_clone_db",
     "db:reset": "node ./scripts/resetDb.js",
