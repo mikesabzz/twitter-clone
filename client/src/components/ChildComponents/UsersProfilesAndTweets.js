@@ -33,6 +33,7 @@ class UsersProfilesAndTweets extends React.Component {
     }
     renderProfile = () => {
         let id = this.props.match.params.id
+        console.log(id)
         const { profiles } = this.state
         if (profiles) {
             const userProfile = profiles.filter(profile => profile.userId == id)
@@ -52,7 +53,7 @@ class UsersProfilesAndTweets extends React.Component {
                                 <FaBirthdayCake /> Born {dateFormat(profile.birthdate.replace(/-/g, '\/'), "mmm dS, yyyy")}
                                 <span className="ml-3 glyphicon glyphicon-calendar"></span> Joined {dateFormat(this.props.createdAt, "mmmm yyyy")}</p>
                         </div>
-                        {localStorage.getItem('userId') == id && localStorage.getItem('userId') == profile.id ?
+                        {localStorage.getItem('userId') == id ?
                             <Link to={{
                                 pathname: `/user/${this.props.name}/${id}/update`,
                                 state: {
