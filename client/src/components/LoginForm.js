@@ -38,6 +38,10 @@ class LoginForm extends Component {
       return { [fieldName]: value }
     })
   }
+  autoFillDemoUser = (event) => {
+    event.preventDefault()
+    this.setState({email: 'demouser@mail.com', password: 'password'})  
+  }
 
   render () {
     const { showError } = this.state
@@ -83,6 +87,8 @@ class LoginForm extends Component {
           </div>
 
           <button className="btn btn-primary">Login</button>
+          <h3 className="text-center">OR</h3>
+          <button onClick={this.autoFillDemoUser} className="btn btn-secondary">Login as a Demo User</button>
         </form>
       </div>
     )
