@@ -33,7 +33,6 @@ class UsersProfilesAndTweets extends React.Component {
     }
     renderProfile = () => {
         let id = this.props.match.params.id
-        console.log(id)
         const { profiles } = this.state
         if (profiles) {
             const userProfile = profiles.filter(profile => profile.userId == id)
