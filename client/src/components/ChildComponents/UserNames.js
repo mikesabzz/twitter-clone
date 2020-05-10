@@ -43,7 +43,7 @@ class UserNames extends React.Component {
                                         state: { names: name }
                                     }} key={name.id}>
                                         <p className="border border-secondary p-3">
-                                            <img className="tweet-image mr-2"
+                                            <img className="tweet-image mr-5"
                                                 src={window.location.origin + `/uploads/${image.poster}`}
                                             />
                                             {name.name}
