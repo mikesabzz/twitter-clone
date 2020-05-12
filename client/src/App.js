@@ -77,7 +77,7 @@ class App extends Component {
         <nav>
           { !isSignedIn &&
             <div className='nav-section'>
-              <img className="twitter-logo-img" src={TwitterLogo} />
+              <img className="twitter-logo-img" src={TwitterLogo} alt="" />
               <Link to='/login'>Login</Link>
               <Link to='/signup'>Sign Up</Link>
             </div>
