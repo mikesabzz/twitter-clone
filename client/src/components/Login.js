@@ -5,7 +5,7 @@ import './SignIn.css'
 function Login (props) {
   return (
     <div className="login-component">
-      <h3>Log in to Twitter</h3>
+      <h3>Log in to Twitter Clone</h3>
       <LoginForm {...props} />
     </div>
   )
