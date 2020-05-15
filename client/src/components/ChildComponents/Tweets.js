@@ -2,7 +2,7 @@ import React from 'react'
 import { 
     getAllTweets, 
     getUserNames, 
-    getImages 
+    getImages
 } from '../../services/apiService'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
@@ -16,6 +16,7 @@ class Tweets extends React.Component {
             tweets: [],
             names: [],
             photo: [],
+            trying: [],
             deleted: false
         }
     }
@@ -50,31 +51,31 @@ class Tweets extends React.Component {
 
         return sortTweets.map(tweet => {
             return names.map(name => {
-                return photo.map(img => {                
-                if ((name.id == tweet.userId) && (name.id == img.userId)) {
-                    return <div className="tweet-box" key={tweet.id}>
-                        <img className="tweet-image" src={window.location.origin + `/uploads/${img.poster}`} />
-                        <div id="tweet-container">
-                        <Link to={{ pathname: `/dashboard/user/${name.name}/${name.id}`, state: { names: name } }} 
-                            className="text-dark h4 font-weight-bold">
-                                {name.name}
-                        </Link>
-                        <p className="tweet-date text-secondary font-weight-normal pull-right">
-                                {dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
-                        <div className="font-weight-normal">{tweet.tweet}</div>
+                return photo.map(img => {
+                    if ((name.id == tweet.userId) && (name.id == img.userId)) {
+                        return <div className="tweet-box" key={tweet.id}>
+                            <img className="tweet-image" src={window.location.origin + `/uploads/${img.poster}`} />
+                            <div id="tweet-container">
+                                <Link to={{ pathname: `/dashboard/user/${name.name}/${name.id}`, state: { names: name } }}
+                                    className="text-dark h4 font-weight-bold">
+                                    {name.name}
+                                </Link>
+                                <p className="tweet-date text-secondary font-weight-normal pull-right">
+                                    {dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
+                                <div className="font-weight-normal">{tweet.tweet}</div>
+                            </div>
+                            {localStorage.getItem('userId') == tweet.userId ?
+                                <div className="tweet-edit-button">
+                                    <Link to={{
+                                        pathname: `/dashboard/tweet/${tweet.id}/update`,
+                                        state: { editTweet: tweet.tweet }
+                                    }}>
+                                        <span className="glyphicon glyphicon-edit"></span></Link>
+                                </div> : ""
+                            }
                         </div>
-                        {localStorage.getItem('userId') == tweet.userId ?
-                            <div className="tweet-edit-button">
-                                <Link to={{
-                                    pathname: `/dashboard/tweet/${tweet.id}/update`,
-                                    state: { editTweet: tweet.tweet }
-                                }}>
-                                    <span className="glyphicon glyphicon-edit"></span></Link>
-                            </div> : ""
-                        }
-                    </div>
-                }
-            })
+                    }
+                })
             })
         })
     }

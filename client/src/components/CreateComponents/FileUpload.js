@@ -32,7 +32,6 @@ class FileUpload extends React.Component {
                 }
             }
             apiRouter.post('/app/upload', formData, config)
-            console.log('image uploaded')
             this.setState({ uploaded: true })
         } catch(error) {
             console.log(error)

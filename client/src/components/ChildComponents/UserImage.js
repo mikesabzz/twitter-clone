@@ -18,7 +18,7 @@ class UserImage extends React.Component {
     }
 
     renderImage = () => {
-        const surgeURL = process.env.REACT_APP_SURGE_URL
+        // const surgeURL = process.env.REACT_APP_SURGE_URL
         const { image, userId } = this.state
         if (image) {
             return image.filter(poster => poster.userId == userId)
@@ -26,8 +26,8 @@ class UserImage extends React.Component {
                     return (
                         <div key={image.id} id="profile-image">
                             <img className="profile-image"
-                                src={surgeURL + `/uploads/${image.poster}`}
-                                // src={window.location.origin + `/uploads/${image.poster}`}
+                                // src={surgeURL + `/uploads/${image.poster}`}
+                                src={window.location.origin + `/uploads/${image.poster}`}
                             />
                         </div>
                     )
