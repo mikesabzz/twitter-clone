@@ -7,8 +7,25 @@ const imageModel = require('./image')
 
 const db = new Sequelize((process.env.DATABASE_URL || 'postgres://localhost:5432/twitter_clone_db'),{
   database: 'twitter_clone_db',
-  dialect: 'postgres'
+  dialect: 'postgres',
+  define: {
+    underscored: true,
+    returning: true
+  }
 })
+if (process.env.NODE_ENV === 'production') {
+  // If the node environment is production, connect to a remote PSQL database
+  const db = new Sequelize(process.env.DATABASE_URL , {
+    dialect: 'postgres'
+  });
+}
+else {
+  // Else connect to a local instance of PSQL running on your machine
+  const db = new Sequelize({
+    database: '', // Name of your local database
+    dialect: 'postgres'
+  });
+}
 
 const User = UserModel(db, Sequelize)
 
