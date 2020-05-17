@@ -19,6 +19,7 @@ class UserImage extends React.Component {
 
     renderImage = () => {
         const { image, userId } = this.state
+        console.log(window.location.origin)
         if (image) {
             return image.filter(poster => poster.userId == userId)
                 .map(image => {
