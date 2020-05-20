@@ -18,6 +18,7 @@
     height: 75px;
     object-fit: cover;
     object-position: 50% 50%;
+    position: absolute;
 }
 .tweet-date{
     display: inline;
@@ -27,7 +28,7 @@
 }
 #tweet-container{
     display: inline-block;
-    margin-left: 1pc;
+    margin-left: 6pc;
     width: 30pc;
 }
 .tweet-edit-button {
