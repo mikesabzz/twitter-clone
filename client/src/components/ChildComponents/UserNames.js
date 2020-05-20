@@ -44,7 +44,7 @@ class UserNames extends React.Component {
                                     }} key={name.id}>
                                         <p className="border border-secondary p-3">
                                             <img className="tweet-image mr-5"
-                                                src={window.location.origin + `/uploads/${image.poster}`}
+                                                src={image.url}
                                             />
                                             {name.name}
                                         </p>

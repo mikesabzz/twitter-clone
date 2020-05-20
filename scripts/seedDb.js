@@ -23,7 +23,7 @@ const seedDb = async () => {
     })
 
     const demoImage = await Image.create({
-      poster: 'image-1588787136889.jpg'
+      url: "http://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg"
     })
 
     await demoTweet.setUser(demo)

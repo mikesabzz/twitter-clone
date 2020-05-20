@@ -2,65 +2,19 @@ const express = require('express')
 const appRouter = express.Router()
 const { passport } = require('../auth/auth')
 const { Tweet, User, Profile, Image } = require('../models')
-const upload = require('../multer')
 const cloudinary = require('../cloudinary')
-const fs = require('fs')
 const multer = require('multer')
-// const cloudinary = require('cloudinary').v2
-// const dotenv = require('dotenv')
-// dotenv.config()
-
-// cloudinary.config({
-//   cloud_name: process.env.Cloud_Name,
-//   api_key: process.env.Cloudinary_API_KEY,
-//   api_secret: process.env.Cloudinary_API_SECRET
-// })
 
 //upload image
-// const storage = multer.diskStorage({
-//   filename: function (req, file, cb) {
-//     cb(null, Date.now() + '=' + file.originalname)
-//   },
-//   destination: function (req, file, cb) {
-//     cb(null, `client/public/uploads/`)
-//   }
-// })
-// const upload = multer({ storage: storage })
-
-// uploads = (file, folder) => {
-//   return new Promise(resolve => {
-//     cloudinary.uploader.upload(file, (result) => {
-//       resolve({
-//         url: result.url,
-//         id: result.public_id
-//       })
-//     }, {
-//         resource_type: "auto",
-//         folder:folder
-//     })
-//   })
-// }
-// appRouter.use('/upload-images', upload.array('image'), async (req, res) => {
-//   const uploader = async (path) => await cloudinary.uploads(path)
-//   if(req.method === 'POST') {
-//     const urls = []
-//     const files = req.files
-//     for(const file of files) {
-//       const { path } = file
-//       const newPath = await uploader(path)
-//       urls.push(newPath)
-//       fs.unlinkSync(path)
-//     }
-//     res.status(200).json({
-//       message: 'Images Upload Success',
-//       data: urls
-//     })
-//   }else{
-//     res.status(405).json({
-//       err:"Images not uploaded"
-//     })
-//   }
-// })
+const storage = multer.diskStorage({
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '=' + file.originalname)
+  },
+  destination: function (req, file, cb) {
+    cb(null, `client/public/uploads/`)
+  }
+})
+const upload = multer({ storage: storage })
 
 appRouter.get('/upload', async(req,res) => {
   try {
@@ -72,10 +26,11 @@ appRouter.get('/upload', async(req,res) => {
 })
 
 appRouter.post('/upload', upload.single('file'), async (req, res) => {
+  const result = await cloudinary.uploads(req.file.path)
   try {
     await Image.create({
-      poster: req.file.filename,
-      userId: req.body.userId
+      url: result.url,
+      userId: req.body.userId,
     })
     .then(r => {
       res.send(r.get({ plain: true }))
@@ -85,8 +40,6 @@ appRouter.post('/upload', upload.single('file'), async (req, res) => {
     console.log(error)
   }
 })
-
-  
 
 //get user profile
 appRouter.get('/profile', passport.authenticate('jwt', { session: false}),
