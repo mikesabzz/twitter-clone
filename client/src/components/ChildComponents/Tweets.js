@@ -1,9 +1,5 @@
 import React from 'react'
-import { 
-    getAllTweets, 
-    getUserNames, 
-    getImages
-} from '../../services/apiService'
+import { getAllTweets } from '../../services/apiService'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 import CreateTweets from '../CreateComponents/CreateTweets'
@@ -14,17 +10,12 @@ class Tweets extends React.Component {
         super(props)
         this.state = {
             tweets: [],
-            names: [],
-            photo: [],
-            trying: [],
             deleted: false
         }
     }
 
     async componentDidMount() {
         await this.getTweets()
-        await this.getUser()
-        await this.getImage()
     }
     getTweets = async () => {
         try {
@@ -34,14 +25,6 @@ class Tweets extends React.Component {
             console.error(e)
         }
     }
-    getUser = async () => {
-        const names = await getUserNames()
-        this.setState({ names })
-    }
-    getImage = async () => {
-        const photo = await getImages()
-        this.setState({ photo })
-    }
 
     renderTweets = () => {
         const { tweets, names, photo } = this.state
@@ -50,33 +33,27 @@ class Tweets extends React.Component {
         });
 
         return sortTweets.map(tweet => {
-            return names.map(name => {
-                return photo.map(img => {
-                    if ((name.id == tweet.userId) && (name.id == img.userId)) {
-                        return <div className="tweet-box" key={tweet.id}>
-                            <img className="tweet-image" src={img.url} />
-                            <div id="tweet-container">
-                                <Link to={{ pathname: `/dashboard/user/${name.name}/${name.id}`, state: { names: name } }}
-                                    className="text-dark h4 font-weight-bold">
-                                    {name.name}
-                                </Link>
-                                <p className="tweet-date text-secondary font-weight-normal pull-right">
-                                    {dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
-                                <div className="font-weight-normal">{tweet.tweet}</div>
-                            </div>
-                            {localStorage.getItem('userId') == tweet.userId ?
-                                <div className="tweet-edit-button">
-                                    <Link to={{
-                                        pathname: `/dashboard/tweet/${tweet.id}/update`,
-                                        state: { editTweet: tweet.tweet }
-                                    }}>
-                                        <span className="glyphicon glyphicon-edit"></span></Link>
-                                </div> : ""
-                            }
-                        </div>
-                    }
-                })
-            })
+            return <div className="tweet-box" key={tweet.id}>
+                <img className="tweet-image" src={tweet.user.image.url} />
+                <div id="tweet-container">
+                    <Link to={{ pathname: `/dashboard/user/${tweet.user.name}/${tweet.user.id}`, state: { names: tweet.user.name } }}
+                        className="text-dark h4 font-weight-bold">
+                        {tweet.user.name}
+                    </Link>
+                    <p className="tweet-date text-secondary font-weight-normal pull-right">
+                        {dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
+                    <div className="font-weight-normal">{tweet.tweet}</div>
+                </div>
+                {localStorage.getItem('userId') == tweet.userId ?
+                    <div className="tweet-edit-button">
+                        <Link to={{
+                            pathname: `/dashboard/tweet/${tweet.id}/update`,
+                            state: { editTweet: tweet.tweet }
+                        }}>
+                            <span className="glyphicon glyphicon-edit"></span></Link>
+                    </div> : ""
+                }
+            </div>
         })
     }
 

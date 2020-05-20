@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { getUserNames, getImages } from '../../services/apiService'
+import { getUserNames } from '../../services/apiService'
 import SearchUser from './SearchUsers';
 import './styles.css'
 
@@ -9,22 +9,16 @@ class UserNames extends React.Component {
         super(props)
         this.state = {
             names: [],
-            images: [],
             inputValue: ''
         }
     }
 
     async componentDidMount() {
         await this.getUser()
-        await this.getImage()
     }
     getUser = async () => {
         const names = await getUserNames()
         this.setState({ names })
-    }
-    getImage = async () => {
-        const images = await getImages()
-        this.setState({ images })
     }
     renderPerson = () => {
         if (this.state.names) {
@@ -34,28 +28,26 @@ class UserNames extends React.Component {
                 return 0
             })
                 .map(name => {
-                    return this.state.images.map(image => {
-                        if (image.userId == name.id) {
-                            return (
-                                <div key={name.id}>
-                                    <Link to={{
-                                        pathname: `/dashboard/user/${name.name}/${name.id}`,
-                                        state: { names: name }
-                                    }} key={name.id}>
-                                        <p className="border border-secondary p-3">
-                                            <img className="tweet-image mr-5"
-                                                src={image.url}
-                                            />
-                                            {name.name}
-                                        </p>
-                                    </Link>
-                                </div>
-                            )
-                        }
-                    })
-                })
+                    return (
+                        <div key={name.id}>
+                            <Link to={{
+                                pathname: `/dashboard/user/${name.name}/${name.id}`,
+                                state: { names: name }
+                            }} key={name.id}>
+                                <p className="border border-secondary p-3">
+                                    <img className="tweet-image mr-5"
+                                        src={name.image.url}
+                                    />
+                                    {name.name}
+                                </p>
+                            </Link>
+                        </div>
+                    )
+                }
+                )
         }
     }
+
     handleFilterChange = (event) => {
         try {
             event.preventDefault()

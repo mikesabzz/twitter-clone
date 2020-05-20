@@ -80,13 +80,14 @@ class UsersProfilesAndTweets extends React.Component {
             })
             return sortTweets.map(tweet => {
                 return (
-                    <div key={tweet.id}>
-                        <div className="tweet-box w-75">
-                            <p>{this.props.match.params.name}</p>
-                            <p className="user-tweet-date text-secondary font-weight-normal">
-                                {dateFormat(tweet.createdAt, "mmm dd, yyyy")}
-                            </p>
+                    <div className="tweet-box" key={tweet.id}>
+                        <img className="tweet-image" src={tweet.user.image.url} />
+                        <div id="tweet-container">
+                            <p className="text-dark h4 font-weight-bold">{tweet.user.name}</p>
+                            <p className="user-tweet-date text-secondary font-weight-normal pull-right">
+                                {dateFormat(tweet.createdAt, "mmm dd, yyyy")}</p>
                             <p className="font-weight-normal">{tweet.tweet}</p>
+                        </div>
                             {localStorage.getItem('userId') == tweet.userId ?
                                 <div className="tweet-edit-delete-button">
                                 <Link to={{
@@ -101,7 +102,8 @@ class UsersProfilesAndTweets extends React.Component {
                                 </div> : ""
                             }
                         </div>
-                    </div>
+                        
+                    
                 )
             })
         }

@@ -9,9 +9,6 @@ const multer = require('multer')
 const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     cb(null, Date.now() + '=' + file.originalname)
-  },
-  destination: function (req, file, cb) {
-    cb(null, `client/public/uploads/`)
   }
 })
 const upload = multer({ storage: storage })
@@ -50,22 +47,17 @@ appRouter.get('/profile', passport.authenticate('jwt', { session: false}),
 //Get all users
 appRouter.get('/profile/users', async(req,res) => {
   try {
-    const allUsers = await User.findAll()
+    const allUsers = await User.findAll({
+      include: [
+        { model: Image }
+      ]
+    })
     res.json(allUsers)
   } catch(error) {
     console.log(error)
   }
 })
-//Get one user
-appRouter.get('/profile/:id', async(req,res)=> {
-  try{
-    const id = req.params.id
-    const oneUser = await User.findByPk(id)
-    res.json(oneUser)
-  } catch(error){
-    console.log(error)
-  }
-})
+
 //Delete account
 appRouter.delete('/profile/:id', async (req, res) => {
   try {
@@ -80,7 +72,16 @@ appRouter.delete('/profile/:id', async (req, res) => {
 //Get all tweets
 appRouter.get('/tweets', async (req, res) => {
   try {
-    const allTweets = await Tweet.findAll()
+    const allTweets = await Tweet.findAll({
+      include: [
+        {
+          model: User,
+          include: [
+            Image
+          ]
+        }
+      ] 
+    })
     res.json(allTweets)
   } catch(error) {
     console.log(error)
@@ -92,16 +93,6 @@ appRouter.post('/tweets', async (req, res) => {
     const newTweet = await Tweet.create(req.body)
     res.json(newTweet)
   } catch(error) {
-    console.log(error)
-  }
-})
-//Find one tweet
-appRouter.get('/tweets/:id', async (req, res) => {
-  try {
-    const id = req.params.id
-    const oneTweet = await Tweet.findByPk(id)
-    res.json(oneTweet)
-  } catch(error){
     console.log(error)
   }
 })
@@ -132,15 +123,6 @@ appRouter.get('/profile/bio/all', async (req, res) => {
   try {
     const profile = await Profile.findAll()
     res.json(profile)
-  } catch(error) {
-    console.log(error)
-  }
-})
-//Get one profile 
-appRouter.get('/profile/bio/:id', async (req, res) => {
-  try {
-    const oneProfile = await Profile.findByPk(req.params.id)
-    res.json(oneProfile)
   } catch(error) {
     console.log(error)
   }
