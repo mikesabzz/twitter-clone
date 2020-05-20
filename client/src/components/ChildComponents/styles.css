@@ -47,9 +47,9 @@
     width: 100vh
 }
 .usernames-container {
-    position: absolute;
-    left: 150px;
-    top: 4cm;
+    position: relative;
+    left: -170px;
+    margin-top: 10vh;
     font-size: larger;
 }
 .search-users-input {
@@ -95,4 +95,13 @@
     padding: 2ch;
     height: 12pc;
     margin-bottom: 6pc;
+}
+.username-box {
+    height: 13vh;
+    width: 50vh;
+    margin-bottom: 20px;
+}
+.username-box p{
+    margin-left: 30%;
+    margin-top: 5%;
 }

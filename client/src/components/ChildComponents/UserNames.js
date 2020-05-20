@@ -34,12 +34,12 @@ class UserNames extends React.Component {
                                 pathname: `/dashboard/user/${name.name}/${name.id}`,
                                 state: { names: name }
                             }} key={name.id}>
-                                <p className="border border-secondary p-3">
-                                    <img className="tweet-image mr-5"
+                                <div className="username-box border border-secondary p-3">
+                                    <img className="tweet-image"
                                         src={name.image.url}
                                     />
-                                    {name.name}
-                                </p>
+                                    <p>{name.name}</p>
+                                </div>
                             </Link>
                         </div>
                     )
