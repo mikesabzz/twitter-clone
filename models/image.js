@@ -1,6 +1,7 @@
 module.exports = (db, Sequelize) => {
     return db.define('image', {
-        poster: Sequelize.STRING
+        poster: Sequelize.STRING,
+        url: Sequelize.STRING
     },
     {
         freezeTableName: true
