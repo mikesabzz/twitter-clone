@@ -1,7 +1,7 @@
 # twitter-clone
 ### Remake of Twitter. Full CRUD app with Express in the backend, SQL used as the database, and React in the frontend.
 ### Express and PassportJS is used to build out an API that provides authentication functionality (Login, Sign Up).
-### File Upload was made using multer.
+### Image Upload was made using multer and uploaded on Cloudinary.
 
 ### Demo Image:
 ![](tweetImg.png)
