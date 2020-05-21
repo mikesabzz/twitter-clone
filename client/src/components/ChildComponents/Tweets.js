@@ -33,8 +33,9 @@ class Tweets extends React.Component {
         });
 
         return sortTweets.map(tweet => {
+            const imageUrl = (tweet.user.image == null) ? "https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" : tweet.user.image.url
             return <div className="tweet-box" key={tweet.id}>
-                <img className="tweet-image" src={tweet.user.image.url} />
+                <img className="tweet-image" src={imageUrl} />
                 <div id="tweet-container">
                     <Link to={{ pathname: `/dashboard/user/${tweet.user.name}/${tweet.user.id}`, state: { names: tweet.user.name } }}
                         className="text-dark h4 font-weight-bold">

@@ -19,17 +19,26 @@ class UserImage extends React.Component {
 
     renderImage = () => {
         const { image, userId } = this.state
-        if (image) {
-            return image.filter(poster => poster.userId == userId)
-            .map(image => {
-                    return (
-                        <div key={image.id} id="profile-image">
-                            <img className="profile-image"
-                                src={image.url} 
-                            />
-                        </div>
-                    )
-                })
+        const userImage = image.filter(poster => poster.userId == userId)
+        if (userImage.length == 0) {
+            return (
+                <div key={image.id} id="profile-image">
+                    <img className="profile-image"
+                        src="https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg"
+                    />
+                </div>
+            )
+        }
+        else {
+            return userImage.map(image => {
+                return (
+                    <div key={image.id} id="profile-image">
+                        <img className="profile-image"
+                            src={image.url}
+                        />
+                    </div>
+                )
+            })
         }
     }
 
