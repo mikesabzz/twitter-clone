@@ -37,6 +37,20 @@ appRouter.post('/upload', upload.single('file'), async (req, res) => {
     console.log(error)
   }
 })
+//Edit image
+appRouter.put('/upload/:id', upload.single('file'), async (req, res) => {
+  const result = await cloudinary.uploads(req.file.path)
+  try {
+    const id = req.params.id
+    const editImage = await Image.findByPk(id)
+    editImage.update({
+      url: result.url
+    })
+    res.json(editImage)
+  } catch(error) {
+    console.log(error)
+  }
+})
 
 //get user profile
 appRouter.get('/profile', passport.authenticate('jwt', { session: false}),

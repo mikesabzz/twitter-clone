@@ -125,3 +125,4 @@ export const deleteTweet = async (tweetId, data) => {
     throw error
   }
 }
+
