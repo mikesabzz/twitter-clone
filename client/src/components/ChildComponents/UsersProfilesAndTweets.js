@@ -55,6 +55,11 @@ class UsersProfilesAndTweets extends React.Component {
                     <div className="user-profile" key={profile.id}>
                         <div>
                             <UserImage id={this.props.match.params.id} />
+                            {localStorage.getItem('userId') == id ?
+                                <Link to={{pathname:`/user/upload/${this.props.name}/${id}/edit`}}>
+                                    <button>Edit Image</button>
+                                </Link> : ""
+                            }
                             <h3>{this.props.match.params.name}</h3>
                             <p className="font-weight-normal h4">{profile.bio}</p>
                             <br />

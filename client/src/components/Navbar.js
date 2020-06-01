@@ -12,6 +12,7 @@ import FileUpload from './CreateComponents/FileUpload'
 import CreateProfile from './CreateComponents/CreateProfile'
 import UpdateTweets from './CreateComponents/UpdateTweets'
 import UpdateProfile from './CreateComponents/UpdateProfile'
+import EditImage from './CreateComponents/EditImage'
 import './Navbar.css'
 
 
@@ -45,6 +46,7 @@ class Navbar extends React.Component {
                     <Route path='/user/:name/:id/update' render={(props) => <UpdateProfile {...props} />} />
                     <Route path='/dashboard/user/create' render={(props) => <CreateProfile {...props} user={user} />} />
                     <Route path='/dashboard/user/upload' render={(props) => <FileUpload {...props} user={user} />} />
+                    <Route path='/user/upload/:name/:id/edit' render={(props) => <EditImage {...props} user={user} />} />
                 </Switch>
             </div>
         );

@@ -81,6 +81,14 @@ export const getImages = async () => {
     console.log(error)
   }
 }
+export const editImage = async (imageId, data) => {
+  try {
+    const response = await api.put(`app/upload/${imageId}`, data)
+    return response
+  } catch(error) {
+    console.log(error)
+  }
+}
 
 export const getUserNames = async () => {
   try {
