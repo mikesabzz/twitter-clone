@@ -40,7 +40,7 @@ class UserImage extends React.Component {
                         {localStorage.getItem('userId') == this.state.userId ?
                             <Link to={{ pathname: `/user/upload/${this.props.name}/${this.state.userId}/edit`, 
                                 state: {imageId: image.id} }}>
-                                <button>Edit Image</button>
+                                <button className="btn btn-outline-light font-weight-bold">Edit Image</button>
                             </Link> : ""
                         }
                     </div>

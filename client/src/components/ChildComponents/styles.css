@@ -105,3 +105,11 @@
     margin-left: 30%;
     margin-top: 5%;
 }
+#profile-image button{
+    display: none;
+    margin-left: -11pc;
+    margin-top: -11pc;
+}
+#profile-image:hover button{
+    display: inline-block;
+}

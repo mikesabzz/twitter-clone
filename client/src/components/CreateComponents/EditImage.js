@@ -41,9 +41,11 @@ class EditImage extends React.Component {
         }
         return (
             <div>
-                <input type="file" htmlFor="file" onChange={this.onFileChange} />
-                <br />
-                <button className="btn btn-primary font-weight-bold rounded" onClick={this.onFileUpload}>Upload!</button>
+                <form onChange={this.onFileChange} onSubmit={this.onFileUpload}>
+                    <input type="file" htmlFor="file" />
+                    <br />
+                    <button className="btn btn-primary font-weight-bold rounded">Upload!</button>
+                </form>
             </div>
         )
     }
