@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import { editImage, api } from '../../services/apiService'
+import { api } from '../../services/apiService'
 const apiRouter = api
 
 class EditImage extends React.Component {
@@ -8,7 +8,7 @@ class EditImage extends React.Component {
         super(props)
         this.state = {
             edited: false,
-            imageId: this.props.match.params.id,
+            imageId: this.props.location.state.imageId,
             file: null
         }
         this.onFileChange = this.onFileChange.bind(this)
@@ -22,7 +22,7 @@ class EditImage extends React.Component {
             const { imageId, file } = this.state
             const formData = new FormData()
             formData.append("file", file, file.name)
-            // formData.append("userId", userId)
+            formData.append("imageId", imageId)
             const config = {
                 headers: {
                     'content-type': 'multipart/form-data'
@@ -34,26 +34,10 @@ class EditImage extends React.Component {
             console.log(error)
         }
     }
-    handleEdit = (e) => {
-        const element = e.target
-        const { name, value } = element
-        const newState = {}
-        newState[name] = value
-        this.setState(newState)
-    }
-    handleSubmit = async (e) => {
-        e.preventDefault()
-        const { imageId } = this.state
-        const image = { imageId }
-        const id = this.state.imageId
-        await editImage(id, image)
-        this.setState({ edited: true })
-        console.log('clicked')
-    }
 
     render() {
         if (this.state.edited) {
-            return <Redirect to={`/dashboard/user/${this.props.match.params.name}/${this.state.imageId}`} />
+            return <Redirect to={`/dashboard/user/${this.props.match.params.name}/${this.props.match.params.id}`} />
         }
         return (
             <div>

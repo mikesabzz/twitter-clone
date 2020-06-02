@@ -81,14 +81,6 @@ export const getImages = async () => {
     console.log(error)
   }
 }
-export const editImage = async (imageId, data) => {
-  try {
-    const response = await api.put(`app/upload/${imageId}`, data)
-    return response
-  } catch(error) {
-    console.log(error)
-  }
-}
 
 export const getUserNames = async () => {
   try {
@@ -120,6 +112,7 @@ export const createTweets = async (data) => {
 export const editTweet = async (tweetId, data) => {
   try {
     const response = await api.put(`app/tweets/${tweetId}`, data)
+    console.log(tweetId)
     return response
   } catch(error){
     throw error

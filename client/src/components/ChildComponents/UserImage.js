@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { getImages } from '../../services/apiService'
 
 class UserImage extends React.Component {
@@ -36,6 +37,12 @@ class UserImage extends React.Component {
                         <img className="profile-image"
                             src={image.url}
                         />
+                        {localStorage.getItem('userId') == this.state.userId ?
+                            <Link to={{ pathname: `/user/upload/${this.props.name}/${this.state.userId}/edit`, 
+                                state: {imageId: image.id} }}>
+                                <button>Edit Image</button>
+                            </Link> : ""
+                        }
                     </div>
                 )
             })
