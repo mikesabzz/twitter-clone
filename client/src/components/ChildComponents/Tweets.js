@@ -27,7 +27,7 @@ class Tweets extends React.Component {
     }
 
     renderTweets = () => {
-        const { tweets, names, photo } = this.state
+        const { tweets } = this.state
         const sortTweets = tweets.sort((a, b) => {
             return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
         });
