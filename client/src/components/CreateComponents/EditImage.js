@@ -11,11 +11,9 @@ class EditImage extends React.Component {
             imageId: this.props.location.state.imageId,
             file: null
         }
-        this.onFileChange = this.onFileChange.bind(this)
-        this.onFileUpload = this.onFileUpload.bind(this)
     }
-    onFileChange = event => {
-        this.setState({ file: event.target.files[0] })
+    onFileChange = (e) => {
+        this.setState({ file: (e).target.files[0] })
     }
     onFileUpload = async () => {
         try {

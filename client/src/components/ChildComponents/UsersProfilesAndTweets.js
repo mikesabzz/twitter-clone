@@ -12,7 +12,6 @@ class UsersProfilesAndTweets extends React.Component {
         this.state = {
             profiles: [],
             tweets: [],
-            deleted: false,
         }
     }
     componentDidMount = async () => {
@@ -28,8 +27,10 @@ class UsersProfilesAndTweets extends React.Component {
         this.setState({ tweets })
     }
     handleDelete = async (id) => {
+        this.state.tweets.splice(id, 1)
         await deleteTweet(id);
-        this.setState({ deleted: true })
+        await this.getTweets()
+        alert("You have deleted a Tweet!")
     }
     renderProfile = () => {
         let id = this.props.match.params.id
@@ -43,7 +44,7 @@ class UsersProfilesAndTweets extends React.Component {
                             src="https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" />
                         </div>
                         {localStorage.getItem('userId') == id ?
-                            <Link to={{ pathname: '/dashboard/user/upload' }}>
+                            <Link to={{ pathname: '/dashboard/user/create' }}>
                                 <button className="btn btn-primary font-weight-bold m-2">Create Profile</button>
                             </Link> : ""
                         }
@@ -83,9 +84,6 @@ class UsersProfilesAndTweets extends React.Component {
         } 
     }
     renderTweets = () => {
-        if (this.state.deleted) {
-            return window.location.reload()
-        }
         let id = this.props.match.params.id
         if (this.state.tweets) {
             const userTweets = this.state.tweets.filter(tweet => tweet.userId == id)

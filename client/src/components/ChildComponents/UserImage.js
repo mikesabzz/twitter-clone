@@ -10,7 +10,7 @@ class UserImage extends React.Component {
             userId: this.props.id
         }
     }
-    componentDidMount = async () => {
+    componentWillMount = async () => {
         await this.getImage()
     }
     getImage = async () => {
