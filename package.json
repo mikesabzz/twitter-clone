@@ -10,7 +10,8 @@
     "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run client\"",
     "db:init": "dropdb --if-exists twitter_clone_db && createdb twitter_clone_db",
     "db:reset": "node ./scripts/resetDb.js",
-    "db:seed": "node ./scripts/seedDb.js"
+    "db:seed": "node ./scripts/seedDb.js",
+    "postinstall": "ng build"
   },
   "repository": {
     "type": "git",
