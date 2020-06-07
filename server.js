@@ -7,6 +7,7 @@ const passport = require('passport')
 const appRouter = require('./routers/appRouter')
 const { authorized } = require('./auth/auth')
 const path = require('path')
+require('dotenv').config()
 
 const PORT = process.env.PORT || 4567
 const app = express()
@@ -20,7 +21,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(passport.initialize())
 app.use('/auth', authRouter)
-app.use('/app', authorized, appRouter)
+app.use('/app',  appRouter)
 
 app.get('/', async (req, res) => {
   try {

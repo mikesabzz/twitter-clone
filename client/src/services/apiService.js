@@ -1,5 +1,6 @@
 import axios from 'axios'
-const BASE_URL = process.env.REACT_APP_HEROKU_URL || 'http://localhost:4567' 
+// const BASE_URL = process.env.REACT_APP_HEROKU_URL || 'http://localhost:4567' 
+const BASE_URL = 'http://localhost:4567' 
 const JWT_TOKEN = localStorage.getItem('token')
 
 export const api = axios.create({
@@ -9,16 +10,6 @@ export const api = axios.create({
   }
 })
 
-
-export const getProfile = async() => {
-  try {
-    const response = await api.get('/app/profile')
-    const { data: { user } } = response
-    return user
-  } catch (e) {
-    throw e
-  }
-}
 
 export const login = async(data) => {
   try {
@@ -42,6 +33,15 @@ export const signUp = async(data) => {
 
     localStorage.setItem('token', token)
     localStorage.setItem('userId', user.id)
+    return user
+  } catch (e) {
+    throw e
+  }
+}
+export const getProfile = async() => {
+  try {
+    const response = await api.get('/app/profile')
+    const { data: { user } } = response
     return user
   } catch (e) {
     throw e
