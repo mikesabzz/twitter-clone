@@ -9,7 +9,8 @@ class LoginForm extends Component {
     this.state = {
       email: '',
       password: '',
-      showError: false
+      showError: false,
+      loading: false
     }
 
     this.handleSubmitForm = this.handleSubmitForm.bind(this)
@@ -21,7 +22,7 @@ class LoginForm extends Component {
   
     const { email, password } = this.state
     const { handleLogin } = this.props
-    this.setState({ showError: false })
+    this.setState({ showError: false, loading: true })
   
     try {
       await handleLogin({ email, password})
@@ -44,10 +45,11 @@ class LoginForm extends Component {
   }
 
   render () {
-    const { showError } = this.state
+    const { showError, loading } = this.state
     const { isSignedIn } = this.props
 
     let errorMessage
+    let loadingMessage
 
     if (showError) {
       errorMessage = (
@@ -58,13 +60,22 @@ class LoginForm extends Component {
         </div>
       )
     }
+    if (loading) {
+      loadingMessage = (
+          <div className='errorMessage'>
+          <span>
+            Please Wait
+          </span>
+        </div>
+        )
+    }
 
     if (isSignedIn) {
       return <Redirect to='/dashboard/tweets' />
     }
     return (
       <div className="login-form">
-        { errorMessage }
+        { errorMessage, loadingMessage }
         <form className='form' onSubmit={this.handleSubmitForm}>
           <div>
             <input
