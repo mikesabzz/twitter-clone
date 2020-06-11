@@ -60,7 +60,7 @@ class LoginForm extends Component {
         </div>
       )
     }
-    if (loading) {
+    else if (loading) {
       loadingMessage = (
           <div className='errorMessage'>
           <span>
@@ -75,7 +75,8 @@ class LoginForm extends Component {
     }
     return (
       <div className="login-form">
-        { errorMessage, loadingMessage }
+        { errorMessage }
+        { loadingMessage }
         <form className='form' onSubmit={this.handleSubmitForm}>
           <div>
             <input
