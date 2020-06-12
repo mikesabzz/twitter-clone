@@ -95,11 +95,13 @@ nav button:visited, nav a:visited {
 nav button:hover {
   cursor: pointer;
 }
-
+.sign-out-btn {
+  margin-left: 25pc;
+}
 .twitter-logo-img {
   width: 7pc;
   height: auto;
-  position: absolute;
   left: 10px;
+  position: fixed;
   top: 0;
 }

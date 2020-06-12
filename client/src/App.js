@@ -86,7 +86,7 @@ class App extends Component {
           { isSignedIn &&
             <div className='nav-section'>
               <img className="twitter-logo-img" src={TwitterLogo} />
-              <button className="btn btn-outline-primary" onClick={this.signOutUser}>Sign out</button>
+              <button className="sign-out-btn btn btn-outline-primary" onClick={this.signOutUser}>Sign out</button>
             </div>
           }
         </nav>
