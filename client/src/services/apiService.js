@@ -126,4 +126,19 @@ export const deleteTweet = async (tweetId, data) => {
     throw error
   }
 }
-
+export const deleteProfile = async (profileId, data) => {
+  try {
+    const response = await api.delete(`app/profile/bio/${profileId}`, data)
+    return response
+  } catch(error){
+    throw error
+  }
+}
+export const deleteAccount = async (id, data) => {
+  try {
+    const response = await api.delete(`app/profile/${id}`, data)
+    return response
+  } catch(error){
+    throw error
+  }
+}

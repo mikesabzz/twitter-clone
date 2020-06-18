@@ -114,6 +114,7 @@ class App extends Component {
               (props) =>
                 <SignUp
                   {...props}
+                  userId={this.state.user.id}
                   handleSignUp={this.signUpUser}
                   isSignedIn={isSignedIn}
                 />

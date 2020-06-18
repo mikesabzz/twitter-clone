@@ -10,7 +10,7 @@ class UserImage extends React.Component {
             userId: this.props.id
         }
     }
-    componentWillMount = async () => {
+    componentDidMount = async () => {
         await this.getImage()
     }
     getImage = async () => {
@@ -32,6 +32,7 @@ class UserImage extends React.Component {
         }
         else {
             return userImage.map(image => {
+                console.log(image)
                 return (
                     <div key={image.id} id="profile-image">
                         <img className="profile-image"
@@ -41,7 +42,9 @@ class UserImage extends React.Component {
                             <Link to={{ pathname: `/user/upload/${this.props.name}/${this.state.userId}/edit`, 
                                 state: {imageId: image.id} }}>
                                 <button className="btn btn-outline-light font-weight-bold">Edit Image</button>
-                            </Link> : ""
+                            </Link>
+                            
+                            : ""
                         }
                     </div>
                 )

@@ -44,13 +44,14 @@ class UsersProfilesAndTweets extends React.Component {
                             src="https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" />
                         </div>
                         {localStorage.getItem('userId') == id ?
-                            <Link to={{ pathname: '/dashboard/user/create' }}>
+                            <Link to={{ pathname: '/dashboard/user/upload' }}>
                                 <button className="btn btn-primary font-weight-bold m-2">Create Profile</button>
                             </Link> : ""
                         }
                     </div>
                 )
-            } else {
+            } 
+            else {
             return userProfile.map(profile => {
                 return (
                     <div className="user-profile" key={profile.id}>

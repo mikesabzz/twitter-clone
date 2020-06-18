@@ -13,7 +13,6 @@ class UserNames extends React.Component {
             imageUrl: ''
         }
     }
-
     async componentDidMount() {
         await this.getUser()
     }
