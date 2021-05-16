@@ -31,6 +31,10 @@ app.get('/', async (req, res) => {
   }
 })
 
+app.get('/error', function(req, res){
+  res.render('error.html');
+});
+
 app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.json({ message: err.message })
