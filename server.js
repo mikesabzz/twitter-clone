@@ -17,6 +17,9 @@ app.use(cors())
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(cors({
+  origin: 'https://twitter-clone-by-sabz.surge.sh'
+}));
 
 app.use(bodyParser.json())
 app.use(passport.initialize())
