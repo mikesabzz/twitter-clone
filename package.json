@@ -1,62 +1,27 @@
 {
   "name": "twitter-clone",
-  "version": "1.0.0",
-  "description": "Remake of Twitter with Express, Auth, PassportJS, SQL, and React.",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "nodemon server.js",
-    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "client": "cd client && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm run start\" \"npm run client\"",
-    "db:init": "dropdb --if-exists twitter_clone_db && createdb twitter_clone_db",
-    "db:reset": "node ./scripts/resetDb.js",
-    "db:seed": "node ./scripts/seedDb.js"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mikesabzz/twitter-clone.git"
-  },
-  "author": "Michael Sabzevari",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mikesabzz/twitter-clone/issues"
-  },
-  "homepage": "https://github.com/mikesabzz/twitter-clone#readme",
   "dependencies": {
-    "axios": "^0.19.2",
-    "bcrypt": "^4.0.1",
-    "body-parser": "^1.19.0",
-    "bootstrap": "^4.6.0",
-    "cloudinary": "^1.25.1",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
-    "datauri": "^3.0.0",
-    "dotenv": "^8.6.0",
-    "express": "^4.17.1",
-    "express-fileupload": "^1.2.1",
-    "fs": "0.0.1-security",
-    "init": "^0.1.2",
-    "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.9.1",
-    "multer": "^1.4.2",
-    "node": "^13.14.0",
-    "node-sass": "^4.14.1",
-    "package-lock.json": "^1.0.0",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
+    "debug": "~2.6.9",
+    "dotenv": "^16.3.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.22",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7",
-    "pg": "^8.6.0",
-    "pq": "0.0.3",
-    "react-move": "^6.4.0",
-    "react-portal": "^4.2.1",
-    "react-router-dom": "^5.2.0",
-    "sequelize": "^5.22.4",
-    "server.js": "^1.0.0",
-    "swagger-ui-dist": "^3.48.0",
-    "swagger-ui-express": "^4.1.6"
-  },
-  "devDependencies": {
-    "concurrently": "^5.3.0",
-    "nodemon": "^2.0.7"
+    "pg": "^8.11.1",
+    "sequelize": "^6.32.1"
   }
 }
