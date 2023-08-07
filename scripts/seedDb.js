@@ -1,10 +1,17 @@
 const { User, Tweet, Profile, Image }  = require('../models/index')
+const bcrypt = require('bcrypt')
+const BCRYPT_SALT_ROUNDS = 12
 
 const seedDb = async () => {
   try {
     await User.destroy({
       where: {}
     })
+
+    const encryptedPassword = await bcrypt.hash(
+      'password',
+       BCRYPT_SALT_ROUNDS
+    )
 
     const demo = await User.create({
       name: "Demo User",

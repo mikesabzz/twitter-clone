@@ -3,54 +3,54 @@ const appRouter = express.Router()
 const { passport } = require('../auth/auth')
 const { Tweet, User, Profile, Image } = require('../models')
 const cloudinary = require('../cloudinary')
-const multer = require('multer')
+// const multer = require('multer')
 
 //upload image
-const storage = multer.diskStorage({
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '=' + file.originalname)
-  }
-})
-const upload = multer({ storage: storage })
+// const storage = multer.diskStorage({
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + '=' + file.originalname)
+//   }
+// })
+// const upload = multer({ storage: storage })
 
-appRouter.get('/upload', async(req,res) => {
-  try {
-    await Image.findAll()
-    .then((result) => res.json(result))
-  } catch(error) {
-    console.log(error)
-  }
-})
+// appRouter.get('/upload', async(req,res) => {
+//   try {
+//     await Image.findAll()
+//     .then((result) => res.json(result))
+//   } catch(error) {
+//     console.log(error)
+//   }
+// })
 
-appRouter.post('/upload', upload.single('file'), async (req, res) => {
-  const result = await cloudinary.uploads(req.file.path)
-  try {
-    await Image.create({
-      url: result.url,
-      userId: req.body.userId,
-    })
-    .then(r => {
-      res.send(r.get({ plain: true }))
-    })
-  }
-  catch (error) {
-    console.log(error)
-  }
-})
+// appRouter.post('/upload', upload.single('file'), async (req, res) => {
+//   const result = await cloudinary.uploads(req.file.path)
+//   try {
+//     await Image.create({
+//       url: result.url,
+//       userId: req.body.userId,
+//     })
+//     .then(r => {
+//       res.send(r.get({ plain: true }))
+//     })
+//   }
+//   catch (error) {
+//     console.log(error)
+//   }
+// })
 //Edit image
-appRouter.put('/upload/:id', upload.single('file'), async (req, res) => {
-  const result = await cloudinary.uploads(req.file.path)
-  try {
-    const id = req.params.id
-    const editImage = await Image.findByPk(id)
-    editImage.update({
-      url: result.url
-    })
-    res.json(editImage)
-  } catch(error) {
-    console.log(error)
-  }
-})
+// appRouter.put('/upload/:id', upload.single('file'), async (req, res) => {
+//   const result = await cloudinary.uploads(req.file.path)
+//   try {
+//     const id = req.params.id
+//     const editImage = await Image.findByPk(id)
+//     editImage.update({
+//       url: result.url
+//     })
+//     res.json(editImage)
+//   } catch(error) {
+//     console.log(error)
+//   }
+// })
 
 //get user profile
 appRouter.get('/profile', passport.authenticate('jwt', { session: false}),

@@ -10,6 +10,13 @@ import ProtectedRoute from './components/ProtectedRoute'
 import authService from './services/authService'
 import SignUp from './components/SignUp'
 
+// Npm uninstall, npm install
+
+// Npm audit
+
+// ****Npm audit --force
+
+
 class App extends Component {
   constructor(props) {
     super(props)
