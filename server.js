@@ -51,3 +51,6 @@ if (process.env.NODE_ENV == "production") {
 }
 
 app.listen(PORT, () => console.log(`App is up and running listening on port ${PORT}`))
+
+
+// When seed or npm start isnt work run: pg_ctl -D /usr/local/var/postgres start

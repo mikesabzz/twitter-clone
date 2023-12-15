@@ -34,9 +34,9 @@ class Tweets extends React.Component {
         });
 
         return sortTweets.map(tweet => {
-            const imageUrl = (tweet.user.image == null) ? "https://res.cloudinary.com/mikesabz/image/upload/v1591122453/s1xym1lgmc0npdrczfhs.jpg" : tweet.user.image.url
+            // const imageUrl = (tweet.user.image == null) ? "https://res.cloudinary.com/mikesabz/image/upload/v1591122453/s1xym1lgmc0npdrczfhs.jpg" : tweet.user.image.url
             return <div className="tweet-box" key={tweet.id}>
-                <img className="tweet-image" src={imageUrl} />
+                {/* <img className="tweet-image" src={imageUrl} /> */}
                 <div id="tweet-container">
                     <Link to={{ pathname: `/dashboard/user/${tweet.user.name}/${tweet.user.id}`, state: { names: tweet.user.name } }}
                         className="text-dark h4 font-weight-bold">
