@@ -7,7 +7,7 @@ const JWTStrategy = require('passport-jwt').Strategy
 const ExtractJWT = require('passport-jwt').ExtractJwt
 require('dotenv').config()
 
-const secretKey = "super long string" 
+const secretKey = process.env.SECRET
 const jwtSign = payload => {
   return jwt.sign(payload, secretKey)
 }
