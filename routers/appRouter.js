@@ -5,6 +5,12 @@ const { Tweet, User, Profile, Image } = require('../models')
 const cloudinary = require('../cloudinary')
 // const multer = require('multer')
 
+appRouter.get('/protected', passport.authenticate('jwt', { session: false}),
+  async (req, res) => {
+    res.json({ user: req.user, message: 'authenticated'})
+  }
+)
+
 //upload image
 // const storage = multer.diskStorage({
 //   filename: function (req, file, cb) {

@@ -20,11 +20,11 @@ class UserNames extends React.Component {
         const names = await getUserNames()
         this.setState({ names })
     }
-    onError() {
-        this.setState({
-          imageUrl: "https://res.cloudinary.com/mikesabz/image/upload/v1589941495/otupu5oygjquz8ruf8cx.jpg"
-        })
-      }
+    // onError() {
+    //     this.setState({
+    //       imageUrl: "https://res.cloudinary.com/mikesabz/image/upload/v1589941495/otupu5oygjquz8ruf8cx.jpg"
+    //     })
+    //   }
     renderPerson = () => {
         if (this.state.names) {
             return this.state.names.sort((a, b) => {
@@ -33,7 +33,7 @@ class UserNames extends React.Component {
                 return 0
             })
                 .map(name => {
-                    const imageUrl = (name.image == null) ? "https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" : name.image.url
+                    // const imageUrl = (name.image == null) ? "https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" : name.image.url
                     return (
                         <div key={name.id}>
                             <Link to={{
@@ -41,8 +41,8 @@ class UserNames extends React.Component {
                                 state: { names: name }
                             }} key={name.id}>
                                 <div className="username-box border border-secondary p-3">
-                                    <img className="tweet-image"
-                                        src={imageUrl} />
+                                    {/* <img className="tweet-image"
+                                        src={imageUrl} /> */}
                                     <p>{name.name}</p>
                                 </div>
                             </Link>

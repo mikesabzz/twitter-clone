@@ -19,14 +19,14 @@ app.use(cors())
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(cors({
-  origin: 'https://twitter-clone-by-sabz.surge.sh'
-}));
+// app.use(cors({
+//   origin: 'https://twitter-clone-by-sabz.surge.sh'
+// }));
 
 app.use(bodyParser.json())
-app.use(passport.initialize())
 app.use('/auth', authRouter)
-app.use('/app',  appRouter)
+app.use('/app', authorized, appRouter)
+app.use(passport.initialize())
 
 app.get('/', async (req, res) => {
   try {

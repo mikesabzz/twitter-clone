@@ -9,7 +9,10 @@ const db = new Sequelize((process.env.DATABASE_URL || 'postgres://localhost:5432
   database: 'twitter_clone_db',
   dialect: 'postgres'
 })
-
+// const db = new Sequelize({
+//     database: 'twitter_clone_db',
+//     dialect: 'postgres'
+//   })
 
 const User = UserModel(db, Sequelize)
 

@@ -1,17 +1,10 @@
 const { User, Tweet, Profile, Image }  = require('../models/index')
-const bcrypt = require('bcrypt')
-const BCRYPT_SALT_ROUNDS = 12
 
 const seedDb = async () => {
   try {
     await User.destroy({
       where: {}
     })
-
-    const encryptedPassword = await bcrypt.hash(
-      'password',
-       BCRYPT_SALT_ROUNDS
-    )
 
     const demo = await User.create({
       name: "Demo User",
@@ -29,13 +22,13 @@ const seedDb = async () => {
       birthdate: "January 1, 2000"
     })
 
-    const demoImage = await Image.create({
-      url: "http://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg"
-    })
+    // const demoImage = await Image.create({
+    //   url: "http://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg"
+    // })
 
     await demoTweet.setUser(demo)
     await demoProfile.setUser(demo)
-    await demoImage.setUser(demo)
+    // await demoImage.setUser(demo)
 
   } catch(e) {
     console.log(e);

@@ -40,8 +40,8 @@ class UsersProfilesAndTweets extends React.Component {
                 return (
                     <div className="w-75">
                         <div id="profile-image">
-                        <img className="profile-image" 
-                            src="https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" />
+                        {/* <img className="profile-image" 
+                            src="https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" /> */}
                         </div>
                         {localStorage.getItem('userId') == id ?
                             <Link to={{ pathname: '/dashboard/user/upload' }}>
@@ -92,10 +92,10 @@ class UsersProfilesAndTweets extends React.Component {
                 return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
             })
             return sortTweets.map(tweet => {
-                const imageUrl = (tweet.user.image == null) ? 'https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg' : tweet.user.image.url
+                // const imageUrl = (tweet.user.image == null) ? 'https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg' : tweet.user.image.url
                 return (
                     <div className="tweet-box" key={tweet.id}>
-                        <img className="tweet-image" src={imageUrl} />
+                        {/* <img className="tweet-image" src={imageUrl} /> */}
                         <div id="tweet-container">
                             <p className="text-dark h4 font-weight-bold">{tweet.user.name}</p>
                             <p className="user-tweet-date text-secondary font-weight-normal pull-right">

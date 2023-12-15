@@ -24,9 +24,9 @@ class UserImage extends React.Component {
         if (userImage.length == 0) {
             return (
                 <div key={image.id} id="profile-image">
-                    <img className="profile-image"
+                    {/* <img className="profile-image"
                         src="https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg"
-                    />
+                    /> */}
                 </div>
             )
         }
