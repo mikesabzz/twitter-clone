@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TwitterLogo from './twitter-clone-logo.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import { Route, Link } from 'react-router-dom'
@@ -33,6 +32,7 @@ const App = () => {
       setUser(fetchedUser);
     } catch (e) {
       console.error("Error logging in:", e);
+      throw e;
     }
   }
 
@@ -44,6 +44,7 @@ const App = () => {
       setUser(newUser);
     } catch (e) {
       console.error("Error signing up:", e);
+      throw e;
     }
   }
 
@@ -62,22 +63,33 @@ const App = () => {
 
   return (
       <div className='App'>
-        <nav>
-          { !isSignedIn &&
-            <div className='nav-section'>
-              <img className="twitter-logo-img" src={TwitterLogo} alt="" />
-              <Link to='/login'>Login</Link>
-              <Link to='/signup'>Sign Up</Link>
-            </div>
-          }
+     <nav className='p-4 flex items-center justify-between'>
+        <div className='flex items-center'>
+          <img className='w-20' src={TwitterLogo} alt='' />
+        </div>
 
-          { isSignedIn &&(
-            <div className='nav-section'>
-              <img className="twitter-logo-img" src={TwitterLogo} />
-              <button className="sign-out-btn btn btn-outline-primary" onClick={signOutUser}>Sign out</button>
-            </div>
+        <div className='flex items-center space-x-4'>
+          {!isSignedIn && (
+            <>
+              <Link to='/login' className='text-xl font-bold text-blue-500'>
+                Login
+              </Link>
+              <Link to='/signup' className='text-xl font-bold text-blue-500'>
+                Sign Up
+              </Link>
+            </>
           )}
-        </nav>
+
+          {isSignedIn && (
+            <button
+            className='text-xl font-bold text-blue-500'
+              onClick={signOutUser}
+            >
+              Sign out
+            </button>
+          )}
+        </div>
+      </nav>
 
         <main>
           <ProtectedRoute 

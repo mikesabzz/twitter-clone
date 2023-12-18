@@ -25,8 +25,9 @@ function LoginForm(props) {
 
     const { email, password } = formData;
     const { handleLogin } = props;
-    setShowError(false);
+
     setLoading(true);
+    setShowError(false);
 
     try {
       await handleLogin({ email, password });
@@ -44,6 +45,12 @@ function LoginForm(props) {
       email: "demouser@mail.com",
       password: "password",
     });
+    const form = event.target.form;
+    if(form) {
+      setTimeout(() => {
+        form.dispatchEvent(new Event("submit", { cancelable: true }));
+      }, 0);
+    }
   };
 
   const { isSignedIn } = props;
