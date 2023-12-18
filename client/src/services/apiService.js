@@ -10,8 +10,6 @@ export const api = axios.create({
   }
 })
 
-
-
 export const login = async(data) => {
   try {
     const response = await api.post('/auth/login', data)

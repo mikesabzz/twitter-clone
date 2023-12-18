@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import TwitterLogo from './twitter-clone-logo.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
@@ -17,69 +17,51 @@ import SignUp from './components/SignUp'
 // ****Npm audit --force
 
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isSignedIn: false,
-      user: {}
-    }
-    this.signOutUser = this.signOutUser.bind(this)
-    this.loginUser = this.loginUser.bind(this)
-    this.signUpUser = this.signUpUser.bind(this)
-  }
+const App = () => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [user, setUser] = useState({});
 
-  signOutUser() {
+  const signOutUser = () => {
     authService.signOut()
-    this.setState({
-      isSignedIn: false,
-      user: {}
-    })
+    setIsSignedIn(false);
+    setUser({});
   }
 
-  async loginUser(credentials) {
+  const loginUser = async (credentials) => {
     try {
-      const user = await login(credentials)
-
-      this.setState({
-        isSignedIn: true,
-        user: user
-      })
+      const fetchedUser = await login(credentials);
+      setIsSignedIn(true);
+      setUser(fetchedUser);
     } catch (e) {
-      throw e
+      console.error("Error logging in:", e);
     }
   }
 
-  async signUpUser (credentials) {
+  const signUpUser = async (credentials) => {
     try {
       console.log('credentials in signUpUser', credentials)
-      const user = await signUp(credentials)
-      this.setState({
-        isSignedIn: true,
-        user: user
-      })
+      const newUser = await signUp(credentials);
+      setIsSignedIn(true);
+      setUser(newUser);
     } catch (e) {
-      throw e
+      console.error("Error signing up:", e);
     }
   }
 
-  async componentDidMount() {
-    try {
-      const fetchedUser = await getProfile()
+  useEffect(() => {
+    const fetchedUserData = async () => {
+      try {
+        const fetchedUser = await getProfile();
+        setIsSignedIn(authService.isAuthenticated());
+        setUser(fetchedUser);
+      } catch (e) {
+        console.log('Issue fetching token')
+      }
+    };
+    fetchedUserData();
+  }, [])
 
-      this.setState({
-        isSignedIn: authService.isAuthenticated(),
-        user: fetchedUser
-      })
-    } catch (e) {
-      console.log('Issue fetching token')
-    }
-  }
-
-  render() {
-    const { isSignedIn, user } = this.state
-    console.log(user)
-    return (
+  return (
       <div className='App'>
         <nav>
           { !isSignedIn &&
@@ -90,18 +72,18 @@ class App extends Component {
             </div>
           }
 
-          { isSignedIn &&
+          { isSignedIn &&(
             <div className='nav-section'>
               <img className="twitter-logo-img" src={TwitterLogo} />
-              <button className="sign-out-btn btn btn-outline-primary" onClick={this.signOutUser}>Sign out</button>
+              <button className="sign-out-btn btn btn-outline-primary" onClick={signOutUser}>Sign out</button>
             </div>
-          }
+          )}
         </nav>
 
         <main>
           <ProtectedRoute 
             path='/dashboard' 
-            user={this.state.user}
+            user={user}
             component={Dashboard} 
           />
           <Route
@@ -110,7 +92,7 @@ class App extends Component {
               (props) =>
                 <Login
                   {...props}
-                  handleLogin={this.loginUser}
+                  handleLogin={loginUser}
                   isSignedIn={isSignedIn}
                 />
             }
@@ -121,8 +103,8 @@ class App extends Component {
               (props) =>
                 <SignUp
                   {...props}
-                  userId={this.state.user.id}
-                  handleSignUp={this.signUpUser}
+                  userId={user.id}
+                  handleSignUp={signUpUser}
                   isSignedIn={isSignedIn}
                 />
             }
@@ -130,7 +112,6 @@ class App extends Component {
         </main>
       </div>
     )
-  }
 }
 
 export default App
