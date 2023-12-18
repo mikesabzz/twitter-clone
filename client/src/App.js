@@ -16,7 +16,6 @@ import SignUp from './components/SignUp'
 
 // ****Npm audit --force
 
-
 const App = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [user, setUser] = useState({});

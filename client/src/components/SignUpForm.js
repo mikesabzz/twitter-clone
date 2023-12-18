@@ -1,56 +1,45 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 
-class SignUpForm extends Component {
-  constructor (props) {
-    super(props)
+function SignUpForm(props) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [showError, setShowError] = useState(false);
 
-    this.state = {
-      email: '',
-      password: '',
-      name: '',
-      showError: false
-    }
+  const handleTextInput = (event) => {
+    const fieldName = event.target.name
+    const value = event.target.value
 
-    this.handleSubmitForm = this.handleSubmitForm.bind(this)
-    this.handleTextInput = this.handleTextInput.bind(this)
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
   }
 
-  async handleSubmitForm (event) {
-    event.preventDefault()
+  const handleSubmitForm = async (event) => {
+    event.preventDefault();
 
-    const { name, email, password } = this.state
-    const { handleSignUp } = this.props
-
-    this.setState({ showError: false })
+    const { name, email, password } = formData;
+    const { handleSignUp } = props;
+    setShowError(false);
 
     try {
       await handleSignUp({ name, email, password})
     } catch (e) {
-      this.setState({ showError: true })
+      setShowError(true);
     }
-  }
+  };
 
-
-
-  handleTextInput (event) {
-    const fieldName = event.target.name
-    const value = event.target.value
-
-    this.setState(state => {
-      return { [fieldName]: value }
-    })
-  }
-
-  render () {
-    const { showError } = this.state
-    const { isSignedIn } = this.props
+    const { isSignedIn } = props;
 
     let errorMessage
 
     if (showError) {
       errorMessage = (
-        <div className='errorMessage'>
+        <div className="bg-red-500 text-white p-2 mb-4 rounded">
           <span>
             An error occurred, please ensure your credentials are correct
           </span>
@@ -59,22 +48,23 @@ class SignUpForm extends Component {
     }
 
     if (isSignedIn) {
-      return <Redirect to={`/dashboard/user/${this.state.name}/${this.props.userId}`} />
+      return <Redirect to={`/dashboard/user/${formData.name}/${props.userId}`} />
     }
 
     return (
-      <div className="signup-form">
+      <div className="flex flex-col items-center relative bottom-[-5pc]">
         { errorMessage }
-        <form className='form' onSubmit={this.handleSubmitForm}>
+        <form className="flex flex-col items-center box-border shadow-md w-96 p-12 bg-blue-50" onSubmit={handleSubmitForm}>
           <div>
             <input
               type='text'
               name='name'
-              onChange={this.handleTextInput}
-              value={this.state.name.replace(/\w\S*/g, function(txt){
+              onChange={handleTextInput}
+              value={formData.name.replace(/\w\S*/g, function(txt){
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
               })}
               placeholder="name"
+              className="bg-blue-100 w-72 p-2 mb-4"
             />
           </div>
 
@@ -82,9 +72,10 @@ class SignUpForm extends Component {
             <input
               type='text'
               name='email'
-              onChange={this.handleTextInput}
-              value={this.state.email}
+              onChange={handleTextInput}
+              value={formData.email}
               placeholder="email"
+              className="bg-blue-100 w-72 p-2 mb-4"
             />
           </div>
 
@@ -92,17 +83,18 @@ class SignUpForm extends Component {
             <input
               type='password'
               name='password'
-              onChange={this.handleTextInput}
-              value={this.state.password}
+              onChange={handleTextInput}
+              value={formData.password}
               placeholder="password"
+              className="bg-blue-100 w-72 p-2 mb-4"
             />
           </div>
 
-          <button className="btn btn-primary">Sign Up</button>
+          <button className="bg-blue-500 w-72 p-2 text-white font-bold rounded">Sign Up</button>
         </form>
       </div>
     )
   }
-}
+
 
 export default SignUpForm

@@ -10,7 +10,7 @@ import {
 ReactDOM.render(
     <Router>
         <App />
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+        {/* <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link> */}
     </Router>,
     document.getElementById('root')
 )

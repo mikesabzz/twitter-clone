@@ -1,110 +1,98 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
-import './SignIn.css'
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
-class LoginForm extends Component {
-  constructor (props) {
-    super(props)
+function LoginForm(props) {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-    this.state = {
-      email: '',
-      password: '',
-      showError: false,
-      loading: false
-    }
+  const [showError, setShowError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    this.handleSubmitForm = this.handleSubmitForm.bind(this)
-    this.handleTextInput = this.handleTextInput.bind(this)
-  }
+  const handleTextInput = (event) => {
+    const fieldName = event.target.name;
+    const value = event.target.value;
 
-  async handleSubmitForm (event) {
-    event.preventDefault()
-  
-    const { email, password } = this.state
-    const { handleLogin } = this.props
-    this.setState({ showError: false, loading: true })
-  
+    setFormData((prevData) => ({
+      ...prevData,
+      [fieldName]: value,
+    }));
+  };
+
+  const handleSubmitForm = async (event) => {
+    event.preventDefault();
+
+    const { email, password } = formData;
+    const { handleLogin } = props;
+    setShowError(false);
+    setLoading(true);
+
     try {
-      await handleLogin({ email, password})
+      await handleLogin({ email, password });
     } catch (e) {
-      this.setState({ showError: true })
+      console.log(e);
+      setShowError(true);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const autoFillDemoUser = (event) => {
+    event.preventDefault();
+    setFormData({
+      email: "demouser@mail.com",
+      password: "password",
+    });
+  };
+
+  const { isSignedIn } = props;
+
+  if (isSignedIn) {
+    return <Redirect to="/dashboard/tweets" />;
   }
 
-  handleTextInput (event) {
-    const fieldName = event.target.name
-    const value = event.target.value
-
-    this.setState(state => {
-      return { [fieldName]: value }
-    })
-  }
-  autoFillDemoUser = (event) => {
-    event.preventDefault()
-    this.setState({email: 'demouser@mail.com', password: 'password'})  
-  }
-
-  render () {
-    const { showError, loading } = this.state
-    const { isSignedIn } = this.props
-
-    let errorMessage
-    let loadingMessage
-
-    if (showError) {
-      errorMessage = (
-        <div className='errorMessage'>
-          <span>
+  return (
+    <div className="flex flex-col items-center relative bottom-[-5pc]">
+      {showError && (
+        <div className="bg-red-500 text-white p-2 mb-4 rounded">
             An error occurred, please ensure your credentials are correct
-          </span>
         </div>
-      )
-    }
-    else if (loading) {
-      loadingMessage = (
-          <div className='errorMessage'>
-          <span>
-            Please Wait
-          </span>
+      )}
+      {loading && (
+        <div className="bg-red-500 text-white p-2 mb-4 rounded">Please Wait</div>
+      )}
+
+      <form className="flex flex-col items-center box-border shadow-md w-96 p-12 bg-blue-100" onSubmit={handleSubmitForm}>
+        <div>
+          <input
+            type="text"
+            name="email"
+            onChange={handleTextInput}
+            value={formData.email}
+            placeholder="email"
+            className="bg-blue-300 w-72 p-2 mb-4"
+          />
         </div>
-        )
-    }
 
-    if (isSignedIn) {
-      return <Redirect to='/dashboard/tweets' />
-    }
-    return (
-      <div className="login-form">
-        { errorMessage }
-        { loadingMessage }
-        <form className='form' onSubmit={this.handleSubmitForm}>
-          <div>
-            <input
-              type='text'
-              name='email'
-              onChange={this.handleTextInput}
-              value={this.state.email}
-              placeholder="email"
-            />
-          </div>
+        <div>
+          <input
+            type="password"
+            name="password"
+            onChange={handleTextInput}
+            value={formData.password}
+            placeholder="password"
+            className="bg-blue-300 w-72 p-2 mb-4"
+          />
+        </div>
 
-          <div>
-            <input
-              type='password'
-              name='password'
-              onChange={this.handleTextInput}
-              value={this.state.password}
-              placeholder="password"
-            />
-          </div>
-
-          <button className="btn btn-primary">Login</button>
-          <h3 className="text-center">OR</h3>
-          <button onClick={this.autoFillDemoUser} className="btn btn-secondary">Login as a Demo User</button>
-        </form>
-      </div>
-    )
-  }
+        <button className="bg-blue-500 w-72 p-2 text-white font-bold rounded mb-4">Login</button>
+        <button onClick={autoFillDemoUser} className="bg-gray-500 w-72 p-2 text-white font-bold rounded">
+          Login as a Demo User
+        </button>
+      </form>
+    </div>
+  );
 }
 
-export default LoginForm
+export default LoginForm;
