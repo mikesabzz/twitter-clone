@@ -31,9 +31,9 @@ class CreateTweets extends React.Component {
         this.setState({ created: true })
     }
     render() {
-        if (this.state.created) {
-            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
-        }
+        // if (this.state.created) {
+        //     return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
+        // }
         return (
             <div>
                 <form onChange={this.handleChange} onSubmit={this.handleSubmit}>

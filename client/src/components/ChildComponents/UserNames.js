@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { getUserNames } from '../../services/apiService'
 import SearchUser from './SearchUsers';
-import './styles.css'
+// import './styles.css'
 
 class UserNames extends React.Component {
     constructor(props) {

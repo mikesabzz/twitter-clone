@@ -1,7 +1,7 @@
 import React from 'react'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Navbar from './Navbar'
-import {BrowserRouter as Router} from 'react-router-dom'
-import './Dashboard.css'
+// import './Dashboard.css'
 
 function Dashboard (props) {
   const { user } = props
@@ -17,10 +17,12 @@ function Dashboard (props) {
     timeOfDay = 'Evening'
   }
   return (
-    <div>
-      <h2 id="dashboard-header">{`Good ${timeOfDay}, ${name}`}</h2>
+    <div className="min-h-screen flex flex-col">
+      <header className="p-4">
+      <h2 className="text-2xl font-bold text-blue-500">{`Good ${timeOfDay}, ${name}`}</h2>
+      </header>
       <Router>
-        <nav className="navbar-container">
+        <nav className="flex-1">
           <Navbar name={name} user={user} />
         </nav>
       </Router>
