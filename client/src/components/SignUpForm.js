@@ -92,7 +92,7 @@ function SignUpForm(props) {
           />
         </div>
 
-        <button className="bg-blue-500 w-72 p-2 text-white font-bold rounded">
+        <button disabled={true} className="bg-blue-500 w-72 p-2 text-white font-bold rounded">
           Sign Up
         </button>
       </form>

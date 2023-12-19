@@ -93,8 +93,8 @@ function LoginForm(props) {
           />
         </div>
 
-        <button className="bg-blue-500 w-72 p-2 text-white font-bold rounded mb-4">Login</button>
-        <button onClick={autoFillDemoUser} className="bg-gray-500 w-72 p-2 text-white font-bold rounded">
+        <button disabled={true} className="bg-blue-500 w-72 p-2 text-white font-bold rounded mb-4">Login</button>
+        <button disabled={true} onClick={autoFillDemoUser} className="bg-gray-500 w-72 p-2 text-white font-bold rounded">
           Login as a Demo User
         </button>
       </form>
