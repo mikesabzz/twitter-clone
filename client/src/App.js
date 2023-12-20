@@ -67,7 +67,7 @@ const App = () => {
         <div className='flex items-center'>
           <img className='w-20' src={TwitterLogo} alt='' />
         </div>
-<h2 className="font-bold bg-red-400 p-4 rounded">The application is currently undergoing maintenance</h2>
+{/* <h2 className="font-bold bg-red-400 p-4 rounded">The application is currently undergoing maintenance</h2> */}
         <div className='flex items-center space-x-4'>
           {!isSignedIn && (
             <>
