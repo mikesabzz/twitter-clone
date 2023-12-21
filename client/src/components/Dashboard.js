@@ -1,7 +1,6 @@
 import React from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router} from 'react-router-dom'
 import Navbar from './Navbar'
-// import './Dashboard.css'
 
 function Dashboard (props) {
   const { user } = props

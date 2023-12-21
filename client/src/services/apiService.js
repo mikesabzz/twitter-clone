@@ -99,7 +99,7 @@ export const getAllTweets = async () => {
   }
 }
 
-export const createTweets = async (data) => {
+export const postTweet = async (data) => {
   try {
       const response = await api.post('/app/tweets', data)
       const { user } = response.data

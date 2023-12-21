@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Switch, Route } from "react-router-dom";
-import { HomeIcon, UserIcon, SearchIcon } from "@heroicons/react/solid";
+import { HomeIcon, UserIcon, SearchIcon, MenuIcon } from "@heroicons/react/solid";
 import Tweets from "./ChildComponents/Tweets";
 import UserNames from "./ChildComponents/UserNames";
 import UsersProfilesAndTweets from "./ChildComponents/UsersProfilesAndTweets";
@@ -21,10 +21,10 @@ const Navbar = (props) => {
   return (
     <div>
       <button className="lg:hidden block" onClick={toggleSidebar}>
-        Toggle Sidebar
+        <MenuIcon className="h-6 w-6" />
       </button>
 
-      <ul className={sidebarOpen ? 'hidden lg:flex' : 'flex'}>
+      <ul className={`bg-blue-50 border border-blue-500 p-4 w-40 ${sidebarOpen ? 'hidden lg:flex' : 'flex'}`}>
         <div key={user.id} className={sidebarOpen ? 'lg:w-64' : 'w-16'}>
           <li>
             <Link to="/dashboard/tweets" className="flex items-center">

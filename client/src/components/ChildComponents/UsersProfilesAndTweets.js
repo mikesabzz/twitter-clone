@@ -32,7 +32,7 @@ const UsersProfilesAndTweets = (props) => {
         setTweets(updatedTweets);
         await deleteTweet(id);
         await getTweets();
-        alert("You have deleted a Tweet!");
+        // alert("You have deleted a Tweet!");
     }
     const renderProfile = () => {
         let id = props.match.params.id;
