@@ -4,7 +4,6 @@ import dateFormat from 'dateformat'
 import { Link } from 'react-router-dom'
 import { FaBirthdayCake } from 'react-icons/fa'
 import UserImage from './UserImage'
-// import './styles.css'
 
 const UsersProfilesAndTweets = (props) => {
     const [profiles, setProfiles] = useState([]);
@@ -45,7 +44,12 @@ const UsersProfilesAndTweets = (props) => {
                         {/* <img src="https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" /> */}
                         </div>
                         {localStorage.getItem('userId') == id ? (
-                            <Link to={{ pathname: '/dashboard/user/upload' }}>
+                            // <Link to={{ pathname: '/dashboard/user/upload' }}>
+                            //     <button className="btn btn-primary font-weight-bold m-2">Create Profile</button>
+                            // </Link> 
+                            
+                            //Temporary Link to create profile until upload photo is working
+                            <Link to={{ pathname: '/dashboard/user/create' }}>
                                 <button className="btn btn-primary font-weight-bold m-2">Create Profile</button>
                             </Link> 
                             ) : (

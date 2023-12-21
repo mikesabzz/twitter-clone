@@ -82,10 +82,10 @@ const Navbar = (props) => {
           path="/dashboard/user/create"
           render={(routeProps) => <CreateProfile {...routeProps} user={user} />}
         />
-        {/* <Route
+        <Route
           path="/dashboard/user/upload"
           render={(routeProps) => <FileUpload {...routeProps} user={user} />}
-        /> */}
+        />
         <Route
           path="/user/upload/:name/:id/edit"
           render={(routeProps) => <EditImage {...routeProps} user={user} />}

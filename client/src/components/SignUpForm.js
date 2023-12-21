@@ -47,7 +47,8 @@ function SignUpForm(props) {
   }
 
   if (isSignedIn) {
-    return <Redirect to={`/dashboard/user/${formData.name}/${props.userId}`} />;
+    return <Redirect to="/dashboard" />;
+    // return <Redirect to={`/dashboard/user/${formData.name}/${props.userId}`} />;
   }
 
   return (

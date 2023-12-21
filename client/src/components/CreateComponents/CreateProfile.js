@@ -1,61 +1,60 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom';
-import { createProfile } from '../../services/apiService';
-import './styles.css'
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import { createProfile } from "../../services/apiService";
 
-class CreateProfile extends React.Component {
-    constructor(props){
-        super(props)
-        this.props = props
-        this.state = {
-            created: false,
-            name: '',
-            userId: props.user.id,
-        }
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-    }
+const CreateProfile = (props) => {
+  const [profileData, setProfileData] = useState({
+    created: false,
+    bio: "",
+    location: "",
+    website: "",
+    birthdate: "",
+    userId: props.user.id,
+  });
 
-    handleChange = (e) => {
-        const element = e.target
-        const { name, value } = element
-        const newState = {}
-        newState[name] = value
-        this.setState(newState)
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-    handleSubmit = async (e) => {
-        e.preventDefault()
-        const { userId, bio, location, website, birthdate } = this.state
-        const profile = { userId, bio, location, website, birthdate }
-        await createProfile(profile)
-        this.setState({created: true})
-    }
-    render(){
-        if (this.state.created) {
-            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`}></Redirect> 
-        } 
-        return (
-            <div className="create-profile-containter">
-                <h2>Create your Profile</h2>
-                <form onChange={this.handleChange} onSubmit={this.handleSubmit} >
-                    <textarea className="bio-textarea" name="bio" type="text" placeholder="Bio" required/>
-                    <br />
-                    <input name="location" type="text" placeholder="Location" />
-                    <br />
-                    <input name="website" type="text" placeholder="Website" />
-                    <br />
-                    <label className="mt-4" htmlFor="birthdate">Date of Birth</label>
-                    <br />
-                    <input className="w-50" name="birthdate" type="date" required/>
-                    <br />
-                    <button className="mt-3 btn btn-primary font-weight-bold">Save</button>
-                </form>
-            </div>
-        )
-    }
-}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { userId, bio, location, website, birthdate } = profileData;
+    const profile = { userId, bio, location, website, birthdate };
+    await createProfile(profile);
+    setProfileData((prevData) => ({ ...prevData, created: true }));
+  };
 
-export default CreateProfile
+  if (profileData.created) {
+    return (
+      <Redirect to={`/dashboard/user/${props.user.name}/${props.user.id}`} />
+    );
+  }
 
+  return (
+    <div className="container mx-auto p-4 bg-blue-50 border border-gray-500 rounded-lg">
+      <h2 className="flex items-center justify-center text-2xl text-blue-500 font-bold mb-4">Get Started</h2>
+      <form className="max-w-md mx-auto" onChange={handleChange} onSubmit={handleSubmit}>
+        <textarea
+          className="w-full h-20 p-2 border rounded mb-4"
+          name="bio"
+          type="text"
+          placeholder="Bio"
+          required
+        />
+        <input className="w-full p-2 border rounded mb-4" name="location" type="text" placeholder="Location" />
+        <input className="w-full p-2 border rounded mb-4" name="website" type="text" placeholder="Website" />
+        <label className="block text-sm font-semibold mb-1"  htmlFor="birthdate">
+          Date of Birth
+        </label>
+        <input className="w-full p-2 border rounded mb-4" name="birthdate" type="date" required />
+        <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+      </form>
+    </div>
+  );
+};
 
+export default CreateProfile;
