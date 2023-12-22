@@ -1,84 +1,84 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { getUserNames } from '../../services/apiService'
-import SearchUser from './SearchUsers';
-// import './styles.css'
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getUserNames } from "../../services/apiService";
+import SearchUser from "./SearchUsers";
 
-class UserNames extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            names: [],
-            inputValue: '',
-            imageUrl: ''
-        }
-    }
-    async componentDidMount() {
-        await this.getUser()
-    }
-    getUser = async () => {
-        const names = await getUserNames()
-        this.setState({ names })
-    }
-    // onError() {
-    //     this.setState({
-    //       imageUrl: "https://res.cloudinary.com/mikesabz/image/upload/v1589941495/otupu5oygjquz8ruf8cx.jpg"
-    //     })
-    //   }
-    renderPerson = () => {
-        if (this.state.names) {
-            return this.state.names.sort((a, b) => {
-                if (a.name < b.name) return -1;
-                if (a.name > b.name) return 1;
-                return 0
-            })
-                .map(name => {
-                    // const imageUrl = (name.image == null) ? "https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" : name.image.url
-                    return (
-                        <div key={name.id}>
-                            <Link to={{
-                                pathname: `/dashboard/user/${name.name}/${name.id}`,
-                                state: { names: name }
-                            }} key={name.id}>
-                                <div className="username-box border border-secondary p-3">
-                                    {/* <img className="tweet-image"
-                                        src={imageUrl} /> */}
-                                    <p>{name.name}</p>
-                                </div>
-                            </Link>
-                        </div>
-                    )
-                }
-                )
-        }
-    }
+const UserNames = () => {
+  const [names, setNames] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
-    handleFilterChange = (event) => {
-        try {
-            event.preventDefault()
-            this.setState({
-                inputValue: event.target.value
-            })
-            const inputUserName = this.state.names.filter((name) => {
-                return name.name.toLowerCase().includes(this.state.inputValue)
-            })
-            if (this.state.inputValue.length < 2) {
-                return this.getUser()
-            }
-            this.setState({ names: inputUserName })
-        } catch (e) {
-            console.error(e)
-        }
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedNames = await getUserNames();
+        setNames(fetchedNames);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
-    render() {
-        return (
-            <div className="usernames-container">
-                <SearchUser name={this.state.names} onChange={this.handleFilterChange} />
-                <br />
-                <div>{this.renderPerson()}</div>
-            </div>
-        )
+  // onError() {
+  //     this.setState({
+  //       imageUrl: "https://res.cloudinary.com/mikesabz/image/upload/v1589941495/otupu5oygjquz8ruf8cx.jpg"
+  //     })
+  //   }
+  const renderPerson = () => {
+    if (names) {
+      return names
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((name) => (
+          // const imageUrl = (name.image == null) ? "https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" : name.image.url
+          <div key={name.id}>
+            <Link
+              to={{
+                pathname: `/dashboard/user/${name.name}/${name.id}`,
+                state: { names: name },
+              }}
+              key={name.id}
+            >
+              <div className="border border-gray-300 p-3">
+                {/* <img src={imageUrl} /> */}
+                <p>{name.name}</p>
+              </div>
+            </Link>
+          </div>
+        ));
     }
-}
-export default UserNames
+  };
+
+  const handleFilterChange = (event) => {
+    try {
+      event.preventDefault();
+      setInputValue(event.target.value);
+      const inputUserName = names.filter((name) => name.name.toLowerCase().includes(inputValue.toLowerCase()));
+
+      if (inputValue.length < 2) {
+        fetchData();
+      } else {
+        setNames(inputUserName);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const fetchedNames = await getUserNames();
+      setNames(fetchedNames);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div>
+      <SearchUser name={names} onChange={handleFilterChange} />
+      <br />
+      <div>{renderPerson()}</div>
+    </div>
+  );
+};
+export default UserNames;

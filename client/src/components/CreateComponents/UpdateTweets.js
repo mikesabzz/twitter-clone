@@ -1,47 +1,38 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-import { editTweet } from '../../services/apiService'
-import './styles.css'
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import { editTweet } from "../../services/apiService";
 
-class UpdateTweets extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            tweetId: this.props.match.params.id,
-            updated: false
-        }
-    }
-    handleUpdate = (e) => {
-        const element = e.target
-        const { name, value } = element
-        const newState = {}
-        newState[name] = value
-        this.setState(newState)
-    }
-    handleSubmit = async (e) => {
-        e.preventDefault()
-        const { userId, name, tweet } = this.state
-        const tweets = { userId, name, tweet }
-        const id = this.state.tweetId
-        await editTweet(id, tweets)
-        this.setState({ updated: true })
-    }
-    render() {
-        if (this.state.updated) {
-            return <Redirect to={`/dashboard/user/${this.props.user.name}/${this.props.user.id}`} />
-        }
-        return (
-            <div className="edit-tweet-container">
-                <form onChange={this.handleUpdate} onSubmit={this.handleSubmit}>
-                    <label htmlFor="tweet">Edit Tweet</label>
-                    <br />
-                    <textarea name="tweet" defaultValue={this.props.location.state.editTweet}></textarea>
-                    <br />
-                    <button className="btn btn-primary font-weight-bold">Save</button>
-                </form>
-            </div>
-        )
-    }
-}
+const UpdateTweets = (props) => {
+  const [tweetId] = useState(props.match.params.id);
+  const [updated, setUpdated] = useState(false);
+  const [tweet, setTweet] = useState(props.location.state.editTweet);
 
-export default UpdateTweets
+  const handleUpdate = (e) => {
+    const { name, value } = e.target;
+    setTweet(value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const tweets = { tweet };
+    await editTweet(tweetId, tweets);
+    setUpdated(true);
+  };
+
+  if (updated) {
+    return (
+      <Redirect to={`/dashboard/user/${props.user.name}/${props.user.id}`} />
+    );
+  }
+  return (
+    <div className="container mx-auto p-4 bg-blue-50 border border-gray-500 rounded-lg">
+      <form className="max-w-md mx-auto" onChange={handleUpdate} onSubmit={handleSubmit}>
+        <label className="flex items-center justify-center text-2xl text-blue-500 font-bold mb-4" htmlFor="tweet">Edit Tweet</label>
+        <textarea className="w-full h-20 p-2 border rounded mb-4" name="tweet" defaultValue={tweet}></textarea>
+        <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
+      </form>
+    </div>
+  );
+};
+
+export default UpdateTweets;

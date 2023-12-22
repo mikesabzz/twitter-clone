@@ -18,6 +18,9 @@ const CreateTweets = (props) => {
     await postTweet(tweets);
     setTweet("");
   };
+  const handleKeyPress = (e) => {
+    return e.key === "Enter" ? handleSubmit(e) : "";
+  };
 
   return (
     <div className="container mx-auto">
@@ -28,6 +31,7 @@ const CreateTweets = (props) => {
           name="tweet"
           value={tweet}
           placeholder="Whats happening?"
+          onKeyPress={handleKeyPress}
         ></textarea>
         <br />
         <div className="flex justify-end">
