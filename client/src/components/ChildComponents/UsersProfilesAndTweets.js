@@ -1,13 +1,16 @@
-import React, {useState, useEffect} from 'react'
-import { getAllTweets, getAllProfiles, deleteTweet } from '../../services/apiService'
-import dateFormat from 'dateformat'
-import { Link } from 'react-router-dom'
-import { FaBirthdayCake } from 'react-icons/fa'
-import UserImage from './UserImage'
+import React, {useState, useEffect} from 'react';
+import { getAllTweets, getAllProfiles, deleteTweet } from '../../services/apiService';
+import dateFormat from 'dateformat';
+import { Link } from 'react-router-dom';
+import { FaBirthdayCake } from 'react-icons/fa';
+import UserImage from './UserImage';
+import Modal from "react-modal";
 
 const UsersProfilesAndTweets = (props) => {
     const [profiles, setProfiles] = useState([]);
     const [tweets, setTweets] = useState([]);
+    const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [tweetToDelete, setTweetToDelete] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,12 +29,22 @@ const UsersProfilesAndTweets = (props) => {
         const tweetsData = await getAllTweets();
         setTweets(tweetsData);
     }
-    const handleDelete = async (id) => {
-        const updatedTweets = tweets.filter((tweet) => tweet.id !== id);
-        setTweets(updatedTweets);
-        await deleteTweet(id);
-        await getTweets();
-        // alert("You have deleted a Tweet!");
+    const openDeleteModal = (id) => {
+        setTweetToDelete(id);
+        setDeleteModalIsOpen(true);
+      };
+      const closeDeleteModal = () => {
+        setTweetToDelete(null);
+        setDeleteModalIsOpen(false);
+      };
+    const handleDelete = async () => {
+        if (tweetToDelete) {
+            const updatedTweets = tweets.filter((tweet) => tweet.id !== tweetToDelete);
+            setTweets(updatedTweets);
+            await deleteTweet(tweetToDelete);
+            await getTweets();
+            closeDeleteModal();
+        }
     }
     const renderProfile = () => {
         let id = props.match.params.id;
@@ -127,7 +140,7 @@ const UsersProfilesAndTweets = (props) => {
                                     }}>
                                         <span className="text-blue-500 cursor-pointer mr-2">Edit</span>
                                     </Link>
-                                    <button onClick={() => handleDelete(tweet.id)}>
+                                    <button onClick={() => openDeleteModal(tweet.id)}>
                                         <span className="text-red-500 cursor-pointer">Delete</span>
                                     </button>
                                 </div> 
@@ -141,6 +154,23 @@ const UsersProfilesAndTweets = (props) => {
             <div>
                 <div>{renderProfile()}</div>
                 <div>{renderTweets()}</div>
+                <Modal
+        isOpen={deleteModalIsOpen}
+        onRequestClose={closeDeleteModal}
+        contentLabel="Delete Confirmation"
+        overlayClassName="modal-overlay fixed inset-0 bg-black opacity-80"
+        className="modal-container mx-auto my-32 bg-white p-4 rounded w-64"
+      >
+        <h2 className="text-lg font-bold mb-2">Are you sure you want to delete this tweet?</h2>
+        <div className="flex justify-end">
+          <button className="mr-2 text-blue-500 cursor-pointer" onClick={handleDelete}>
+            Yes, delete
+          </button>
+          <button className="text-gray-500 cursor-pointer" onClick={closeDeleteModal}>
+            Cancel
+          </button>
+        </div>
+      </Modal>
             </div>
         );
 };

@@ -3,9 +3,12 @@ import { getAllTweets, deleteTweet } from "../../services/apiService";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import CreateTweets from "../CreateComponents/CreateTweets";
+import Modal from "react-modal";
 
 const Tweets = (props) => {
   const [tweets, setTweets] = useState([]);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [tweetToDelete, setTweetToDelete] = useState(null);
 
   useEffect(() => {
     const fetchTweets = async () => {
@@ -18,12 +21,24 @@ const Tweets = (props) => {
     };
     fetchTweets();
   }, [tweets]);
+
+  const openDeleteModal = (id) => {
+    setTweetToDelete(id);
+    setDeleteModalIsOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setTweetToDelete(null);
+    setDeleteModalIsOpen(false);
+  };
   
-  const handleDelete = async (id) => {
-    const updatedTweets = tweets.filter((tweet) => tweet.id !== id);
-    setTweets(updatedTweets);
-    await deleteTweet(id);
-    // alert("You have deleted a Tweet!");
+  const handleDelete = async () => {
+    if (tweetToDelete) {
+      const updatedTweets = tweets.filter((tweet) => tweet.id !== tweetToDelete);
+      setTweets(updatedTweets);
+      await deleteTweet(tweetToDelete);
+      closeDeleteModal();
+    }
   };
 
   const renderTweets = () => {
@@ -71,7 +86,7 @@ const Tweets = (props) => {
                 >
                   Edit
                 </Link>
-                <button onClick={() => handleDelete(tweet.id)}>
+                <button onClick={() => openDeleteModal(tweet.id)}>
                   <span className="text-red-500 cursor-pointer">
                     Delete
                   </span>
@@ -91,6 +106,23 @@ const Tweets = (props) => {
       {/* <h1 className="text-2xl font-bold text-blue-500 mb-4">Tweets</h1> */}
       <CreateTweets {...props} />
       <div>{renderTweets()}</div>
+      <Modal
+        isOpen={deleteModalIsOpen}
+        onRequestClose={closeDeleteModal}
+        contentLabel="Delete Confirmation"
+        overlayClassName="modal-overlay fixed inset-0 bg-black opacity-80"
+        className="modal-container mx-auto my-32 bg-white p-4 rounded w-64"
+      >
+        <h2 className="text-lg font-bold mb-2">Are you sure you want to delete this tweet?</h2>
+        <div className="flex justify-end">
+          <button className="mr-2 text-blue-500 cursor-pointer" onClick={handleDelete}>
+            Yes, delete
+          </button>
+          <button className="text-gray-500 cursor-pointer" onClick={closeDeleteModal}>
+            Cancel
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

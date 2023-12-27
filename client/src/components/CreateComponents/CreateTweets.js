@@ -32,6 +32,7 @@ const CreateTweets = (props) => {
           value={tweet}
           placeholder="Whats happening?"
           onKeyPress={handleKeyPress}
+          onChange={handleChange} 
         ></textarea>
         <br />
         <div className="flex justify-end">
