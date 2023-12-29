@@ -22,13 +22,16 @@ const seedDb = async () => {
       birthdate: "January 1, 2000"
     })
 
-    // const demoImage = await Image.create({
-    //   url: "http://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg"
-    // })
+    const demoImage = await Image.create({
+      image: {
+        public_id: "416939c1270e8a181e91472376735185",
+        url: "https://res-console.cloudinary.com/mikesabz/media_explorer_thumbnails/416939c1270e8a181e91472376735185/detailed"
+      }
+    })
 
     await demoTweet.setUser(demo)
     await demoProfile.setUser(demo)
-    // await demoImage.setUser(demo)
+    await demoImage.setUser(demo)
 
   } catch(e) {
     console.log(e);

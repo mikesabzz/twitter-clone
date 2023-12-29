@@ -29,7 +29,6 @@ const UserNames = () => {
       return names
         .sort((a, b) => a.name.localeCompare(b.name))
         .map((name) => (
-          // const imageUrl = (name.image == null) ? "https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" : name.image.url
           <div key={name.id}>
             <Link
               to={{
@@ -38,9 +37,9 @@ const UserNames = () => {
               }}
               key={name.id}
             >
-              <div className="border border-gray-300 p-3">
-                {/* <img src={imageUrl} /> */}
-                <p>{name.name}</p>
+              <div className="border border-gray-300 p-3 flex">
+                <img className="rounded-lg w-20 h-auto" src={name.image.image.url} />
+                <p className="ml-2">{name.name}</p>
               </div>
             </Link>
           </div>

@@ -1,12 +1,12 @@
-// const cloudinary = require('cloudinary')
-// const dotenv = require('dotenv')
-// dotenv.config()
+const cloudinary = require('cloudinary').v2;
+const dotenv = require('dotenv');
+dotenv.config();
 
-// cloudinary.config({
-//     cloud_name: process.env.Cloud_Name,
-//     api_key: process.env.Cloudinary_API_KEY,
-//     api_secret: process.env.Cloudinary_API_SECRET
-// })
+cloudinary.config({
+    cloud_name: process.env.Cloud_Name,
+    api_key: process.env.Cloudinary_API_KEY,
+    api_secret: process.env.Cloudinary_API_SECRET
+});
 
 // exports.uploads = (file, folder) => {
 //     return new Promise(resolve => {
@@ -21,3 +21,5 @@
 //       })
 //     })
 //   }
+
+  module.exports = cloudinary;

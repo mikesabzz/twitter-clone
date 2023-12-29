@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import CreateTweets from "../CreateComponents/CreateTweets";
 import Modal from "react-modal";
+Modal.setAppElement('#root');
 
 const Tweets = (props) => {
   const [tweets, setTweets] = useState([]);
@@ -52,6 +53,7 @@ const Tweets = (props) => {
           <div
             className="bg-white border border-gray-300 p-4 rounded mb-4 relative">
             <div className="flex items-start">
+            <img className="rounded-lg w-20 h-auto"  src={tweet.user.image.image.url} alt="" />
             <div className="ml-4 flex-grow">
               <Link
                 to={

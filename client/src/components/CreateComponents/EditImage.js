@@ -5,43 +5,26 @@ const apiRouter = api;
 
 const EditImage = (props) => {
   const [edited, setEdited] = useState(false);
-  const [imageId, setImageId] = useState(props.location.state.imageId);
+  const [imageId] = useState(props.location.state.imageId);
   const [file, setFile] = useState(null);
 
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
   };
-  onFileUpload = async () => {
+
+  const onFileUpload = async (e) => {
+    e.preventDefault(); 
     try {
-      const { imageId, file } = this.state;
       const formData = new FormData();
       formData.append("file", file, file.name);
       formData.append("imageId", imageId);
+
       const config = {
         headers: {
           "content-type": "multipart/form-data",
         },
       };
       apiRouter.put(`app/upload/${imageId}`, formData, config);
-      this.setState({ edited: true });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onFileUpload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file, file.name);
-      formData.append("imageId", imageId);
-
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      };
-
-      await apiRouter.put(`app/upload/${imageId}`, formData, config);
       setEdited(true);
     } catch (error) {
       console.log(error);

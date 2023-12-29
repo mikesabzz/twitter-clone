@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 
 function LoginForm(props) {
+  const isMounted = useRef(true);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -9,6 +10,13 @@ function LoginForm(props) {
 
   const [showError, setShowError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Cleanup function to set the mounted state to false on unmount
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   const handleTextInput = (event) => {
     const fieldName = event.target.name;

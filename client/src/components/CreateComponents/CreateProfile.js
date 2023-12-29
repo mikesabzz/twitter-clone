@@ -30,7 +30,8 @@ const CreateProfile = (props) => {
 
   if (profileData.created) {
     return (
-      <Redirect to={`/dashboard/user/${props.user.name}/${props.user.id}`} />
+      // <Redirect to={`/dashboard/user/${props.user.name}/${props.user.id}`} />
+      <Redirect to={`/dashboard/user/upload`} />
     );
   }
 

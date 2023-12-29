@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { api } from "../../services/apiService";
 const apiRouter = api;
@@ -6,16 +6,20 @@ const apiRouter = api;
 const FileUpload = (props) => {
   const [uploaded, setUploaded] = useState(false);
   const [userId] = useState(props.user.id);
+  const [userName] = useState(props.user.name);
   const [file, setFile] = useState(null);
+  const [enableSubmit, setEnableSubmit] = useState(false);
 
   const onFileChange = (event) => {
+    setEnableSubmit(true);
     setFile(event.target.files[0]);
   };
 
   const onFileUpload = async () => {
     try {
+      console.log(file);
       const formData = new FormData();
-      formData.append("file", file, file.name);
+      formData.append("file", file);
       formData.append("userId", userId);
 
       const config = {
@@ -40,17 +44,11 @@ const FileUpload = (props) => {
           <p>Modification Date: {file.lastModifiedDate.toDateString()}</p>
         </div>
       );
-    } else {
-      return (
-        <h4 className="font-weight-bold">
-          Upload a profile picture before pressing the 'Upload!' button!
-        </h4>
-      );
-    }
+    } 
   };
 
   if (uploaded) {
-    return <Redirect to={"/dashboard/user/create"} />;
+    return <Redirect to={`/dashboard/user/${userName}/${userId}`} />;
   }
   return (
     <div>
@@ -59,6 +57,7 @@ const FileUpload = (props) => {
         <input type="file" htmlFor="file" onChange={onFileChange} required />
         <br />
         <button
+          disabled={!enableSubmit}
           className="btn btn-primary font-weight-bold rounded"
           onClick={onFileUpload}
         >

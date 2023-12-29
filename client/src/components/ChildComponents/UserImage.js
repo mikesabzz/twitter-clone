@@ -21,35 +21,32 @@ const UserImage = ({ id, name }) => {
   }, []);
 
   const renderImage = () => {
-    const userImages = [{id: 1, url: "https://cdn.vectorstock.com/i/preview-1x/13/04/male-profile-picture-vector-2041304.jpg"}];
-    // const userImages = image.filter(poster => poster.userId == userId);
+    const userImages = image.find(poster => poster.userId == userId);
     if (!userImages) {
-    // if (userImages.length === 0) {
       return (
-        <div key={userId} id="profile-image">
-           <img className="profile-image" src="https://cdn.vectorstock.com/i/preview-1x/13/04/male-profile-picture-vector-2041304.jpg" alt="Default" />
-          {/* <img className="profile-image" src="https://res.cloudinary.com/mikesabz/image/upload/v1589940574/iu3kvrmdpvpw1lp0aoru.jpg" alt="Default" /> */}
+        <div key={userId}>
+           <img src="https://cdn.vectorstock.com/i/preview-1x/13/04/male-profile-picture-vector-2041304.jpg" alt="Default" />
         </div>
       );
     } else {
-      return userImages.map(userImage => (
-        <div key={userImage.id} id="profile-image">
-          <img className="profile-image" src={userImage.url} alt={`User ${name}'s Image`} />
+        return (
+        <div key={userImages.id}>
+          <img src={userImages.image.url} alt={`User ${name}'s Image`} />
 
-          {localStorage.getItem('userId') == userId ? (
+          {localStorage.getItem('userId') === userId ? (
             <Link
               to={{
                 pathname: `/user/upload/${name}/${userId}/edit`,
-                state: { imageId: userImage.id },
+                state: { imageId: userImages.id },
               }}
             >
-              <button className="btn btn-outline-light font-weight-bold">Edit Image</button>
+              <button>Edit Image</button>
             </Link>
           ) : (
             ''
           )}
         </div>
-      ));
+        );
     }
   };
 
