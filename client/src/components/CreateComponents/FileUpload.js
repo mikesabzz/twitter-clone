@@ -17,7 +17,6 @@ const FileUpload = (props) => {
 
   const onFileUpload = async () => {
     try {
-      console.log(file);
       const formData = new FormData();
       formData.append("file", file);
       formData.append("userId", userId);

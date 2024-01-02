@@ -5,8 +5,8 @@ const apiRouter = api;
 
 const EditImage = (props) => {
   const [edited, setEdited] = useState(false);
-  const [imageId] = useState(props.location.state.imageId);
   const [file, setFile] = useState(null);
+  const imageId = localStorage.getItem('imageId');
 
   const onFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -24,7 +24,7 @@ const EditImage = (props) => {
           "content-type": "multipart/form-data",
         },
       };
-      apiRouter.put(`app/upload/${imageId}`, formData, config);
+      await apiRouter.put(`app/upload/${imageId}`, formData, config);
       setEdited(true);
     } catch (error) {
       console.log(error);

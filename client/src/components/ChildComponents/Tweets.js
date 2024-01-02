@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import CreateTweets from "../CreateComponents/CreateTweets";
 import Modal from "react-modal";
+import DefaultProfilePicture from "./DefaultImage/defaultprofilepicture.png";
 Modal.setAppElement('#root');
 
 const Tweets = (props) => {
@@ -53,7 +54,11 @@ const Tweets = (props) => {
           <div
             className="bg-white border border-gray-300 p-4 rounded mb-4 relative">
             <div className="flex items-start">
-            <img className="rounded-lg w-20 h-auto"  src={tweet.user.image.image.url} alt="" />
+            {tweet.user && tweet.user.image && tweet.user.image.image && tweet.user.image.image.url ? (
+              <img className="rounded-lg w-20 h-auto" src={tweet.user.image.image.url} alt="" />
+            ) : (
+              <img className="rounded-lg w-20 h-auto" src={DefaultProfilePicture} alt="Default" />
+            )}
             <div className="ml-4 flex-grow">
               <Link
                 to={
@@ -105,7 +110,6 @@ const Tweets = (props) => {
 
   return (
     <div className="tweet-data">
-      {/* <h1 className="text-2xl font-bold text-blue-500 mb-4">Tweets</h1> */}
       <CreateTweets {...props} />
       <div>{renderTweets()}</div>
       <Modal

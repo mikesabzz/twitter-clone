@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom'
 import { getImages } from '../../services/apiService'
 
 const UserImage = ({ id, name }) => {
-    const [image, setImage] = useState([]);
+  const [image, setImage] = useState([]);
   const [userId] = useState(id);
-
 
   const getImage = async () => {
     const images = await getImages();
@@ -16,7 +15,6 @@ const UserImage = ({ id, name }) => {
     const fetchData = async () => {
       await getImage();
     };
-
     fetchData();
   }, []);
 
@@ -35,10 +33,8 @@ const UserImage = ({ id, name }) => {
 
           {localStorage.getItem('userId') === userId ? (
             <Link
-              to={{
-                pathname: `/user/upload/${name}/${userId}/edit`,
-                state: { imageId: userImages.id },
-              }}
+              to={{pathname: `/user/upload/${name}/${userId}/edit`}}
+              onClick={() => localStorage.setItem('imageId', userImages.id)}
             >
               <button>Edit Image</button>
             </Link>
