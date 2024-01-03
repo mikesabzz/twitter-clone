@@ -5,7 +5,7 @@ const profileModel = require('./profile')
 const bcrypt = require('bcrypt')
 const imageModel = require('./image')
 
-const db = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:5432/twitter_clone_db',{
+const db = new Sequelize(process.env.DATABASE_URL,{
   // database: 'twitter_clone_db',
   dialect: 'postgres',
   logging: false,
