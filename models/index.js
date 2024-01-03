@@ -5,11 +5,10 @@ const profileModel = require('./profile')
 const bcrypt = require('bcrypt')
 const imageModel = require('./image')
 
-const db = new Sequelize(process.env.DATABASE_URL,{
-  // database: 'twitter_clone_db',
-  dialect: 'postgres',
-  logging: false,
-});
+const db = new Sequelize((process.env.DATABASE_URL || 'postgres://localhost:5432/twitter_clone_db'),{
+  database: 'twitter_clone_db',
+  dialect: 'postgres'
+})
 // const db = new Sequelize({
 //     database: 'twitter_clone_db',
 //     dialect: 'postgres'
@@ -37,14 +36,6 @@ Tweet.belongsTo(User)
 const Profile = profileModel(db, Sequelize)
 User.hasOne(Profile)
 Profile.belongsTo(User)
-
-db.sync({ force: false }) 
-  .then(() => {
-    console.log(`Database & tables synced!`);
-  })
-  .catch((error) => {
-    console.error('Error syncing database:', error);
-  });
 
 module.exports = {
   db,
