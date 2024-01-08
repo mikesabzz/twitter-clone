@@ -22,6 +22,9 @@ app.use(bodyParser.urlencoded({
 // app.use(cors({
 //   origin: 'https://twitter-clone-by-sabz.surge.sh'
 // }));
+app.use(cors({
+  origin: 'http://localhost:3000/'
+}));
 
 app.use(bodyParser.json())
 app.use('/auth', authRouter)
@@ -30,7 +33,8 @@ app.use(passport.initialize())
 
 app.get('/', async (req, res) => {
   try {
-    res.json({message: 'Welcome Mike to Express Auth App!'})
+    res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+    // res.json({message: 'Welcome Mike to Express Auth App!'})
   } catch (e) {
     res.status(e.status).json({ message: e.status })
   }

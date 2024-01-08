@@ -1,6 +1,7 @@
 import axios from 'axios'
 // const BASE_URL = process.env.REACT_APP_HEROKU_URL 
 const BASE_URL = 'http://localhost:4567' 
+// const BASE_URL = process.env.RENDER_DEPLOYMENT_URL;
 const JWT_TOKEN = localStorage.getItem('token')
 
 export const api = axios.create({
