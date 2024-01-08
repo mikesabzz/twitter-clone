@@ -24,10 +24,6 @@ User.beforeCreate(async (user, options) => {
 const Image = imageModel(db, Sequelize)
 User.hasOne(Image)
 Image.belongsTo(User)
-db.sync() 
-  .then(() => {
-    console.log(`Database & tables created!`)
-});
 
 const Tweet = TweetModel(db, Sequelize)
 User.hasMany(Tweet)
@@ -36,6 +32,13 @@ Tweet.belongsTo(User)
 const Profile = profileModel(db, Sequelize)
 User.hasOne(Profile)
 Profile.belongsTo(User)
+
+const syncDatabase = async () => {
+  await db.sync();
+  console.log(`Database & tables created!`);
+};
+
+syncDatabase().catch(error => console.error('Error syncing database:', error));
 
 module.exports = {
   db,

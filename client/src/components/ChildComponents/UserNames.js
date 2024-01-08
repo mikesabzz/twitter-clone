@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getUserNames } from "../../services/apiService";
+import DefaultProfilePicture from "./DefaultImage/defaultprofilepicture.png";
 import SearchUser from "./SearchUsers";
 
 const UserNames = () => {
@@ -19,11 +20,6 @@ const UserNames = () => {
     fetchData();
   }, []);
 
-  // onError() {
-  //     this.setState({
-  //       imageUrl: "https://res.cloudinary.com/mikesabz/image/upload/v1589941495/otupu5oygjquz8ruf8cx.jpg"
-  //     })
-  //   }
   const renderPerson = () => {
     if (names) {
       return names
@@ -38,7 +34,11 @@ const UserNames = () => {
               key={name.id}
             >
               <div className="border border-gray-300 p-3 flex">
+              {name.image && name.image.image && name.image.image.url ? (
                 <img className="rounded-lg w-20 h-auto" src={name.image.image.url} />
+              ): (
+                <img className="rounded-lg w-20 h-auto" src={DefaultProfilePicture} alt="Default" />
+              )}
                 <p className="ml-2">{name.name}</p>
               </div>
             </Link>

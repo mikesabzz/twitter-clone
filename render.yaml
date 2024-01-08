@@ -1,8 +1,0 @@
-services:
-  - name: postgres
-    plan: postgresql
-    env: production
-    config:
-      version: "12"
-      dbname: "twitter_clone_db"
-      user: "michaelsabzevari"
