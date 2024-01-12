@@ -7,13 +7,7 @@ const imageModel = require('./image')
 
 const db = new Sequelize((process.env.DATABASE_URL || 'postgres://localhost:5432/twitter_clone_db'),{
   database: 'twitter_clone_db',
-  dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false, 
-    },
-  },
+  dialect: 'postgres'
 })
 // const db = new Sequelize({
 //     database: 'twitter_clone_db',

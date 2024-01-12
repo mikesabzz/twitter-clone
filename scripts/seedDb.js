@@ -22,10 +22,11 @@ const seedDb = async () => {
       birthdate: "January 1, 2000"
     })
 
+
     const demoImage = await Image.create({
       image: {
         public_id: "416939c1270e8a181e91472376735185",
-        url: "https://res-console.cloudinary.com/mikesabz/media_explorer_thumbnails/416939c1270e8a181e91472376735185/detailed"
+        url: "https://res.cloudinary.com/mikesabz/image/upload/v1621185704/fo70syhsigwopui85acb.jpg"
       }
     })
 
@@ -44,7 +45,7 @@ const run = async () => {
   } catch(e) {
     console.log(e)
   } finally {
-    await process.exit()
+    process.exit()
   }
 }
 
