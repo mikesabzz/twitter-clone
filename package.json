@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "react-scripts build",
     "start": "nodemon server.js",
     "db:init": "dropdb --if-exists twitter_clone_db && createdb twitter_clone_db",
     "db:reset": "node ./scripts/resetDb.js",
