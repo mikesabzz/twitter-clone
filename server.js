@@ -22,9 +22,9 @@ app.use(bodyParser.urlencoded({
 // app.use(cors({
 //   origin: 'https://twitter-clone-by-sabz.surge.sh'
 // }));
-app.use(cors({
-  origin: 'http://localhost:3000/'
-}));
+// app.use(cors({
+//   origin: 'http://localhost:3000/'
+// }));
 
 app.use(bodyParser.json())
 app.use('/auth', authRouter)
