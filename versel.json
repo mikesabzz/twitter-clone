@@ -1,20 +1,11 @@
 {
   "version": 2,
-  "packageManager": "npm",
   "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
+    { "src": "client/package.json", "use": "@vercel/node" },
+    { "src": "package.json", "use": "@vercel/node" }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+    { "src": "/api/(.*)", "dest": "server/$1" },
+    { "src": "/(.*)", "dest": "client/$1" }
   ]
 }
