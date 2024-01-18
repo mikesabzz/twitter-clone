@@ -30,7 +30,6 @@ function LoginForm(props) {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
-
     const { email, password } = formData;
     const { handleLogin } = props;
 
