@@ -6,11 +6,15 @@
       "use": "@vercel/node"
     },
     {
-      "src": "client/build",
+      "src": "client/build/static",
       "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/auth/(.*)",
+      "dest": "server.js"
+    },
     {
       "src": "/api/(.*)",
       "dest": "server.js"
