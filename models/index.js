@@ -4,11 +4,29 @@ const TweetModel = require('./tweet')
 const profileModel = require('./profile')
 const bcrypt = require('bcryptjs')
 const imageModel = require('./image')
+const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_DATABASE, DB_PORT } = process.env || {};
 
-const db = new Sequelize((process.env.DATABASE_URL || 'postgres://localhost:5432/twitter_clone_db'),{
-  database: 'twitter_clone_db',
-  dialect: 'postgres'
-})
+const db = new Sequelize({
+  database: DB_DATABASE,
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
+  host: DB_HOST,
+  port: DB_PORT ? parseInt(DB_PORT, 10) : 5432,
+  dialect: "postgres",
+  dialectModule: require("pg"),
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+  logging: console.log,
+});
+
+// const db = new Sequelize((process.env.DATABASE_URL || 'postgres://localhost:5432/twitter_clone_db'),{
+//   database: 'twitter_clone_db',
+//   dialect: 'postgres'
+// })
 // const db = new Sequelize({
 //     database: 'twitter_clone_db',
 //     dialect: 'postgres'
