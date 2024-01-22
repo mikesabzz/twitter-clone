@@ -7,7 +7,7 @@ const imageModel = require('./image')
 const dotenv = require("dotenv");
 
 dotenv.config();
-const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_DATABASE, DB_PORT } = process.env || {};
+const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_DATABASE } = process.env || {};
 
 const db = new Sequelize({
   database: DB_DATABASE,
