@@ -16,7 +16,7 @@ const app = express()
 
 app.use(logger('dev'))
 const corsOptions = {
-  origin: "http://localhost:3000/",
+  origin: "http://localhost:3000",
   // origin: "https://twclienttest.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
