@@ -1,20 +1,18 @@
 import axios from 'axios'
-const BASE_URL = process.env.VERCEL_URL
+const BASE_URL = process.env.VERCEL_URL || 'https://twitter-clone-delta-pink.vercel.app'
 // const BASE_URL = 'http://localhost:4567' 
-const JWT_TOKEN = localStorage.getItem('token')
 
 export const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   }
-})
-console.log(BASE_URL);
+});
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
+  const JWT_TOKEN = localStorage.getItem('token');
+  if (JWT_TOKEN) {
+    config.headers['Authorization'] = `Bearer ${JWT_TOKEN}`;
   }
   return config;
 });
@@ -37,7 +35,7 @@ export const signUp = async(data) => {
     const response = await api.post('/auth/signup', data)
     const { data: { user, token } } = response
 
-    console.log(response.data)
+    // console.log(response.data)
 
     localStorage.setItem('token', token)
     localStorage.setItem('userId', user.id)
@@ -120,7 +118,6 @@ export const postTweet = async (data) => {
 export const editTweet = async (tweetId, data) => {
   try {
     const response = await api.put(`app/tweets/${tweetId}`, data)
-    console.log(tweetId)
     return response
   } catch(error){
     throw error
