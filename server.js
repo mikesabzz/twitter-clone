@@ -16,8 +16,7 @@ const app = express()
 
 app.use(logger('dev'))
 const corsOptions = {
-  origin: "http://localhost:3000",
-  // origin: "https://twclienttest.vercel.app",
+  origin: "https://twitter-clone-client-three.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   credentials: true,
   optionsSuccessStatus: 204,
