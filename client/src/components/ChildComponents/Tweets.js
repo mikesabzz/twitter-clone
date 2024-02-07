@@ -22,7 +22,7 @@ const Tweets = (props) => {
       }
     };
     fetchTweets();
-  }, [tweets]);
+  }, []);
 
   const openDeleteModal = (id) => {
     setTweetToDelete(id);
@@ -41,6 +41,10 @@ const Tweets = (props) => {
       await deleteTweet(tweetToDelete);
       closeDeleteModal();
     }
+  };
+  const automaticallyUpdateTweets = async () => {
+    const tweetsData = await getAllTweets();
+    setTweets(tweetsData);
   };
 
   const renderTweets = () => {
@@ -110,7 +114,7 @@ const Tweets = (props) => {
 
   return (
     <div className="tweet-data">
-      <CreateTweets {...props} />
+      <CreateTweets automaticallyUpdateTweets={automaticallyUpdateTweets} {...props} />
       <div>{renderTweets()}</div>
       <Modal
         isOpen={deleteModalIsOpen}

@@ -27,7 +27,9 @@ function SignUpForm(props) {
     setShowError(false);
 
     try {
-      await handleSignUp({ name, email, password });
+      const lowerCaseEmail = email.toLowerCase();
+      const lowerCasePassword = password.toLowerCase();
+      await handleSignUp({ name, email: lowerCaseEmail, password: lowerCasePassword });
     } catch (e) {
       setShowError(true);
     }

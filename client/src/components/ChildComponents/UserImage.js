@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getImages } from '../../services/apiService'
+import DefaultProfilePicture from "./DefaultImage/defaultprofilepicture.png";
 
 const UserImage = ({ id, name }) => {
   const [image, setImage] = useState([]);
@@ -22,8 +23,17 @@ const UserImage = ({ id, name }) => {
     const userImages = image.find(poster => poster.userId == userId);
     if (!userImages) {
       return (
-        <div key={userId}>
-           <img src="https://cdn.vectorstock.com/i/preview-1x/13/04/male-profile-picture-vector-2041304.jpg" alt="Default" />
+        <div key={userId}>          
+          <img src={DefaultProfilePicture} alt="Default" />
+          {localStorage.getItem("userId") == id ? (
+            <Link to={{ pathname: "/dashboard/user/upload" }}>
+              <button className="btn btn-primary font-weight-bold m-2">
+                Upload Image?
+              </button>
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
       );
     } else {

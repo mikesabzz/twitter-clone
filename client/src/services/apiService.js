@@ -109,8 +109,9 @@ export const getAllTweets = async () => {
 export const postTweet = async (data) => {
   try {
       const response = await api.post('/app/tweets', data)
-      const { user } = response.data
-      return user
+      // const { user } = response.data
+      // return user
+      return response.data;
   } catch(error) {
     throw error
   }

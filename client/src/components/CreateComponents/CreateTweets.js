@@ -17,6 +17,7 @@ const CreateTweets = (props) => {
     const tweets = { userId, tweet };
     await postTweet(tweets);
     setTweet("");
+    props.automaticallyUpdateTweets();
   };
   const handleKeyPress = (e) => {
     return e.key === "Enter" ? handleSubmit(e) : "";
