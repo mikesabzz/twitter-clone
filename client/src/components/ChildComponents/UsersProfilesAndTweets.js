@@ -187,8 +187,12 @@ const UsersProfilesAndTweets = (props) => {
   };
   return (
     <div>
-      <div>{renderProfile()}</div>
-      <div>{renderTweets()}</div>
+      <div className="container mx-auto">
+        <div className="lg:w-full">{renderProfile()}</div>
+      </div>
+      <div className="container mx-auto">
+        <div className="lg:w-full">{renderTweets()}</div>
+      </div>
       <Modal
         isOpen={deleteModalIsOpen}
         onRequestClose={closeDeleteModal}

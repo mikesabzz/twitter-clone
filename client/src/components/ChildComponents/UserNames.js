@@ -76,7 +76,9 @@ const UserNames = () => {
     <div>
       <SearchUser name={names} onChange={handleFilterChange} />
       <br />
-      <div>{renderPerson()}</div>
+      <div className="container mx-auto">
+      <div className="lg:w-full">{renderPerson()}</div>
+      </div>
     </div>
   );
 };
